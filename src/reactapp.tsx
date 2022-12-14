@@ -1,15 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "../node_modules/react-router-dom/dist/index";
-import MainPage from './pages/main-page';
-import BasketPage from './pages/basket-page';
-import ProductPage from './pages/product-page';
-import NotFoundPage from './pages/404-page';
-import { AppRoute } from './const';
+import { HashRouter, Route, Routes } from "react-router-dom";
+import MainPage from "./pages/main-page";
+import BasketPage from "./pages/basket-page";
+import ProductPage from "./pages/product-page";
+import NotFoundPage from "./pages/404-page";
+import { AppRoute } from "./const";
 
 export function App() {
   return (
     // <h1></h1>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -34,6 +34,6 @@ export function App() {
           element={<NotFoundPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
