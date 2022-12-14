@@ -1,18 +1,19 @@
 import React from "react";
+import { Link } from "../../node_modules/react-router-dom/dist/index";
 
-export default function ProductPage() {
+export default function NotFoundPage() {
   return (
     <>
       <header></header>
       <main>
-      <h1 style={{ textAlign: 'center' }}>
-        404.
-        <br />
-        <small>Page not found</small>
-      </h1>
-      <Link to="/">
-        Go to main page
-      </Link>
+        <h2 style={{ textAlign: 'center' }}>
+          404.
+          <br />
+          <h2>Page not found</h2>
+        </h2>
+        <Link to="/">
+          Go to main page
+        </Link>
       </main>
       <footer></footer>
     </>
