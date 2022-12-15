@@ -1,10 +1,11 @@
 import React from "react";
-import logo from "../assets/images/online-store.png";
+import logo from "../../assets/images/online-store.png";
+import { Link } from "react-router-dom";
 
 export function Logo() {
   return (
-    <a href="#">
+    <Link to="/">
       <img className="header__logo" src={logo} alt="logo image" />
-    </a>
+    </Link>
   );
 }
