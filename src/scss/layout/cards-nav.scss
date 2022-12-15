@@ -6,6 +6,15 @@
   height: 40px;
   background-color: rgb(234, 234, 234);
 
+  .cards-nav__sort-wrap {
+    .cards-nav__select {
+      padding: 4px;
+      outline: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
   .cards-nav__found {
     margin: 0;
   }
