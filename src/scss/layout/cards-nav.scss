@@ -2,11 +2,47 @@
 
 .cards-nav {
   margin-top: 10px;
-  @include a.flex();
+  @include a.flex(space-around);
   height: 40px;
   background-color: rgb(234, 234, 234);
 
   .cards-nav__found {
     margin: 0;
+  }
+
+  .cards-nav__switcher-wrap {
+    @include a.flex();
+    gap: 7px;
+
+    .cards-nav__grid-icon,
+    .cards-nav__stack-icon {
+      cursor: pointer;
+      transition: all .2s ease;
+      border: 1px solid transparent;
+      border-radius: 5px;
+    }
+
+    .cards-nav__grid-icon{
+      height: 25px;
+      padding: 3px;
+    }
+
+    .cards-nav__stack-icon {
+      height: 22px;
+      padding: 4px;
+    }
+
+    .cards-nav__switcher-icon-active {
+      background-color: rgb(255, 255, 255);
+      border: 1px solid black;
+    }
+
+    .cards-nav__switcher-icon-inactive {
+
+      &:hover {
+        background-color: rgb(90, 90, 90);
+        filter: invert(100%);
+      }
+    }
   }
 }
