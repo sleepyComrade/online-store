@@ -1,7 +1,14 @@
-const enum AppRoute {
-    Main = '/',
-    Basket = '/basket',
-    Product = '/product/:id'
-  }
+enum AppRoute {
+  Main = '/',
+  Basket = '/basket',
+  Product = '/product/:id'
+}
 
-  export { AppRoute };
+const Filters = {
+  Category: 'Category',
+  Brand: 'Brand',
+  Price: 'Price',
+  Stock: 'Stock'
+}
+
+export { AppRoute, Filters };
