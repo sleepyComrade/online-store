@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/main-page";
 import BasketPage from "./pages/basket-page";
@@ -8,7 +8,6 @@ import { AppRoute } from "./const";
 
 export function App() {
   return (
-    // <h1></h1>
     <HashRouter>
       <Routes>
         <Route

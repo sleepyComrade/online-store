@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Filters } from "../const";
 import FiltersSection from "./../components/filters-section";
+import { IProductData } from "./../interfaces";
+
+
 
 export default function MainPage() {
+  const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products')
+      .then(res => res.json())
+      .then(data => setProductsItems(data.products))
+  }, []);
+  
   return (
     <>
       <header></header>
@@ -17,7 +27,7 @@ export default function MainPage() {
           Go to product page
         </Link>
 
-        <FiltersSection />
+        <FiltersSection  products={productsItems} />        
       </main>
       <footer></footer>
     </>
