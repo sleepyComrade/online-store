@@ -9,4 +9,9 @@
   .header__logo {
     height: 60px;
   }
+
+  .header__payment-wrap {
+    @include a.flex();
+    gap: 20px;
+  }
 }
