@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Header } from "../components/header";
 
 export default function BasketPage() {
   return (
     <>
-      <header></header>
+      <Header></Header>
       <main>
         <h2>Basket Page</h2>
         <Link to="/">

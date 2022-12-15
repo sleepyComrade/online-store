@@ -1,0 +1,11 @@
+@use '../abstracts/mixins.scss' as a;
+
+.header {
+  @include a.flex(start);
+  height: 80px;
+  background-color: rgb(234, 234, 234);
+
+  .header__logo {
+    height: 60px;
+  }
+}

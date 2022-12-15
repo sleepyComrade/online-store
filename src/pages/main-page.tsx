@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Header } from "../components/header";
 
 export default function MainPage() {
   return (
     <>
-      <header></header>
+      <Header></Header>
       <main>
         <h2>Main Page</h2>
         <Link to="/basket">
