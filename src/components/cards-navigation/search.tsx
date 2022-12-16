@@ -9,7 +9,7 @@ export function Search() {
   const [value, setValue] = useState('');
   const [imgClassName, setImgClassName] = useState(imgClassNames.inactive);
 
-  const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     if (e.target.value) {
       setImgClassName(imgClassNames.active);
