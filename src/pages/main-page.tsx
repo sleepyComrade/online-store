@@ -9,7 +9,7 @@ export default function MainPage() {
   const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
 
   useEffect(() => {
-    fetch('https://dummyjson.com/products')
+    fetch('https://dummyjson.com/products?limit=100')
       .then(res => res.json())
       .then(data => setProductsItems(data.products))
   }, []);

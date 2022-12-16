@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FiltersButtons from "./filters-buttons";
 import FiltersBlockCheckbox from "./filter-block-checkbox";
 import FiltersBlockRange from "./../components/filters-block-range";
@@ -10,10 +10,14 @@ type MainPageProps = {
 }
 
 export default function FiltersSection({ products }: MainPageProps) {
-  const categories: Array<string> = [];
-  for (let product of products) {
-    if (!categories.includes(product.category)) categories.push(product.category);
-  }
+
+  const [categories, setCategories] = useState<Array<string>>([]);
+  
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/categories')
+    .then(res => res.json())
+    .then(categories => setCategories(categories));
+  }, []); 
 
   const brands: Array<string> = [];
   for (let product of products) {
