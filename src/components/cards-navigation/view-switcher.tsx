@@ -1,6 +1,6 @@
 import React from "react";
-import grid from '../../assets/svg/grid.svg'
-import stack from '../../assets/svg/view-stacked.svg'
+import grid from '../../assets/svg/grid.svg';
+import stack from '../../assets/svg/view-stacked.svg';
 
 export function ViewSwitcher() {
   return (
