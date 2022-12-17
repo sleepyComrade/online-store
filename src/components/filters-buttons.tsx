@@ -2,9 +2,9 @@ import React from "react";
 
 export default function FiltersButtons() {
     return (
-        <div>
-            <button>Reset Filters</button>
-            <button>Copy Link</button>
+        <div className="filters__buttons">
+            <button className="filters__button btn">Reset Filters</button>
+            <button className="filters__button btn">Copy Link</button>
         </div>
     )
 }

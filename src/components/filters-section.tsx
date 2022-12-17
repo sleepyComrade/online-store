@@ -25,7 +25,7 @@ export default function FiltersSection({ products }: MainPageProps) {
   }
 
   return (
-    <section>
+    <section className="filters">
       <FiltersButtons />
       <FiltersBlockCheckbox filterTitle={Filters.Category} ProductsFilters={categories} />
       <FiltersBlockCheckbox filterTitle={Filters.Brand} ProductsFilters={brands} />

@@ -1,4 +1,5 @@
 import React from "react";
+import FilterRange from "./filter-range";
 
 type FiltersBlockCheckboxProps = {
   filterTitle: string;
@@ -6,11 +7,12 @@ type FiltersBlockCheckboxProps = {
 
 export default function FiltersBlockRange({ filterTitle }: FiltersBlockCheckboxProps) {
   return (
-    <section>
-      <h3>{filterTitle}</h3>
-      <label className="login-checkbox" htmlFor="price">
-        <input type="range" name="price" />
-      </label>
-    </section>
+    <div className="filters__block filters__block--range">
+      <h3 className="filters__block-title">{filterTitle}</h3>
+      <div className="filters__range-wrapper">
+       <FilterRange />
+
+      </div>
+    </div>
   )
 }

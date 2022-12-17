@@ -8,9 +8,11 @@ type FiltersBlockCheckboxProps = {
 
 export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters }: FiltersBlockCheckboxProps) {
   return (
-    <section>
-      <h3>{filterTitle}</h3>
+    <div className="filters__block filters__block--checkbox">
+      <h3 className="filters__block-title">{filterTitle}</h3>
+      <div className="filters__checkbox-wrapper">
       { ProductsFilters.map((item) => <FilterCheckbox key={item} filter={item} />) }
-    </section>
+      </div>      
+    </div>
   )
 }

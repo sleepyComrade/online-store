@@ -4,7 +4,6 @@ import FiltersSection from "./../components/filters-section";
 import { IProductData } from "./../interfaces";
 
 
-
 export default function MainPage() {
   const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
 
