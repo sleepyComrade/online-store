@@ -68,6 +68,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .filter-checkbox__label {
@@ -79,7 +80,7 @@
     cursor: pointer;
 }
 
-.filter-checkbox__label:focus,
+.filter-checkbox__input:focus + label,
 .filter-checkbox__label:hover {
     color:crimson;
 } 
@@ -187,8 +188,6 @@
 
 .filter-range__progress {
     height: 5px;
-    left: 25%;
-    right: 25%;
     position: absolute;
     border-radius: 5px;
     background: crimson;
@@ -215,6 +214,7 @@
     pointer-events: auto;
     -webkit-appearance: none;
     background: crimson;
+    cursor: pointer;
 }
 
 .filter-range__input::-moz-range-thumb {
@@ -225,4 +225,5 @@
     pointer-events: auto;
     -moz-appearance: none;
     background: crimson;
+    cursor: pointer;
 }

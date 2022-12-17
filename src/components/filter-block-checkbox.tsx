@@ -11,7 +11,7 @@ export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters }: F
     <div className="filters__block filters__block--checkbox">
       <h3 className="filters__block-title">{filterTitle}</h3>
       <div className="filters__checkbox-wrapper">
-      { ProductsFilters.map((item) => <FilterCheckbox key={item} filter={item} />) }
+      { ProductsFilters.map((item, index) => <FilterCheckbox key={index} filter={item} />) }
       </div>      
     </div>
   )
