@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FiltersSection from "./../components/filters-section";
 import { IProductData } from "./../interfaces";
-
+import { Header } from "../components/header/header";
+import { CardsNav } from "../components/cards-navigation/navigation";
 
 export default function MainPage() {
   const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
@@ -15,8 +16,9 @@ export default function MainPage() {
   
   return (
     <>
-      <header></header>
+      <Header></Header>
       <main>
+        <CardsNav></CardsNav>
         <h2>Main Page</h2>
         <Link to="/basket">
           Go to basket page

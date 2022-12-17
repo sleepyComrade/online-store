@@ -1,0 +1,17 @@
+@use '../abstracts/mixins' as a;
+
+.header {
+  @include a.flex(space-between);
+  padding: 0 30px;
+  height: 80px;
+  background-color: rgb(234, 234, 234);
+
+  .header__logo {
+    height: 60px;
+  }
+
+  .header__payment-wrap {
+    @include a.flex();
+    gap: 20px;
+  }
+}
