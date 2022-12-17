@@ -8,7 +8,6 @@ import { AppRoute } from "./const";
 
 export function App() {
   return (
-    // <h1></h1>
     <HashRouter>
       <Routes>
         <Route
