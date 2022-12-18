@@ -1,4 +1,3 @@
-import React from "react";
 import FilterCheckbox from "./filter-checkbox";
 
 type FiltersBlockCheckboxProps = {

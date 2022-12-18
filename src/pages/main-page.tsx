@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import FiltersSection from "./../components/filters-section";
+import FiltersSection from "./../components/filters/filters-section";
 import { IProductData } from "./../interfaces";
 import { Header } from "../components/header/header";
 import { CardsBlock } from "../components/cards/cards-block";

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FiltersButtons from "./filters-buttons";
 import FiltersBlockCheckbox from "./filter-block-checkbox";
-import FiltersBlockRange from "./../components/filters-block-range";
-import { Filters } from "../const";
-import { IProductData } from "../interfaces";
+import FiltersBlockRange from "./../filters/filters-block-range";
+import { Filters } from "../../const";
+import { IProductData } from "../../interfaces";
 
 type MainPageProps = {
   products: Array<IProductData>;

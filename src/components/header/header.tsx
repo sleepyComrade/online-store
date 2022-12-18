@@ -1,4 +1,3 @@
-import React from "react";
 import { Logo } from "./logo";
 import { Cart } from "./cart";
 import { Total } from "./total";

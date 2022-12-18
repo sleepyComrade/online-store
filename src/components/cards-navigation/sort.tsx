@@ -1,5 +1,3 @@
-import React from "react";
-
 export function Sort() {
   return (
     <div className="cards-nav__sort-wrap">

@@ -1,4 +1,3 @@
-import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/main-page";
 import BasketPage from "./pages/basket-page";
