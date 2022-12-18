@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Header } from "../components/header/header";
+import { PaymentForm } from "../components/payment-form/payment-form";
 
 export default function BasketPage() {
   return (
@@ -15,6 +16,7 @@ export default function BasketPage() {
         <Link to="/product/01">
           Go to product page
         </Link>
+        <PaymentForm />
       </main>
       <footer></footer>
     </>

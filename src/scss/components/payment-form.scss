@@ -1,0 +1,42 @@
+@use '../abstracts/mixins' as a;
+
+.payment-form {
+  margin: auto;
+  max-width: 500px;
+  @include a.flex();
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid black;
+
+  .payment-form__block-name{
+    text-align: center;
+    margin: 10px 0 0;
+  }
+
+  .payment-form__input-wrap{
+    max-width: 400px;
+    @include a.flex(start);
+    gap: 10px;
+    margin: 0 5px;
+    // color: rgb(209, 4, 4);
+  }
+
+  .payment-form__help-msg {
+    min-width: 165px;
+  }
+}
+
+.payment-form__input {
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 6px;
+  outline: none;
+}
+
+.payment-form__input_incorrect {
+  border-color: rgb(209, 4, 4);
+}
+
+.payment-form__input_correct {
+  border-color: rgb(36, 181, 48);
+}
