@@ -1,0 +1,62 @@
+@use '../abstracts/mixins' as a;
+
+.credit-card {
+  @include a.flex();
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+
+  .credit-card__fieldset_line{
+    box-sizing: border-box;
+    @include a.flex(center, start);
+    flex-direction: column;
+    width: 300px;
+  }
+
+  .credit-card__fieldset {
+    width: 100%;
+    @include a.flex();
+    padding: 1px 10px 7px;
+    border-radius: 5px;
+  }
+
+  .credit-card__fieldset_incorrect {
+    border-color: rgb(209, 4, 4);
+  }
+
+  .credit-card__fieldset_correct {
+    border-color: rgb(36, 181, 48);
+  }
+
+  .credit-card__fieldset_small-wrap {
+    @include a.flex();
+    gap: 20px;
+    width: 300px;
+  }
+}
+
+.credit-card__input_small {
+  width: 80%;
+}
+
+.credit-card__legend {
+  font-size: 16px;
+}
+
+.credit-card__input {
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+.credit-card__icon {
+  width: 40px;
+  height: 25px;
+  background-color: rgb(205, 205, 205);
+  border-radius: 5px;
+}
+
+.credit-card__error {
+  margin: 0;
+  color: rgb(209, 4, 4);
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CreditCard } from "./credit-card";
 
 export function PaymentForm() {
   const inputState = {
@@ -23,11 +24,8 @@ export function PaymentForm() {
   const [emailState, setEmailState] = useState(inputState.initial);
 
   const [nameHelpMessage, setNameHelpMessage] = useState("Enter your name");
-  const [phoneHelpMessage, setPhoneHelpMessage] = useState(
-    "Enter your phone number"
-  );
-  const [addressHelpMessage, setAddressHelpMessage] =
-    useState("Enter your address");
+  const [phoneHelpMessage, setPhoneHelpMessage] = useState("Enter your phone number");
+  const [addressHelpMessage, setAddressHelpMessage] = useState("Enter your address");
   const [emailHelpMessage, setEmailHelpMessage] = useState("Enter your email");
 
   const setStates = (
@@ -54,7 +52,7 @@ export function PaymentForm() {
   };
 
   const nameBlurHandler = () => {
-    const regex = /^((\b[a-zA-Z]{3,40}\b)\s*){2,}$/;
+    const regex = /^((\b[A-Z]{1}[a-zA-Z]{2,40}\b)\s*){2,}$/;
     setStates(name, regex, setNameHelpMessage, setNameState, setNameCorrectness);
   };
 
@@ -151,6 +149,10 @@ export function PaymentForm() {
           />
           <p>{emailHelpMessage}</p>
         </div>
+      </div>
+      <div>
+        <h3 className="payment-form__block-name">Credit Card details</h3>
+        <CreditCard />
       </div>
       <button onClick={submitForm}>Confirm</button>
     </form>
