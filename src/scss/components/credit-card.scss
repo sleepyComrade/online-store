@@ -50,10 +50,13 @@
 }
 
 .credit-card__icon {
-  width: 40px;
-  height: 25px;
+  width: 35px;
+  height: 24px;
   background-color: rgb(205, 205, 205);
   border-radius: 5px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .credit-card__error {

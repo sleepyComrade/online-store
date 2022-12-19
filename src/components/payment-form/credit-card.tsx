@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import defaultCard from "../../assets/images/credit-card.png";
+import visa from "../../assets/svg/visa.svg";
+import masterCard from "../../assets/svg/mastercard.svg";
+import americanExpress from "../../assets/svg/american-express.svg";
 
 export function CreditCard() {
   const fieldsetState = {
@@ -8,6 +12,9 @@ export function CreditCard() {
   };
 
   const inputNames = ['Holder', 'Number', 'Date', 'CVV'];
+  const systems = [defaultCard, visa, masterCard, americanExpress];
+
+  const [system, setSystem] = useState(systems[0]);
 
   const [holder, setHolder] = useState("");
   const [number, setNumber] = useState("");
@@ -54,11 +61,13 @@ export function CreditCard() {
   };
 
   const holderBlurHandler = () => {
-
+    const regex = /^((\b[A-Z]{3,40}\b)\s*){2,}$/;
+    setStates(holder, regex, setHolderError, setHolderState, setHolderIsCorrect, 0);
   };
 
   const numberBlurHandler = () => {
-
+    const regex = /^(\d{4}) (\d{4}) (\d{4}) (\d{4})$/;
+    setStates(number, regex, setNumberError, setNumberState, setNumberIsCorrect, 1);
   };
 
   const dateBlurHandler = () => {
@@ -72,13 +81,40 @@ export function CreditCard() {
   };
 
   const holderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setHolder(e.target.value);
+    setHolder(e.target.value.toUpperCase());
     setHolderError('');
     setHolderState(fieldsetState.initial);
   };
 
   const numberChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNumber(e.target.value);
+    let resValue = e.target.value;
+    if (resValue.length > 19) {
+      resValue = number;
+    } else {
+      const numbers = e.target.value.split(' ').join('');
+      const value = numbers.replace(/\D/g, '');
+      const length = Math.ceil(value.length / 4);
+      const resArr = [];
+      for (let i = 0; i < length; i++) {
+        resArr.push(value.slice(i * 4, (i * 4) + 4))
+      }
+      resValue = resArr.join(' ');
+      switch (resValue[0]) {
+        case '4':
+          setSystem(systems[1]);
+          break;
+        case '5':
+          setSystem(systems[2]);
+          break;
+        case '6':
+          setSystem(systems[3]);
+          break;
+        default:
+          setSystem(systems[0]);
+          break;
+      }
+    }
+    setNumber(resValue);
     setNumberError('');
     setNumberState(fieldsetState.initial);
   };
@@ -142,7 +178,7 @@ export function CreditCard() {
         <fieldset className={numberState}>
           <legend className="credit-card__legend">&nbsp;Card Number&nbsp;</legend>
           <input onBlur={numberBlurHandler} onChange={numberChangeHandler} value={number} className="credit-card__input" type="text" placeholder="0000 0000 0000 0000" />
-          <div className="credit-card__icon"></div>
+          <div className="credit-card__icon" style={{backgroundImage: `url(${system})`}}></div>
         </fieldset>
         {(numberError) && <p className="credit-card__error">{numberError}</p>}
       </div>
