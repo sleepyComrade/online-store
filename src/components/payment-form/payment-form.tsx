@@ -5,14 +5,16 @@ import { PersonalData } from "./personal-data";
 export function PaymentForm() {
   const submitForm = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log('submit');
+    console.log("submit");
   };
 
   return (
-    <form className="payment-form">
-      <PersonalData />
-      <CreditCard />
-      <button onClick={submitForm}>Confirm</button>
-    </form>
+    <div>
+      <form className="payment-form">
+        <PersonalData />
+        <CreditCard />
+        <button onClick={submitForm}>Confirm</button>
+      </form>
+    </div>
   );
 }

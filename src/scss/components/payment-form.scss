@@ -1,13 +1,14 @@
 @use '../abstracts/mixins' as a;
 
 .payment-form {
-  margin: auto;
-  max-width: 500px;
   @include a.flex();
   flex-direction: column;
   gap: 20px;
+  padding: 20px;
   font-size: 18px;
   border: 1px solid black;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
 
   .payment-form__block-name{
     text-align: center;
@@ -24,6 +25,24 @@
   .payment-form__help-msg {
     min-width: 165px;
   }
+}
+
+.modal-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  @include a.flex();
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+.modal-wrap_open {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .payment-form__input {

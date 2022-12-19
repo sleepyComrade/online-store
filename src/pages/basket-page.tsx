@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "../components/header/header";
 import { PaymentForm } from "../components/payment-form/payment-form";
+import { Modal } from "../components/payment-form/modal";
 
 export default function BasketPage() {
+  const [isModal, setIsModal] = useState(false);
   return (
     <>
       <Header></Header>
@@ -16,9 +18,12 @@ export default function BasketPage() {
         <Link to="/product/01">
           Go to product page
         </Link>
-        <PaymentForm />
+        <button onClick={() => setIsModal(true)}>Pay</button>
       </main>
       <footer></footer>
+      <Modal open={isModal} setState={setIsModal} >
+        <PaymentForm />
+      </Modal>
     </>
   );
 }
