@@ -14,4 +14,21 @@
     @include a.flex();
     gap: 20px;
   }
+
+  .header__cart-wrap {
+    position: relative;
+    color: black;
+  
+    .header__cart-counter {
+      position: absolute;
+      top: 4px;
+      right: -3px;
+      @include a.flex();
+      width: 23px;
+      height: 23px;
+      background-color: rgb(234, 234, 234);
+      border-radius: 50%;
+      border: 2px solid black;
+    }
+  }
 }

@@ -4,12 +4,12 @@ import CartList from "./cart-list";
 export default function CartProductsSection() {
   const [cartItems, setCartItems] = useState([]);
 
-    useEffect(() => {
-      fetch('https://dummyjson.com/products?limit=7')
-        .then(res => res.json())
-        // .then(data => console.log(data.products))
-        .then(data => setCartItems(data.products))
-    }, []);
+  useEffect(() => {
+    fetch('https://dummyjson.com/products?limit=7')
+      .then(res => res.json())
+      // .then(data => console.log(data.products))
+      .then(data => setCartItems(data.products))
+  }, []);
 
   return (
     <section className="cart">

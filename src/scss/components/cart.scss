@@ -1,18 +1,71 @@
 @use '../abstracts/mixins' as a;
 
-.header__cart-wrap {
-  position: relative;
-  color: black;
+.cart__list {
+  padding-left: 0;
+}
 
-  .header__cart-counter {
-    position: absolute;
-    top: 4px;
-    right: -3px;
-    @include a.flex();
-    width: 23px;
-    height: 23px;
-    background-color: rgb(234, 234, 234);
-    border-radius: 50%;
-    border: 2px solid black;
-  }
+.cart-item {
+  width: 70%;
+  @include a.flex(flex-start);
+  align-items: stretch;
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding-bottom: 10px; 
+}
+
+.cart-item:not(:last-child) {
+  border-bottom: 1px dashed crimson;
+}
+
+.cart-item__number {
+  width: 8%;
+  @include a.flex(flex-start);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.cart-item__number span {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border: 1px dashed crimson;
+  border-radius: 50%;
+  line-height: 38px;
+  text-align: center;
+}
+
+.cart-item__info {
+  width: 72%;
+  @include a.flex(flex-start);
+}
+
+.cart-item__image {
+  @include a.flex(flex-start);
+  width: 30%;
+  margin: 0 10px;
+}
+
+.cart-item__image img {
+  width: 180px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.cart-item__full-info {
+  width: 70%;
+  padding: 0 15px;
+  background-color: rgb(234, 234, 234);
+}
+
+.cart-item__counter {
+  width: 20%;
+}
+
+.cart-item__title {
+  padding: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #fff;
 }
