@@ -11,8 +11,8 @@ export default function ProductPage() {
           Go to main page
         </Link>
         <br />
-        <Link to="/basket">
-          Go to basket page
+        <Link to="/cart">
+          Go to cart page
         </Link>
       </main>
       <footer></footer>

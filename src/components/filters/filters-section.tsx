@@ -5,11 +5,11 @@ import FiltersBlockRange from "./../filters/filters-block-range";
 import { Filters } from "../../const";
 import { IProductData } from "../../interfaces";
 
-type MainPageProps = {
+type FilterSectionProps = {
   products: Array<IProductData>;
 }
 
-export default function FiltersSection({ products }: MainPageProps) {
+export default function FiltersSection({ products }: FilterSectionProps) {
 
   const [categories, setCategories] = useState<Array<string>>([]);
   

@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import { Header } from "../components/header/header";
 import { PaymentForm } from "../components/payment-form/payment-form";
 import { Modal } from "../components/payment-form/modal";
+import CartProductsSection from "../components/cart/cart-products-section";
 
-export default function BasketPage() {
+export default function CartPage() {
   const [isModal, setIsModal] = useState(false);
   return (
     <>
       <Header></Header>
       <main>
-        <h2>Basket Page</h2>
+        <h2>Cart Page</h2>
         <Link to="/">
           Go to main page
         </Link>
@@ -19,6 +20,10 @@ export default function BasketPage() {
           Go to product page
         </Link>
         <button onClick={() => setIsModal(true)}>Pay</button>
+
+        <div className="main-container main-container--cart-page">
+          <CartProductsSection />
+        </div>
       </main>
       <footer></footer>
       <Modal open={isModal} setState={setIsModal} >

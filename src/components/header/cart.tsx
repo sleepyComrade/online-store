@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export function Cart() {
   const [count, setCount] = useState(0);
   return (
-    <Link to="/basket">
+    <Link to="/cart">
       <div className="header__cart-wrap">
         <div className="header__cart-counter">
           <span>{count}</span>

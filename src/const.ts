@@ -1,6 +1,6 @@
 enum AppRoute {
   Main = '/',
-  Basket = '/basket',
+  Cart = '/cart',
   Product = '/product/:id'
 }
 

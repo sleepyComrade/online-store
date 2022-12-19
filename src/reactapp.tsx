@@ -1,6 +1,6 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/main-page";
-import BasketPage from "./pages/basket-page";
+import CartPage from "./pages/cart-page";
 import ProductPage from "./pages/product-page";
 import NotFoundPage from "./pages/404-page";
 import { AppRoute } from "./const";
@@ -16,9 +16,9 @@ export function App() {
           }
         />
         <Route
-          path={AppRoute.Basket}
+          path={AppRoute.Cart}
           element={
-            <BasketPage />
+            <CartPage />
           }
         />
         <Route
