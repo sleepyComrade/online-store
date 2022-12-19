@@ -166,35 +166,38 @@ export function CreditCard() {
   };
 
   return (
-    <div className="credit-card">
-      <div className="credit-card__fieldset_line">
-        <fieldset className={holderState}>
-          <legend className="credit-card__legend">&nbsp;Card Holder&nbsp;</legend>
-          <input onBlur={holderBlurHandler} onChange={holderChangeHandler} value={holder} className="credit-card__input" type="text" placeholder="John Smith" />
-        </fieldset>
-        {(holderError) && <p className="credit-card__error">{holderError}</p>}
-      </div>
-      <div className="credit-card__fieldset_line">
-        <fieldset className={numberState}>
-          <legend className="credit-card__legend">&nbsp;Card Number&nbsp;</legend>
-          <input onBlur={numberBlurHandler} onChange={numberChangeHandler} value={number} className="credit-card__input" type="text" placeholder="0000 0000 0000 0000" />
-          <div className="credit-card__icon" style={{backgroundImage: `url(${system})`}}></div>
-        </fieldset>
-        {(numberError) && <p className="credit-card__error">{numberError}</p>}
-      </div>
-      <div>
-        <div className="credit-card__fieldset_small-wrap">
-          <fieldset className={dateState}>
-            <legend className="credit-card__legend">&nbsp;Expiration Date&nbsp;</legend>
-            <input onBlur={dateBlurHandler} onChange={dateChangeHandler} value={date} className="credit-card__input credit-card__input_small" type="text" placeholder="00/00" />
+    <div>
+      <h3 className="payment-form__block-name">Credit Card details</h3>
+      <div className="credit-card">
+        <div className="credit-card__fieldset_line">
+          <fieldset className={holderState}>
+            <legend className="credit-card__legend">&nbsp;Card Holder&nbsp;</legend>
+            <input onBlur={holderBlurHandler} onChange={holderChangeHandler} value={holder} className="credit-card__input" type="text" placeholder="John Smith" />
           </fieldset>
-          <fieldset className={cvvState}>
-            <legend className="credit-card__legend">&nbsp;CVV&nbsp;</legend>
-            <input onBlur={cvvBlurHandler} onChange={cvvChangeHandler} value={cvv} className="credit-card__input credit-card__input_small" type="text" placeholder="•••" />
-          </fieldset>
+          {(holderError) && <p className="credit-card__error">{holderError}</p>}
         </div>
-        {(dateError) && <p className="credit-card__error">{dateError}</p>}
-        {(cvvError) && <p className="credit-card__error">{cvvError}</p>}
+        <div className="credit-card__fieldset_line">
+          <fieldset className={numberState}>
+            <legend className="credit-card__legend">&nbsp;Card Number&nbsp;</legend>
+            <input onBlur={numberBlurHandler} onChange={numberChangeHandler} value={number} className="credit-card__input" type="text" placeholder="0000 0000 0000 0000" />
+            <div className="credit-card__icon" style={{backgroundImage: `url(${system})`}}></div>
+          </fieldset>
+          {(numberError) && <p className="credit-card__error">{numberError}</p>}
+        </div>
+        <div>
+          <div className="credit-card__fieldset_small-wrap">
+            <fieldset className={dateState}>
+              <legend className="credit-card__legend">&nbsp;Expiration Date&nbsp;</legend>
+              <input onBlur={dateBlurHandler} onChange={dateChangeHandler} value={date} className="credit-card__input credit-card__input_small" type="text" placeholder="00/00" />
+            </fieldset>
+            <fieldset className={cvvState}>
+              <legend className="credit-card__legend">&nbsp;CVV&nbsp;</legend>
+              <input onBlur={cvvBlurHandler} onChange={cvvChangeHandler} value={cvv} className="credit-card__input credit-card__input_small" type="text" placeholder="•••" />
+            </fieldset>
+          </div>
+          {(dateError) && <p className="credit-card__error">{dateError}</p>}
+          {(cvvError) && <p className="credit-card__error">{cvvError}</p>}
+        </div>
       </div>
     </div>
   );
