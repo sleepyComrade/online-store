@@ -27,24 +27,6 @@
   }
 }
 
-.modal-wrap {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  @include a.flex();
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease;
-}
-
-.modal-wrap_open {
-  opacity: 1;
-  pointer-events: all;
-}
-
 .payment-form__input {
   padding: 5px 0;
   text-align: center;

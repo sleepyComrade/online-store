@@ -22,7 +22,7 @@ export default function BasketPage() {
       </main>
       <footer></footer>
       <Modal open={isModal} setState={setIsModal} >
-        <PaymentForm />
+        <PaymentForm setState={setIsModal} />
       </Modal>
     </>
   );

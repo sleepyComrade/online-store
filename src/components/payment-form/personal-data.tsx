@@ -17,6 +17,9 @@ export function PersonalData() {
   const [addressIsCorrect, setAddressCorrectness] = useState(false);
   const [emailIsCorrect, setEmailCorrectness] = useState(false);
 
+  const isValid = [nameIsCorrect, phoneNumIsCorrect, addressIsCorrect, emailIsCorrect];
+  const checkValidity = () => isValid.every(el => el);
+
   const [nameState, setNameState] = useState(inputState.initial);
   const [phoneState, setPhoneState] = useState(inputState.initial);
   const [addressState, setAddressState] = useState(inputState.initial);
