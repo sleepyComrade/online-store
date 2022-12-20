@@ -10,12 +10,18 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
   const [cardIsCorrect, setCardCorrect] = useState({holderIsCorrect: false, numberIsCorrect: false, dateIsCorrect: false, cvvIsCorrect: false});
   const submitForm = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log(personalData);
-    console.log(personalIsCorrect);
-    console.log(cardData);
-    console.log(cardIsCorrect);
-    props.setState(false);
-    console.log("submit");
+    let isValid = true;
+    const personalValues = Object.values(personalIsCorrect);
+    const cardValues = Object.values(cardIsCorrect);
+    const values = [...personalValues, ...cardValues];
+    values.forEach(value => {
+      if (!value) {
+        isValid = false;
+      }
+    })
+    if (isValid) {
+      props.setState(false);
+    }
   };
 
   return (
