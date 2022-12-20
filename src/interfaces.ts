@@ -25,3 +25,17 @@ export interface IPersonalDataValidity {
     addressIsCorrect: boolean,
     emailIsCorrect: boolean
 }
+
+export interface ICardData {
+    holder: string,
+    number: string,
+    date: string,
+    cvv: string
+}
+
+export interface ICardDataValidity {
+    holderIsCorrect: boolean,
+    numberIsCorrect: boolean,
+    dateIsCorrect: boolean,
+    cvvIsCorrect: boolean
+}

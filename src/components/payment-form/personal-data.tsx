@@ -47,21 +47,10 @@ export function PersonalData(props: {onChange: (data: IPersonalData, personalIsC
     }
   };
 
-  const nameBlurHandler = () => {
-    setStates(data.name, regexes.name, setNameHelpMessage, setNameState);
-  };
-
-  const phoneBlurHandler = () => {
-    setStates(data.phone, regexes.phone, setPhoneHelpMessage, setPhoneState);
-  };
-
-  const addressBlurHandler = () => {
-    setStates(data.address, regexes.address, setAddressHelpMessage, setAddressState);
-  };
-
-  const emailBlurHandler = () => {
-    setStates(data.email, regexes.email, setEmailHelpMessage, setEmailState);
-  };
+  const nameBlurHandler = () => setStates(data.name, regexes.name, setNameHelpMessage, setNameState);
+  const phoneBlurHandler = () => setStates(data.phone, regexes.phone, setPhoneHelpMessage, setPhoneState);
+  const addressBlurHandler = () => setStates(data.address, regexes.address, setAddressHelpMessage, setAddressState);
+  const emailBlurHandler = () => setStates(data.email, regexes.email, setEmailHelpMessage, setEmailState);
 
   const nameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     personalIsCorrect.nameIsCorrect = regexes.name.test(e.target.value.trim());
