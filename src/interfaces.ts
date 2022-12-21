@@ -1,4 +1,5 @@
 export interface IProductData {
+    data: any;
     id: number;
     title: string;
     description: string;
