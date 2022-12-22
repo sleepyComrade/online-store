@@ -1,7 +1,6 @@
 @use '../abstracts/mixins' as a;
 
 .cards-nav {
-  margin-top: 10px;
   @include a.flex(space-around);
   height: 40px;
   background-color: rgb(234, 234, 234);

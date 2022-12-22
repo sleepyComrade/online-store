@@ -1,0 +1,17 @@
+.card-item {
+  width: 200px;
+}
+.card-item .card-item__image {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.card-item .card-item__title {
+  margin: 10px;
+  overflow-wrap: break-word;
+}
+.card-item .card-item__price {
+  margin: 0;
+}/*# sourceMappingURL=card-item.css.map */

@@ -1,0 +1,70 @@
+.cards-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 40px;
+  background-color: rgb(234, 234, 234);
+}
+.cards-nav .cards-nav__sort-wrap .cards-nav__select {
+  padding: 4px;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cards-nav .cards-nav__found {
+  margin: 0;
+}
+.cards-nav .cards-nav__switcher-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.cards-nav .cards-nav__switcher-wrap .cards-nav__grid-icon,
+.cards-nav .cards-nav__switcher-wrap .cards-nav__stack-icon {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.cards-nav .cards-nav__switcher-wrap .cards-nav__grid-icon {
+  height: 25px;
+  padding: 3px;
+}
+.cards-nav .cards-nav__switcher-wrap .cards-nav__stack-icon {
+  height: 22px;
+  padding: 4px;
+}
+.cards-nav .cards-nav__switcher-wrap .cards-nav__switcher-icon-active {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+}
+.cards-nav .cards-nav__switcher-wrap .cards-nav__switcher-icon-inactive:hover {
+  background-color: rgb(90, 90, 90);
+  filter: invert(100%);
+}
+.cards-nav .cards-nav__search-wrap {
+  width: 157px;
+  position: relative;
+  border: 1px solid black;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.cards-nav .cards-nav__search-wrap .cards-nav__input {
+  width: 125px;
+  padding: 5px;
+  padding-right: 0;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+}
+.cards-nav .cards-nav__search-wrap .cards-nav__img {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  width: 20px;
+  cursor: pointer;
+}
+.cards-nav .cards-nav__search-wrap .cards-nav__img-inactive {
+  display: none;
+}/*# sourceMappingURL=cards-nav.css.map */
