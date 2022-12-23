@@ -1,0 +1,95 @@
+@use '../abstracts/mixins' as a;
+
+.promo-block {
+  position: fixed;
+  right: 50px;
+  width: 30%;
+  border: 1px dashed crimson;
+  text-align: center;
+}
+
+.promo-block__header {
+  padding: 10px 20px;
+  border-bottom: 1px solid crimson;
+  background-color: #fff;
+}
+
+.promo-block__calculation {
+  padding: 10px 20px 20px;
+  background-color: rgb(234, 234, 234);
+}
+
+.promo-block__products-count,
+.promo-block__total-price,
+.promo-block__total-price-with-promo-code {
+  font-size: 20px;
+  font-weight: bold;
+  color: crimson;
+}
+
+.promo-block__products-count span,
+.promo-block__total-price span,
+.promo-block__total-price-with-promo-code span {
+  color: #000;
+}
+
+.promo-block__total-price {
+  text-decoration: line-through;
+}
+
+.promo-block__code-input {
+  width: 230px;
+  padding: 5px 10px;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.promo-block__code-input:focus {
+  outline: 0;
+}
+
+.promo-block__button--buy {
+  min-width: 125px;
+  padding: 8px;
+  background-color: #fff;
+  color: crimson;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease-out;
+  border-radius: 5px;
+}
+
+.promo-block__button--buy:focus,
+.promo-block__button--buy:hover {
+  background-color: crimson;
+  color: #fff;
+  transition: all 0.3s ease-out;
+}
+
+.promo-block__list {
+  padding-left: 0;
+}
+
+.promo-block__item {
+  width: 100%;
+  @include a.flex();
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.promo-block__item p {
+  margin: 5px;
+}
+
+.promo-block__button--add {
+  min-width: 25px;
+  padding: 3px 8px;
+  margin-left: 10px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 5px;
+  background-color: rgb(234, 234, 234);
+}

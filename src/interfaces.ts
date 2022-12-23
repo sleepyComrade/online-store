@@ -1,5 +1,4 @@
 export interface IProductData {
-    data: any;
     id: number;
     title: string;
     description: string;
@@ -53,4 +52,9 @@ export interface ICardDataValidity {
     numberIsCorrect: boolean,
     dateIsCorrect: boolean,
     cvvIsCorrect: boolean
+}
+export interface IPromoCode  {
+    title: string;
+    code: string;
+    discount: number;
 }

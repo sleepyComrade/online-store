@@ -4,6 +4,7 @@ import { Header } from "../components/header/header";
 import { PaymentForm } from "../components/payment-form/payment-form";
 import { Modal } from "../components/payment-form/modal";
 import CartProductsSection from "../components/cart/cart-products-section";
+import CartPromoBlock from "../components/cart/cart-promo-block";
 
 export default function CartPage() {
   const [isModal, setIsModal] = useState(false);
@@ -23,6 +24,7 @@ export default function CartPage() {
 
         <div className="main-container main-container--cart-page">
           <CartProductsSection />
+          <CartPromoBlock />
         </div>
       </main>
       <footer></footer>

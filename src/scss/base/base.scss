@@ -36,9 +36,13 @@ img {
 }
 
 .main-container {
-  width: 1600px;
+  width: 1350px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.main-container--cart-page {
+  position: relative;
 }
