@@ -5,6 +5,8 @@
 }
 
 .cards-block__card-list {
+  position: relative;
+  width: 100%;
   margin-top: 10px;
   @include a.flex(space-around);
   flex-wrap: wrap;

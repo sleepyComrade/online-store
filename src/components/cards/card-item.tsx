@@ -1,39 +1,43 @@
 import React, { useState } from "react";
-import { IProductData } from "../../interfaces";
+import { IProductData, ICardStyle } from "../../interfaces";
 import star from "../../assets/svg/star.svg";
 
-export function CardItem(props: { product: IProductData }) {
-  const [btnContent, setBtnContent] = useState('Add to cart')
+export function CardItem(props: { product: IProductData, style: ICardStyle }) {
+  const [btnContent, setBtnContent] = useState('Add to cart');
+  const [btnColor, setBtnColor] = useState('green')
   const addRemoveItem = () => {
     setBtnContent(btnContent === 'Add to cart' ? 'Remove from cart' : 'Add to cart');
+    setBtnColor(btnContent === 'Add to cart' ? 'crimson' : 'green');
   }
   const title = props.product.title.charAt(0).toUpperCase() + props.product.title.slice(1);
   const originalPrice = ((props.product.price / (100 - props.product.discountPercentage)) * 100).toFixed(2);
   return (
-    <div className="card-item">
+    <div className={props.style.item}>
       <div
-        className="card-item__image"
+        className={props.style.image}
         style={{ backgroundImage: `url(${props.product.images[0]})` }}
       ></div>
-      <div className="card-item__title-rate-wrap">
-        <h4 title={title} className="card-item__title">{title}</h4>
-        <div className="card-item__rate-wrap">
+      <div>
+      <div className={props.style.titleWrap}>
+        <h4 title={title} className={props.style.title}>{title}</h4>
+        <div className={props.style.rateWrap}>
           <span>{props.product.rating.toFixed(2)}</span>
-          <img className="card-item__star-icon" src={star} alt="star icon" />
+          <img className={props.style.star} src={star} alt="star icon" />
         </div>
       </div>
-      <div className="card-item__price-wrap">
-        <h4 className="card-item__price">
+      <div className={props.style.priceWrap}>
+        <h4 className={props.style.price}>
           USD {props.product.price.toFixed(2)}
         </h4>
         {props.product.discountPercentage && (
-          <p className="card-item__discount">
-            <span className="card-item__origin-price">USD {originalPrice}</span>
+          <p className={props.style.discount}>
+            <span className={props.style.originPrice}>USD {originalPrice}</span>
             &nbsp;({props.product.discountPercentage}% off)
           </p>
         )}
       </div>
-      <button onClick={addRemoveItem} className="card-item__btn">{btnContent}</button>
+      <button style={{background: `${btnColor}`}} onClick={addRemoveItem} className={props.style.button}>{btnContent}</button>
+      </div>
     </div>
   );
 }

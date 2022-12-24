@@ -11,3 +11,17 @@ export interface IProductData {
     thumbnail: string;
     images: string[];
 }
+
+export interface ICardStyle {
+    item: string,
+    image: string,
+    titleWrap: string,
+    title: string,
+    rateWrap: string,
+    star: string,
+    priceWrap: string,
+    price: string,
+    discount: string,
+    originPrice: string,
+    button: string
+}
