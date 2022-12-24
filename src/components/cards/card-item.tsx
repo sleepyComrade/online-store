@@ -3,6 +3,10 @@ import { IProductData } from "../../interfaces";
 import star from "../../assets/svg/star.svg";
 
 export function CardItem(props: { product: IProductData }) {
+  const [btnContent, setBtnContent] = useState('Add to cart')
+  const addRemoveItem = () => {
+    setBtnContent(btnContent === 'Add to cart' ? 'Remove from cart' : 'Add to cart');
+  }
   const title = props.product.title.charAt(0).toUpperCase() + props.product.title.slice(1);
   const originalPrice = ((props.product.price / (100 - props.product.discountPercentage)) * 100).toFixed(2);
   return (
@@ -29,7 +33,7 @@ export function CardItem(props: { product: IProductData }) {
           </p>
         )}
       </div>
-      <button className="card-item__btn">Add to cart</button>
+      <button onClick={addRemoveItem} className="card-item__btn">{btnContent}</button>
     </div>
   );
 }
