@@ -68,22 +68,27 @@
   transition: all 0.3s ease-out;
 }
 
-.promo-block__list {
+.promo-block__applied-codes-list {
   padding-left: 0;
 }
 
-.promo-block__item {
+.promo-block__applied-codes-item {
   width: 100%;
   @include a.flex();
   margin-top: 10px;
   background-color: #fff;
 }
 
-.promo-block__item p {
+.promo-block__applied-codes-item p {
   margin: 5px;
 }
 
-.promo-block__button--add {
+.promo-block__found-code {
+  @include a.flex();
+}
+
+.promo-block__button--add,
+.promo-block__button--drop {
   min-width: 25px;
   padding: 3px 8px;
   margin-left: 10px;
@@ -92,4 +97,8 @@
   border: 1px solid rgb(197, 197, 197);
   border-radius: 5px;
   background-color: rgb(234, 234, 234);
+}
+
+.non-display {
+  display: none;
 }
