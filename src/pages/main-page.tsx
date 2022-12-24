@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import FiltersSection from "./../components/filters-section";
 import { IProductData } from "./../interfaces";
 import { Header } from "../components/header/header";
-import { CardsNav } from "../components/cards-navigation/navigation";
+import { CardsBlock } from "../components/cards/cards-block";
 
 export default function MainPage() {
   const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
@@ -18,7 +18,6 @@ export default function MainPage() {
     <>
       <Header></Header>
       <main>
-        <CardsNav></CardsNav>
         <h2>Main Page</h2>
         <Link to="/basket">
           Go to basket page
@@ -27,8 +26,10 @@ export default function MainPage() {
         <Link to="/product/01">
           Go to product page
         </Link>
-
-        <FiltersSection  products={productsItems} />        
+        <div className="main-page__content-wrap">
+          <FiltersSection  products={productsItems} />
+          <CardsBlock products={productsItems} />
+        </div>
       </main>
       <footer></footer>
     </>

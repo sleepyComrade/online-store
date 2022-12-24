@@ -1,0 +1,18 @@
+@use '../abstracts/mixins' as a;
+
+.cards-block {
+  flex: 1;
+}
+
+.cards-block__card-list {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  @include a.flex(space-around);
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.cards-block__cards-wrap {
+  @include a.flex();
+}
