@@ -5,7 +5,12 @@
 }
 
 .cards-block__card-list {
+  margin-top: 10px;
   @include a.flex(space-around);
   flex-wrap: wrap;
   gap: 25px;
+}
+
+.cards-block__cards-wrap {
+  @include a.flex();
 }

@@ -4,8 +4,8 @@ import { CardList } from "./cards-list";
 
 export function CardsWrap(props: { products: Array<IProductData>}) {
   return (
-    <div>
-      {!props.products.length ? <h1>No products found</h1> : <CardList products={props.products} /> }
+    <div className="cards-block__cards-wrap">
+      {!props.products.length ? <h2>No products found</h2> : <CardList products={props.products} /> }
     </div>
   );
 }

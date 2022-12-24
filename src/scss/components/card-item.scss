@@ -1,22 +1,82 @@
 @use '../abstracts/mixins' as a;
 
 .card-item {
-  width: 200px;
+  min-width: 250px;
+  max-width: 300px;
+  flex: 1;
+  cursor: pointer;
+
+  &:hover .card-item__image {
+    box-shadow: 0px 0px 5px 2px rgb(188, 188, 188);
+  }
 
   .card-item__image {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    padding-bottom: 100%;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    transition: all .2s ease;
   }
 
-  .card-item__title {
-    margin: 10px;
-    overflow-wrap: break-word; 
+  .card-item__title-rate-wrap {
+    @include a.flex(space-between);
+    gap: 15px;
+
+    .card-item__title {
+      margin: 10px 0;
+      font-size: 18px;
+      font-weight: normal;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-item__rate-wrap {
+      @include a.flex();
+      gap: 3px;
+
+      .card-item__star-icon {
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+  
+  .card-item__price-wrap {
+    @include a.flex(start, start);
+    flex-direction: column;
+    gap: 5px;
+
+    .card-item__price {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .card-item__discount {
+      margin: 0;
+      font-size: 14px;
+      color: green;
+
+      .card-item__origin-price{
+        text-decoration: line-through;
+      }
+    }
   }
 
-  .card-item__price {
-    margin: 0;
+  .card-item__btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: crimson;
+    transition: all .2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(201, 18, 55);
+      box-shadow: 0px 0px 5px 2px rgb(188, 188, 188);
+    }
   }
 }
