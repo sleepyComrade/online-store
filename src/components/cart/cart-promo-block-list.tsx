@@ -3,21 +3,15 @@ import CartPromoBlockItem from "./cart-promo-block-item";
 
 type CartPromoBlockListProps = {
   appliedPromoItems: Array<IPromoCode>;
-  onAppliedPromoItems: (arr: Array<IPromoCode>) => void;
+  onDrop: (code: string) => void;
 }
 
-export default function CartPromoBlockList({appliedPromoItems, onAppliedPromoItems}: CartPromoBlockListProps) {
-
-  const dropCodeHandler = (itemCode: IPromoCode['code']) => {
-    const currentIndex = appliedPromoItems.findIndex((item)=> item.code == itemCode);
-    console.log(appliedPromoItems);
-    return [...appliedPromoItems.slice(0, currentIndex), ...appliedPromoItems.slice(currentIndex + 1)];
- }
+export default function CartPromoBlockList({appliedPromoItems, onDrop}: CartPromoBlockListProps) {
 
   return (
-    <ul className="promo-block__applied-codes-list" onAppliedPromoItems={appliedPromoItems}>
+    <ul className="promo-block__applied-codes-list" >
       {appliedPromoItems.map(item => <CartPromoBlockItem key={item.code} promoItem={item}
-        onDropCode={() =>  dropCodeHandler(item.code)}/>)}
+        onDropCode={() => onDrop(item.code)} />)}      
     </ul>
   )
 }

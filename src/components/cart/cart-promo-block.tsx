@@ -4,18 +4,17 @@ import { PromoCodes } from "../../const";
 import CartPromoBlockList from "./cart-promo-block-list";
 
 export default function CartPromoBlock() {
-  {/*состояние, когда введен какой-либо код или нет*/}
-  const [promo, setPromo] = useState(false); 
-
   {/*состояние, когда введен конкретный код или нет*/}
-  const [promoItem, setPromoItem] = useState<IPromoCode>({
-    title: '',
-    code: '',
-    discount: 0
-  });
+  const [promoItem, setPromoItem] = useState<null | IPromoCode>(null);
 
    {/*состояние для вывода списка всех примененных кодов*/}
   const [appliedPromoItems, setAppliedPromoItems] = useState<Array<IPromoCode>>([]);
+
+  const dropCodeHandler = (itemCode: IPromoCode['code'], appliedPromoItems: Array<IPromoCode>) => {
+    const currentIndex = appliedPromoItems.findIndex((item)=> item.code == itemCode);
+    console.log(appliedPromoItems);
+    return [...appliedPromoItems.slice(0, currentIndex), ...appliedPromoItems.slice(currentIndex + 1)];
+ }
 
   return (
     <section className="cart__promo-block promo-block">
@@ -36,7 +35,9 @@ export default function CartPromoBlock() {
         {appliedPromoItems.length !== 0 &&
           <div className="promo-block__applied-codes">
             <h3>Applied codes</h3>
-            <CartPromoBlockList appliedPromoItems={appliedPromoItems} onAppliedPromoItems={setAppliedPromoItems} />
+            <CartPromoBlockList appliedPromoItems={appliedPromoItems} onDrop={(code) => {
+              setAppliedPromoItems((last) => dropCodeHandler(code, last))
+            }} />
           </div>
         }
 
@@ -46,22 +47,20 @@ export default function CartPromoBlock() {
             name="promo-block-code-input"
             placeholder="Enter promo code"
             onChange={(e) => {
-              PromoCodes.forEach(item => {
-                if (e.target.value === item.code) {
-                  setPromo(true);
-                  setPromoItem(item);
-                }
-              })
+              const promo = PromoCodes.find(item => {
+                return e.target.value === item.code;
+              }) || null;
+              setPromoItem(promo);
             }} />
 
-          {promo === true &&
+          {promoItem &&
             <div className="promo-block__found-code">
               <p>{promoItem.title} - {promoItem.discount}%</p>
               {/* если данный код уже находится в массиве примененных кодов, кнопка Add скрывается */}
-              <button className={`${appliedPromoItems.includes(promoItem) ? "non-display" : "btn promo-block__button promo-block__button--add"} `}
+              {!appliedPromoItems.includes(promoItem) && <button className={"btn promo-block__button promo-block__button--add"} 
                 onClick={() => {
                   setAppliedPromoItems([...appliedPromoItems, promoItem])
-                }}>Add</button>
+                }}>Add</button>}
             </div>
           }
 

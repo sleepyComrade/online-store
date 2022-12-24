@@ -4,23 +4,22 @@ import CartItemsPerPage from "./cart-items-per-page";
 import CartPagination from "./cart-pagination";
 import { IProductData } from "../../interfaces";
 
-export default function CartProductsSection() {
-  const [cartItems, setCartItems] = useState<Array<{data: IProductData, counter: number}>>([]);
+type CartProductsSectionProps = {
+  cartItems: Array<{data: IProductData, counter: number}>;
+  setCartItems: React.Dispatch<React.SetStateAction<{
+    data: IProductData;
+    counter: number;
+}[]>>
+}
+
+export default function CartProductsSection({cartItems, setCartItems}: CartProductsSectionProps) {
+
   const [countItemsPerPageCart, setCountItemsPerPageCart] = useState(5);
   const minItemsPerPage = 1;
   const countItemsPerPage: number = (Number.isNaN(countItemsPerPageCart) || countItemsPerPageCart === 0) ? minItemsPerPage : countItemsPerPageCart;
   const itemsPerPage = cartItems.filter(item => item.counter > 0).slice(0, countItemsPerPage); 
  
-  useEffect(() => {
-    fetch('https://dummyjson.com/products?limit=10')
-      .then(res => res.json())
-      .then((data: {products: Array<IProductData>}) => setCartItems(data.products.map(item => {
-        return {
-          counter: 1,
-          data: item
-        }
-      })))
-  }, []); 
+ 
 
   return (
     <section className="cart">

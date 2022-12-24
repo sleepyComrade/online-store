@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "../components/header/header";
 import { PaymentForm } from "../components/payment-form/payment-form";
 import { Modal } from "../components/payment-form/modal";
 import CartProductsSection from "../components/cart/cart-products-section";
 import CartPromoBlock from "../components/cart/cart-promo-block";
+import { IProductData } from "../interfaces";
 
 export default function CartPage() {
   const [isModal, setIsModal] = useState(false);
+  const [cartItems, setCartItems] = useState<Array<{data: IProductData, counter: number}>>([]);
+  useEffect(() => {
+    fetch('https://dummyjson.com/products?limit=10')
+      .then(res => res.json())
+      .then((data: {products: Array<IProductData>}) => setCartItems(data.products.map(item => {
+        return {
+          counter: 1,
+          data: item
+        }
+      })))
+  }, []); 
+  
   return (
     <>
       <Header></Header>
@@ -23,7 +36,7 @@ export default function CartPage() {
         <button onClick={() => setIsModal(true)}>Pay</button>
 
         <div className="main-container main-container--cart-page">
-          <CartProductsSection />
+          <CartProductsSection cartItems={cartItems} setCartItems={setCartItems} />
           <CartPromoBlock />
         </div>
       </main>
