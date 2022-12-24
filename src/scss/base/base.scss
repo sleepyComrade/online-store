@@ -4,6 +4,15 @@
   box-sizing: inherit;
 }
 
+body {
+  min-width: 320px;
+  box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+}
+
 img {
   max-width: 100%;
   height: auto;
