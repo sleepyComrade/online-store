@@ -4,7 +4,7 @@ import { Header } from "../components/header/header";
 export default function ProductPage() {
   return (
     <>
-      <Header></Header>
+      {/* <Header></Header> */}
       <main>
         <h2>Product Page</h2>
         <Link to="/">

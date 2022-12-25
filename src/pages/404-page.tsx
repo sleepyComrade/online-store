@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function NotFoundPage() {
   return (
     <>
-      <header></header>
+      {/* <header></header> */}
       <main>
         <h2 style={{ textAlign: 'center' }}>
           404.

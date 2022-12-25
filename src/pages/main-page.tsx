@@ -16,7 +16,7 @@ export default function MainPage() {
   
   return (
     <>
-      <Header></Header>
+      {/* <Header></Header> */}
       <main>
         <h2>Main Page</h2>
         <br />
