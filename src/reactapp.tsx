@@ -1,3 +1,4 @@
+import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/main-page";
 import CartPage from "./pages/cart-page";
@@ -29,7 +30,7 @@ export function App() {
   {/*состояние для вывода списка всех примененных кодов*/ }
   const [appliedPromoItems, setAppliedPromoItems] = useState<Array<IPromoCode>>([]);
 
-  const cartItemsCount = cartItems.reduce((acc, item) => acc + (1 * item.counter), 0); // ???
+  const cartItemsCount = cartItems.reduce((acc, item) => acc + (1 * item.counter), 0);
   const totalCost = cartItems.reduce((acc, item) => acc + (item.data.price * item.counter), 0);
   // сумма полученных скидок
   const discountAmount = appliedPromoItems.reduce((acc, item) => acc + item.discount, 0);
