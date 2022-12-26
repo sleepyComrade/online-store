@@ -7,9 +7,10 @@ import { gridItem, bigItem } from "../../const";
 type CardBlockProps = {
   products: Array<IProductData>;
   activeCategories: string[];
+  activeBrands: string[];
 }
 
-export function CardsBlock({ products, activeCategories}: CardBlockProps) {
+export function CardsBlock({ products, activeCategories, activeBrands}: CardBlockProps) {
   const [style, setStyle] = useState(gridItem);
   return (
     <div className="cards-block">
@@ -18,7 +19,7 @@ export function CardsBlock({ products, activeCategories}: CardBlockProps) {
             setStyle(gridItem);
           } else setStyle(bigItem);
         }}></CardsNav>
-        <CardsWrap activeCategories={activeCategories} style={style} products={products} />
+        <CardsWrap activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
     </div>
   );
 }

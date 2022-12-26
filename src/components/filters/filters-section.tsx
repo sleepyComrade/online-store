@@ -3,14 +3,16 @@ import FiltersButtons from "./filters-buttons";
 import FiltersBlockCheckbox from "./filter-block-checkbox";
 import FiltersBlockRange from "./../filters/filters-block-range";
 import { Filters } from "../../const";
-import { IProductData } from "../../interfaces";
 
 type FilterSectionProps = {
-  products: Array<IProductData>;
+  brands: Array<string>;
+  brandState: boolean[];
   onCategoryChange: (data: string[]) => void;
+  onBrandChange: (data: string[]) => void;
+  onBrandStateChange: (data: boolean[]) => void;
 }
 
-export default function FiltersSection({ products, onCategoryChange }: FilterSectionProps) {
+export default function FiltersSection({ brands, brandState, onCategoryChange, onBrandChange, onBrandStateChange }: FilterSectionProps) {
   const [categories, setCategories] = useState<Array<string>>([]);
   const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
   useEffect(() => {
@@ -20,12 +22,7 @@ export default function FiltersSection({ products, onCategoryChange }: FilterSec
       setCategories(categories);
       setCategoryState(new Array(categories.length).fill(false));
     });
-  }, []); 
-
-  const brands: Array<string> = [];
-  for (let product of products) {
-    if (!brands.includes(product.brand)) brands.push(product.brand);
-  }
+  }, []);
 
   return (
     <section className="filters">
@@ -33,9 +30,7 @@ export default function FiltersSection({ products, onCategoryChange }: FilterSec
       <FiltersBlockCheckbox onStateChange={(data: boolean[]) => {
         setCategoryState(data)
       }} categoryState={categoryState} onCategoryChange={onCategoryChange} filterTitle={Filters.Category} ProductsFilters={categories} />
-      <FiltersBlockCheckbox onStateChange={(data: boolean[]) => {
-        setCategoryState(data)
-      }} categoryState={categoryState} onCategoryChange={onCategoryChange} filterTitle={Filters.Brand} ProductsFilters={brands} />
+      <FiltersBlockCheckbox onStateChange={onBrandStateChange} categoryState={brandState} onCategoryChange={onBrandChange} filterTitle={Filters.Brand} ProductsFilters={brands} />
       <FiltersBlockRange filterTitle={Filters.Price} />
       <FiltersBlockRange filterTitle={Filters.Stock} />
     </section>
