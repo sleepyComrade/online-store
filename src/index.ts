@@ -8,4 +8,4 @@ if (rootDiv === null || !(rootDiv instanceof HTMLElement)) {
   throw new Error("error");
 }
 const root = ReactDOM.createRoot(rootDiv);
-root.render(App());
+root.render(React.createElement(App));

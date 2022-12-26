@@ -1,15 +1,21 @@
-import React from "react";
 import { Logo } from "./logo";
 import { Cart } from "./cart";
 import { Total } from "./total";
 
-export function Header() {
+type HeaderProps = {
+  cartItemsCount: number;
+  totalCost: number;
+  totalCostWithDiscount: number;
+}
+
+export function Header({cartItemsCount, totalCost, totalCostWithDiscount}: HeaderProps) {
+
   return (
     <header className="header">
       <Logo></Logo>
       <div className="header__payment-wrap">
-        <Total></Total>
-        <Cart></Cart>
+        <Total totalCost={totalCost} totalCostWithDiscount={totalCostWithDiscount}></Total>
+        <Cart cartItemsCount={cartItemsCount}></Cart>
       </div>
     </header>
   );

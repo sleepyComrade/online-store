@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import FiltersSection from "./../components/filters-section";
+import FiltersSection from "./../components/filters/filters-section";
 import { IProductData } from "./../interfaces";
 import { Header } from "../components/header/header";
 import { CardsBlock } from "../components/cards/cards-block";
@@ -16,12 +16,8 @@ export default function MainPage() {
   
   return (
     <>
-      <Header></Header>
       <main>
         <h2>Main Page</h2>
-        <Link to="/basket">
-          Go to basket page
-        </Link>
         <br />
         <Link to="/product/01">
           Go to product page

@@ -53,3 +53,8 @@ export interface ICardDataValidity {
     dateIsCorrect: boolean,
     cvvIsCorrect: boolean
 }
+export interface IPromoCode  {
+    title: string;
+    code: string;
+    discount: number;
+}
