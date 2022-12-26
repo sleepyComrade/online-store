@@ -1,14 +1,11 @@
-import { useState } from "react";
 import cart from "../../assets/svg/cart-icon.png";
 import { Link } from "react-router-dom";
-import { IProductData } from "../../interfaces";
 
 type CartProps = {
   cartItemsCount: number;
 }
 
 export function Cart({cartItemsCount}: CartProps) {
-  // const [count, setCount] = useState(0);
   
   return (
     <Link to="/cart">

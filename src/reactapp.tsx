@@ -10,8 +10,6 @@ import { IProductData, IPromoCode } from "./interfaces";
 import { Header } from "./components/header/header";
 
 export function App() {
-  const [value, setValue] = useState(3);
-
   const [cartItems, setCartItems] = useState<Array<{ data: IProductData, counter: number }>>([]);
 
   useEffect(() => {
@@ -41,8 +39,7 @@ export function App() {
   const totalCostWithDiscount = totalCost - discountFromCost;
 
   return (
-    <AppContext.Provider value={{ a: value, setA: (num) => setValue(num) }}>
-      {/* <button onClick={() => setValue((last) => last +1)}></button> */}
+    // <AppContext.Provider value={}>
       <HashRouter>
         <Header cartItemsCount={cartItemsCount} totalCost={totalCost} totalCostWithDiscount={totalCostWithDiscount} />
         <Routes>
@@ -78,6 +75,6 @@ export function App() {
           />
         </Routes>
       </HashRouter>
-    </AppContext.Provider>
+    // </AppContext.Provider>
   );
 }
