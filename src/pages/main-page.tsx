@@ -10,7 +10,18 @@ export default function MainPage() {
   const [brands, setBrands] = useState<Array<string>>([]);
   const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
   const [brandState, setBrandState] = useState<Array<boolean>>([]);
-  const [searchParams, setSearchParams] = useSearchParams({categories: activeCategories, brands: []});
+  const [searchParams, setSearchParams] = useSearchParams({categories: activeCategories, brands: activeBrands});
+  const [categories, setCategories] = useState<Array<string>>([]);
+  const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/categories')
+    .then(res => res.json())
+    .then(categories => {
+      setCategories(categories);
+      setCategoryState(new Array(categories.length).fill(false));
+    });
+  }, []);
   
   useEffect(() => {
     fetch('https://dummyjson.com/products?limit=100')
@@ -35,13 +46,15 @@ export default function MainPage() {
           Go to product page
         </Link>
         <div className="main-page__content-wrap">
-          <FiltersSection onBrandStateChange={(data: boolean[]) => {
+          <FiltersSection onStateChange={(data: boolean[]) => {
+            setCategoryState(data)
+          }} onBrandStateChange={(data: boolean[]) => {
             setBrandState(data);
           }} onBrandChange={(data: string[]) => {
             setActiveBrands(data);
           }} onCategoryChange={(data: string[]) => {
             setActiveCategories(data);
-          }} brandState={brandState} brands={brands} />
+          }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
           <CardsBlock activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
         </div>
       </main>

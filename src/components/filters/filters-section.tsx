@@ -6,30 +6,20 @@ import { Filters } from "../../const";
 
 type FilterSectionProps = {
   brands: Array<string>;
+  categories: Array<string>;
   brandState: boolean[];
+  categoryState: boolean[];
   onCategoryChange: (data: string[]) => void;
   onBrandChange: (data: string[]) => void;
+  onStateChange: (data: boolean[]) => void;
   onBrandStateChange: (data: boolean[]) => void;
 }
 
-export default function FiltersSection({ brands, brandState, onCategoryChange, onBrandChange, onBrandStateChange }: FilterSectionProps) {
-  const [categories, setCategories] = useState<Array<string>>([]);
-  const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
-  useEffect(() => {
-    fetch('https://dummyjson.com/products/categories')
-    .then(res => res.json())
-    .then(categories => {
-      setCategories(categories);
-      setCategoryState(new Array(categories.length).fill(false));
-    });
-  }, []);
-
+export default function FiltersSection({ brands, categories, categoryState, brandState, onCategoryChange, onBrandChange, onBrandStateChange, onStateChange }: FilterSectionProps) {
   return (
     <section className="filters">
       <FiltersButtons />
-      <FiltersBlockCheckbox onStateChange={(data: boolean[]) => {
-        setCategoryState(data)
-      }} categoryState={categoryState} onCategoryChange={onCategoryChange} filterTitle={Filters.Category} ProductsFilters={categories} />
+      <FiltersBlockCheckbox onStateChange={onStateChange} categoryState={categoryState} onCategoryChange={onCategoryChange} filterTitle={Filters.Category} ProductsFilters={categories} />
       <FiltersBlockCheckbox onStateChange={onBrandStateChange} categoryState={brandState} onCategoryChange={onBrandChange} filterTitle={Filters.Brand} ProductsFilters={brands} />
       <FiltersBlockRange filterTitle={Filters.Price} />
       <FiltersBlockRange filterTitle={Filters.Stock} />
