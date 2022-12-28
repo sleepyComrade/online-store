@@ -10,9 +10,8 @@ type CardsListProps = {
 };
 
 export function CardList({ products, style, activeCategories, activeBrands }: CardsListProps) {
-  return (
-    <div className="cards-block__card-list">
-      {products
+  const foo = () => {
+    return products
         .filter(
           (product) =>
             activeCategories.includes(product.category) || !activeCategories.length
@@ -23,7 +22,11 @@ export function CardList({ products, style, activeCategories, activeBrands }: Ca
         )
         .map((product) => (
           <CardItem style={style} product={product} key={product.id} />
-        ))}
+        ))
+  }
+  return (
+    <div className="cards-block__card-list">
+      {!foo().length ? <h2 style={{textAlign: 'center', width: '100%'}}>No products found</h2> : foo()}
     </div>
   );
 }

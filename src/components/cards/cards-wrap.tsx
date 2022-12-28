@@ -12,7 +12,7 @@ type CardsWrapProps = {
 export function CardsWrap({products, style, activeCategories, activeBrands}: CardsWrapProps) {
   return (
     <div className="cards-block__cards-wrap">
-      {!products.length ? <h2>No products found</h2> : <CardList activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} /> }
+      <CardList activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
     </div>
   );
 }
