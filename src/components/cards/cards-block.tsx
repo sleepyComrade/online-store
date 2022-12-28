@@ -14,9 +14,12 @@ export function CardsBlock({ products, activeCategories, activeBrands}: CardBloc
   const [style, setStyle] = useState(gridItem);
   const [sort, setSort] = useState({sorted: ''});
   const [total, setTotal] = useState(0);
+  const [searched, setSearched] = useState('');
   return (
     <div className="cards-block">
-        <CardsNav total={total} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+        <CardsNav onSearchChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setSearched(e.target.value);
+        }} total={total} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           setSort({sorted: e.target.value});
         }} onStyleChange={(view: string) => {
           if (view === 'grid') {
@@ -25,7 +28,7 @@ export function CardsBlock({ products, activeCategories, activeBrands}: CardBloc
         }}></CardsNav>
         <CardsWrap onTotalChange={(length: number) => {
           setTotal(length);
-        }} sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
+        }} searched={searched} sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
     </div>
   );
 }

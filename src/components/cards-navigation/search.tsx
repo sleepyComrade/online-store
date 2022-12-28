@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import close from '../../assets/svg/close-icon.svg'
 
-export function Search() {
+export function Search({onSearchChange}: {onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void}) {
   const imgClassNames = {
     active: 'cards-nav__img',
     inactive: 'cards-nav__img cards-nav__img-inactive'
@@ -14,6 +14,7 @@ export function Search() {
     if (e.target.value) {
       setImgClassName(imgClassNames.active);
     } else setImgClassName(imgClassNames.inactive);
+    onSearchChange(e);
   }
 
   const handleClick = () => {

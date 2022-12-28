@@ -9,9 +9,10 @@ type CardsListProps = {
   activeBrands: string[];
   sort: { sorted: string};
   onTotalChange: (length: number) => void;
+  searched: string;
 };
 
-export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange }: CardsListProps) {
+export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange, searched }: CardsListProps) {
   const foo = () => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = products
@@ -22,6 +23,12 @@ export function CardList({ products, style, activeCategories, activeBrands, sort
     .filter(
       (product) =>
       activeBrands.includes(product.brand) || !activeBrands.length
+    )
+    .filter(
+      (product) =>
+      product.brand.toLowerCase().includes(searched.toLowerCase()) ||
+      product.title.toLowerCase().includes(searched.toLowerCase()) ||
+      product.category.toLowerCase().includes(searched.toLowerCase())
     )
     .map((product) => (
       <CardItem style={style} product={product} key={product.id} />
