@@ -7,13 +7,14 @@ import { Search } from "../cards-navigation/search";
 type CardNavProps = {
   onSortChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onStyleChange: (view:string) => void;
+  total: number;
 }
 
-export function CardsNav({onStyleChange, onSortChange}: CardNavProps) {
+export function CardsNav({ onStyleChange, onSortChange, total }: CardNavProps) {
   return (
     <div className="cards-nav">
       <Sort onSortChange={onSortChange}></Sort>
-      <Found></Found>
+      <Found total={total}></Found>
       <Search></Search>
       <ViewSwitcher onStyleChange={onStyleChange}></ViewSwitcher>
     </div>

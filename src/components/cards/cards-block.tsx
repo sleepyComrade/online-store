@@ -13,17 +13,19 @@ type CardBlockProps = {
 export function CardsBlock({ products, activeCategories, activeBrands}: CardBlockProps) {
   const [style, setStyle] = useState(gridItem);
   const [sort, setSort] = useState({sorted: ''});
+  const [total, setTotal] = useState(0);
   return (
     <div className="cards-block">
-        <CardsNav onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-          console.log(e.target.value);
+        <CardsNav total={total} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           setSort({sorted: e.target.value});
         }} onStyleChange={(view: string) => {
           if (view === 'grid') {
             setStyle(gridItem);
           } else setStyle(bigItem);
         }}></CardsNav>
-        <CardsWrap sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
+        <CardsWrap onTotalChange={(length: number) => {
+          setTotal(length);
+        }} sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
     </div>
   );
 }

@@ -8,12 +8,13 @@ type CardsWrapProps = {
   activeCategories: string[];
   activeBrands: string[];
   sort: { sorted: string};
+  onTotalChange: (length: number) => void;
 }
 
-export function CardsWrap({products, style, activeCategories, activeBrands, sort}: CardsWrapProps) {
+export function CardsWrap({products, style, activeCategories, activeBrands, sort, onTotalChange}: CardsWrapProps) {
   return (
     <div className="cards-block__cards-wrap">
-      <CardList sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
+      <CardList onTotalChange={onTotalChange} sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
     </div>
   );
 }

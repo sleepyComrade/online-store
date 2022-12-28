@@ -8,9 +8,10 @@ type CardsListProps = {
   activeCategories: string[];
   activeBrands: string[];
   sort: { sorted: string};
+  onTotalChange: (length: number) => void;
 };
 
-export function CardList({ products, style, activeCategories, activeBrands, sort }: CardsListProps) {
+export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange }: CardsListProps) {
   const foo = () => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = products
@@ -31,6 +32,7 @@ export function CardList({ products, style, activeCategories, activeBrands, sort
       filteredItems.sort((a, b) => a.props.product[sortInfo[1]] - b.props.product[sortInfo[1]]) :
       filteredItems.sort((a, b) => a.props.product[sortInfo[1]] - b.props.product[sortInfo[1]]).reverse();
     }
+    onTotalChange(sortedItems.length);
     return sortedItems;
   }
   return (
