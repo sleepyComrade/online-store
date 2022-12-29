@@ -11,6 +11,7 @@ import { Header } from "./components/header/header";
 
 export function App() {
   const [cartItems, setCartItems] = useState<Array<{ data: IProductData, counter: number }>>([]);
+  const [isModal, setIsModal] = useState(false);  // добавить также в ProductPage
 
   useEffect(() => {
     fetch('https://dummyjson.com/products?limit=10')
@@ -29,7 +30,7 @@ export function App() {
   {/*состояние для вывода списка всех примененных кодов*/ }
   const [appliedPromoItems, setAppliedPromoItems] = useState<Array<IPromoCode>>([]);
 
-  const cartItemsCount = cartItems.reduce((acc, item) => acc + (1 * item.counter), 0); // ???
+  const cartItemsCount = cartItems.reduce((acc, item) => acc + (1 * item.counter), 0);
   const totalCost = cartItems.reduce((acc, item) => acc + (item.data.price * item.counter), 0);
   // сумма полученных скидок
   const discountAmount = appliedPromoItems.reduce((acc, item) => acc + item.discount, 0);
@@ -60,7 +61,9 @@ export function App() {
                 setPromoItem={setPromoItem}
                 appliedPromoItems={appliedPromoItems}
                 setAppliedPromoItems={setAppliedPromoItems}
-                totalCostWithDiscount={totalCostWithDiscount} />
+                totalCostWithDiscount={totalCostWithDiscount}
+                isModal={isModal} 
+                setIsModal={setIsModal}/>
             }
           />
           <Route

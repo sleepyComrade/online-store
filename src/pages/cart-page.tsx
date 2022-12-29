@@ -21,14 +21,15 @@ type CartPageProps = {
   appliedPromoItems: IPromoCode[];
   setAppliedPromoItems: React.Dispatch<React.SetStateAction<IPromoCode[]>>;
   totalCostWithDiscount: number;
+  isModal: boolean;
+  setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CartPage({ cartItems, setCartItems, cartItemsCount, totalCost, promoItem, setPromoItem, appliedPromoItems, setAppliedPromoItems, totalCostWithDiscount }: CartPageProps) {
-  const [isModal, setIsModal] = useState(false);
+export default function CartPage({ cartItems, setCartItems, cartItemsCount, totalCost, promoItem, setPromoItem, appliedPromoItems, setAppliedPromoItems, totalCostWithDiscount, isModal, setIsModal}: CartPageProps) {
+
   return (
     <>
       <main>
-        <button onClick={() => setIsModal(true)}>Pay</button>
         <div className="main-container main-container--cart-page">
           <CartProductsSection cartItems={cartItems} setCartItems={setCartItems} />
           <CartPromoBlock 
@@ -38,13 +39,12 @@ export default function CartPage({ cartItems, setCartItems, cartItemsCount, tota
             setPromoItem={setPromoItem} 
             appliedPromoItems={appliedPromoItems}
             setAppliedPromoItems={setAppliedPromoItems}
-            totalCostWithDiscount={totalCostWithDiscount} />
+            totalCostWithDiscount={totalCostWithDiscount}
+            isModal={isModal}
+            setIsModal={setIsModal} />
         </div>
       </main>
       <footer></footer>
-      <Modal open={isModal} setState={setIsModal} >
-        <PaymentForm setState={setIsModal} />
-      </Modal>
     </>
   );
 }
