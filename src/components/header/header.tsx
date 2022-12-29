@@ -12,10 +12,12 @@ export function Header({cartItemsCount, totalCost, totalCostWithDiscount}: Heade
 
   return (
     <header className="header">
-      <Logo></Logo>
-      <div className="header__payment-wrap">
-        <Total totalCost={totalCost} totalCostWithDiscount={totalCostWithDiscount}></Total>
-        <Cart cartItemsCount={cartItemsCount}></Cart>
+      <div className="header__container">
+        <Logo></Logo>
+        <div className="header__payment-wrap">
+          <Total totalCost={totalCost} totalCostWithDiscount={totalCostWithDiscount}></Total>
+          <Cart cartItemsCount={cartItemsCount}></Cart>
+        </div>
       </div>
     </header>
   );

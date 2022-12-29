@@ -41,24 +41,26 @@ export default function MainPage() {
   return (
     <>
       <main>
-        <h2>Main Page</h2>
-        <br />
-        <Link to="/product/01">
-          Go to product page
-        </Link>
-        <div className="main-page__content-wrap">
-          <FiltersSection onPriceChange={(data: {min: string, max: string}) => {
-            setPriceRange(data);
-          }} onStateChange={(data: boolean[]) => {
-            setCategoryState(data)
-          }} onBrandStateChange={(data: boolean[]) => {
-            setBrandState(data);
-          }} onBrandChange={(data: string[]) => {
-            setActiveBrands(data);
-          }} onCategoryChange={(data: string[]) => {
-            setActiveCategories(data);
-          }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
-          <CardsBlock priceRange={priceRange} activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
+        <div className="main-container">
+          {/* <h2>Main Page</h2>
+          <br />
+          <Link to="/product/01">
+            Go to product page
+          </Link> */}
+          <div className="main-page__content-wrap">
+            <FiltersSection onPriceChange={(data: {min: string, max: string}) => {
+              setPriceRange(data);
+            }} onStateChange={(data: boolean[]) => {
+              setCategoryState(data)
+            }} onBrandStateChange={(data: boolean[]) => {
+              setBrandState(data);
+            }} onBrandChange={(data: string[]) => {
+              setActiveBrands(data);
+            }} onCategoryChange={(data: string[]) => {
+              setActiveCategories(data);
+            }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
+            <CardsBlock priceRange={priceRange} activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
+          </div>
         </div>
       </main>
       <footer></footer>

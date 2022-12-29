@@ -1,8 +1,10 @@
+@use '../abstracts' as a;
+
 .filters {
     width: 320px;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgb(234, 234, 234);
+    background-color: a.$clr-primary-11;
 }
 
 .filters__buttons {
@@ -16,7 +18,8 @@
     min-width: 90px;
     padding: 8px;
     background-color: #fff;
-    color: crimson;
+    // color: crimson;
+    color: a.$clr-grey-2;
     font-size: 18px;
     font-weight: 600;
     transition: all 0.3s ease-out;
@@ -25,7 +28,8 @@
 
 .filters__button:focus,
 .filters__button:hover {
-    background-color: crimson;
+    // background-color: crimson;
+    background-color: a.$clr-primary-4;
     color: #fff;
     transition: all 0.3s ease-out;
 }
