@@ -31,23 +31,24 @@
 }
 
 .filters__block {
-    width: 95%;    
+    width: 95%;
     display: block;
     overflow: hidden;
     margin-right: 0;
     margin-right: 10px;
     margin-bottom: 20px;
     padding: 8px;
+    padding-bottom: 15px;
     border: 1px solid crimson;
     border-radius: 10px;
 }
 
 .filters__block--checkbox {
-    height: 215px;
+    height: 220px;
 }
 
 .filters__block--range {
-    height: 150px;
+    height: 165px;
 }
 
 .filters__block-title {
@@ -129,8 +130,8 @@
 
 /* Работает в Firefox */
 .filters__checkbox-wrapper {
-  scrollbar-width: thin;
-  scrollbar-color: crimson #fff;
+    scrollbar-width: thin;
+    scrollbar-color: crimson #fff;
 }
 
 .filter-checkbox__count {
@@ -144,7 +145,7 @@
     font-weight: 500;
 }
 
-/* range filter */ 
+/* range filter */
 
 .filter-range__values {
     width: 100%;
