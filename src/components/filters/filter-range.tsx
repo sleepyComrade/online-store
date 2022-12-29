@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export default function FilterRange() {
+type FilterRangeProps = {
+  onChange: (data: {min: string, max: string}) => void;
+}
+
+export default function FilterRange({onChange}: FilterRangeProps) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(2000);
   const maxLimit = 2000;
@@ -38,10 +42,12 @@ export default function FilterRange() {
         <input type="range" className="filter-range__input filter-range__input--min" min={minLimit} max={maxLimit} value={minValue}
           onChange={(e) => {
             setMinValue(+e.target.value);
+            onChange({min: minValue + '', max: maxValue + ''});
           }} />
         <input type="range" className="filter-range__input filter-range__input--max" min={minLimit} max={maxLimit} value={maxValue}
           onChange={(e) => {
             setMaxValue(+e.target.value);
+            onChange({min: minValue + '', max: maxValue + ''});
           }} />
       </div>
     </div>

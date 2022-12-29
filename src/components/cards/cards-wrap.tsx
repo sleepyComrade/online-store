@@ -10,6 +10,7 @@ type CardsWrapProps = {
   sort: { sorted: string };
   onTotalChange: (length: number) => void;
   searched: string;
+  priceRange: {min: string, max: string};
 };
 
 export function CardsWrap({
@@ -20,6 +21,7 @@ export function CardsWrap({
   sort,
   onTotalChange,
   searched,
+  priceRange
 }: CardsWrapProps) {
   return (
     <div className="cards-block__cards-wrap">
@@ -31,6 +33,7 @@ export function CardsWrap({
         style={style}
         products={products}
         searched={searched}
+        priceRange={priceRange}
       />
     </div>
   );

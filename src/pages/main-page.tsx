@@ -13,6 +13,7 @@ export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams({categories: activeCategories, brands: activeBrands});
   const [categories, setCategories] = useState<Array<string>>([]);
   const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
+  const [priceRange, setPriceRange] = useState({min: '0', max: '2000'});
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
@@ -46,7 +47,9 @@ export default function MainPage() {
           Go to product page
         </Link>
         <div className="main-page__content-wrap">
-          <FiltersSection onStateChange={(data: boolean[]) => {
+          <FiltersSection onPriceChange={(data: {min: string, max: string}) => {
+            setPriceRange(data);
+          }} onStateChange={(data: boolean[]) => {
             setCategoryState(data)
           }} onBrandStateChange={(data: boolean[]) => {
             setBrandState(data);
@@ -55,7 +58,7 @@ export default function MainPage() {
           }} onCategoryChange={(data: string[]) => {
             setActiveCategories(data);
           }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
-          <CardsBlock activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
+          <CardsBlock priceRange={priceRange} activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
         </div>
       </main>
       <footer></footer>

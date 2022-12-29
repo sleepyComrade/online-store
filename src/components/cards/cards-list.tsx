@@ -10,9 +10,10 @@ type CardsListProps = {
   sort: { sorted: string};
   onTotalChange: (length: number) => void;
   searched: string;
+  priceRange: {min: string, max: string};
 };
 
-export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange, searched }: CardsListProps) {
+export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange, searched, priceRange }: CardsListProps) {
   const foo = () => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = products
@@ -23,6 +24,10 @@ export function CardList({ products, style, activeCategories, activeBrands, sort
     .filter(
       (product) =>
       activeBrands.includes(product.brand) || !activeBrands.length
+    )
+    .filter(
+      (product) =>
+      product.price >= +priceRange.min && product.price <= +priceRange.max
     )
     .filter(
       (product) =>
