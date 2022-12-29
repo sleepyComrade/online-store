@@ -13,11 +13,16 @@ type CartProductsSectionProps = {
 }
 
 export default function CartProductsSection({ cartItems, setCartItems }: CartProductsSectionProps) {
-  
   const [countItemsPerPageCart, setCountItemsPerPageCart] = useState(5);
   const minItemsPerPage = 1;
   const countItemsPerPage: number = (Number.isNaN(countItemsPerPageCart) || countItemsPerPageCart === 0) ? minItemsPerPage : countItemsPerPageCart;
-  const itemsPerPage = cartItems.filter(item => item.counter > 0).slice(0, countItemsPerPage);
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const lastCartItemsIndex = currentPage * countItemsPerPageCart;
+  const firstCartItemsIndex = (currentPage - 1) * countItemsPerPageCart;
+
+  const itemsPerPage = cartItems.filter(item => item.counter > 0).slice(firstCartItemsIndex, lastCartItemsIndex);
 
   return (
     <section className="cart">
@@ -26,11 +31,11 @@ export default function CartProductsSection({ cartItems, setCartItems }: CartPro
         <CartItemsPerPage countItemsPerPageCart={countItemsPerPageCart}
           onCountItemsPerPageCart={setCountItemsPerPageCart} onBlur={() => setCountItemsPerPageCart(countItemsPerPage)} />
 
-        <CartPagination countItemsPerPageCart={countItemsPerPage} cartProductsCount={cartItems.length} />
+        <CartPagination countItemsPerPageCart={countItemsPerPage} cartProductsCount={cartItems.length} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </div>
 
       <div className="cart__products">
-        <CartList productsInCart={itemsPerPage} onCounter={(itemId, value) => setCartItems((last) => {
+        <CartList startIndex={firstCartItemsIndex} productsInCart={itemsPerPage} onCounter={(itemId, value) => setCartItems((last) => {
           const currentIndex = last.findIndex((item) => item.data.id == itemId);
           return [...last.slice(0, currentIndex), { ...last[currentIndex], counter: value }, ...last.slice(currentIndex + 1)]
         })} />

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { PaymentForm } from "../components/payment-form/payment-form";
-import { Modal } from "../components/payment-form/modal";
 import CartProductsSection from "../components/cart/cart-products-section";
 import CartPromoBlock from "../components/cart/cart-promo-block";
 import { IProductData, IPromoCode } from "../interfaces";
