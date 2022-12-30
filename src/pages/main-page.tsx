@@ -10,17 +10,19 @@ export default function MainPage() {
   const [brands, setBrands] = useState<Array<string>>([]);
   const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
   const [brandState, setBrandState] = useState<Array<boolean>>([]);
-  const [searchParams, setSearchParams] = useSearchParams({categories: activeCategories, brands: activeBrands});
+  const [searchParams, setSearchParams] = useSearchParams();
   const [categories, setCategories] = useState<Array<string>>([]);
   const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
   const [priceRange, setPriceRange] = useState({min: '0', max: '2000'});
+
+  const queryCat = searchParams.getAll('cat') || [];
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
     .then(res => res.json())
     .then(categories => {
       setCategories(categories);
-      setCategoryState(new Array(categories.length).fill(false));
+      setCategoryState(categories.map((cat: string) => queryCat.includes(cat)));
     });
   }, []);
   
@@ -58,8 +60,9 @@ export default function MainPage() {
               setActiveBrands(data);
             }} onCategoryChange={(data: string[]) => {
               setActiveCategories(data);
+              setSearchParams({cat: data});
             }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
-            <CardsBlock priceRange={priceRange} activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
+            <CardsBlock queryCat={queryCat} priceRange={priceRange} activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
           </div>
         </div>
       </main>

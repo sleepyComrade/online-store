@@ -9,9 +9,10 @@ type CardBlockProps = {
   activeCategories: string[];
   activeBrands: string[];
   priceRange: {min: string, max: string};
+  queryCat: string[];
 }
 
-export function CardsBlock({ products, activeCategories, activeBrands, priceRange}: CardBlockProps) {
+export function CardsBlock({ products, activeCategories, activeBrands, priceRange, queryCat }: CardBlockProps) {
   const [style, setStyle] = useState(gridItem);
   const [sort, setSort] = useState({sorted: ''});
   const [total, setTotal] = useState(0);
@@ -29,7 +30,7 @@ export function CardsBlock({ products, activeCategories, activeBrands, priceRang
         }}></CardsNav>
         <CardsWrap onTotalChange={(length: number) => {
           setTotal(length);
-        }} priceRange={priceRange} searched={searched} sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
+        }} queryCat={queryCat} priceRange={priceRange} searched={searched} sort={sort} activeBrands={activeBrands} activeCategories={activeCategories} style={style} products={products} />
     </div>
   );
 }

@@ -11,15 +11,16 @@ type CardsListProps = {
   onTotalChange: (length: number) => void;
   searched: string;
   priceRange: {min: string, max: string};
+  queryCat: string[];
 };
 
-export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange, searched, priceRange }: CardsListProps) {
+export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange, searched, priceRange, queryCat }: CardsListProps) {
   const foo = () => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = products
     .filter(
       (product) =>
-        activeCategories.includes(product.category) || !activeCategories.length
+      queryCat.includes(product.category) || !queryCat.length
     )
     .filter(
       (product) =>

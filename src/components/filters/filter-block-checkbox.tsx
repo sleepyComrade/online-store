@@ -19,7 +19,7 @@ export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onC
         onStateChange(categoryState);
         const activeCat = ProductsFilters.filter((cat, i) => categoryState[i]);
         onCategoryChange(activeCat);
-      }} key={index} filter={item} />) }
+      }} state={categoryState[index]} key={index} filter={item} />) }
       </div>
     </div>
   )

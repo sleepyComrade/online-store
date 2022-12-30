@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IProductData, ICardStyle } from "../../interfaces";
 import { CardList } from "./cards-list";
 
@@ -11,6 +11,7 @@ type CardsWrapProps = {
   onTotalChange: (length: number) => void;
   searched: string;
   priceRange: {min: string, max: string};
+  queryCat: string[];
 };
 
 export function CardsWrap({
@@ -21,11 +22,13 @@ export function CardsWrap({
   sort,
   onTotalChange,
   searched,
-  priceRange
+  priceRange,
+  queryCat
 }: CardsWrapProps) {
   return (
     <div className="cards-block__cards-wrap">
       <CardList
+        queryCat={queryCat}
         onTotalChange={onTotalChange}
         sort={sort}
         activeBrands={activeBrands}
