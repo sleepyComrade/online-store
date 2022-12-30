@@ -5,31 +5,31 @@ import { CardList } from "./cards-list";
 type CardsWrapProps = {
   products: Array<IProductData>;
   style: ICardStyle;
-  activeBrands: string[];
   sort: { sorted: string };
   onTotalChange: (length: number) => void;
   searched: string;
   priceRange: {min: string, max: string};
   queryCat: string[];
+  queryBrand: string[];
 };
 
 export function CardsWrap({
   products,
   style,
-  activeBrands,
   sort,
   onTotalChange,
   searched,
   priceRange,
-  queryCat
+  queryCat,
+  queryBrand
 }: CardsWrapProps) {
   return (
     <div className="cards-block__cards-wrap">
       <CardList
+        queryBrand={queryBrand}
         queryCat={queryCat}
         onTotalChange={onTotalChange}
         sort={sort}
-        activeBrands={activeBrands}
         style={style}
         products={products}
         searched={searched}

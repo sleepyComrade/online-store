@@ -6,6 +6,7 @@ import { CardsBlock } from "../components/cards/cards-block";
 
 export default function MainPage() {
   const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
+  const [activeCategories, setActiveCategories] = useState<Array<string>>([]);
   const [brands, setBrands] = useState<Array<string>>([]);
   const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
   const [brandState, setBrandState] = useState<Array<boolean>>([]);
@@ -15,6 +16,7 @@ export default function MainPage() {
   const [priceRange, setPriceRange] = useState({min: '0', max: '2000'});
 
   const queryCat = searchParams.getAll('cat') || [];
+  const queryBrand = searchParams.getAll('brand') || [];
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
@@ -22,6 +24,7 @@ export default function MainPage() {
     .then(categories => {
       setCategories(categories);
       setCategoryState(categories.map((cat: string) => queryCat.includes(cat)));
+      setActiveCategories(categories.filter((cat: string) => queryCat.includes(cat)));
     });
   }, []);
   
@@ -35,7 +38,8 @@ export default function MainPage() {
           if (!brands.includes(product.brand)) brands.push(product.brand);
         }
         setBrands(brands);
-        setBrandState(new Array(brands.length).fill(false));
+        setBrandState(brands.map((brand: string) => queryBrand.includes(brand)));
+        setActiveBrands(brands.filter((brand: string) => queryBrand.includes(brand)));
       })
   }, []);
   
@@ -57,10 +61,12 @@ export default function MainPage() {
               setBrandState(data);
             }} onBrandChange={(data: string[]) => {
               setActiveBrands(data);
+              setSearchParams({brand: data, cat: activeCategories});
             }} onCategoryChange={(data: string[]) => {
-              setSearchParams({cat: data});
+              setActiveCategories(data);
+              setSearchParams({brand: activeBrands, cat: data});
             }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
-            <CardsBlock queryCat={queryCat} priceRange={priceRange} activeBrands={activeBrands} products={productsItems} />
+            <CardsBlock queryBrand={queryBrand} queryCat={queryCat} priceRange={priceRange} products={productsItems} />
           </div>
         </div>
       </main>

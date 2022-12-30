@@ -6,12 +6,12 @@ import { gridItem, bigItem } from "../../const";
 
 type CardBlockProps = {
   products: Array<IProductData>;
-  activeBrands: string[];
   priceRange: {min: string, max: string};
   queryCat: string[];
+  queryBrand: string[];
 }
 
-export function CardsBlock({ products, activeBrands, priceRange, queryCat }: CardBlockProps) {
+export function CardsBlock({ products, priceRange, queryCat, queryBrand }: CardBlockProps) {
   const [style, setStyle] = useState(gridItem);
   const [sort, setSort] = useState({sorted: ''});
   const [total, setTotal] = useState(0);
@@ -29,7 +29,15 @@ export function CardsBlock({ products, activeBrands, priceRange, queryCat }: Car
         }}></CardsNav>
         <CardsWrap onTotalChange={(length: number) => {
           setTotal(length);
-        }} queryCat={queryCat} priceRange={priceRange} searched={searched} sort={sort} activeBrands={activeBrands} style={style} products={products} />
+        }}
+        queryBrand={queryBrand}
+        queryCat={queryCat} 
+        priceRange={priceRange} 
+        searched={searched} 
+        sort={sort} 
+        style={style} 
+        products={products}
+        />
     </div>
   );
 }

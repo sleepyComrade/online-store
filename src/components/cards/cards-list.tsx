@@ -5,15 +5,24 @@ import { IProductData, ICardStyle } from "../../interfaces";
 type CardsListProps = {
   products: Array<IProductData>;
   style: ICardStyle;
-  activeBrands: string[];
   sort: { sorted: string};
   onTotalChange: (length: number) => void;
   searched: string;
   priceRange: {min: string, max: string};
   queryCat: string[];
+  queryBrand: string[];
 };
 
-export function CardList({ products, style, activeBrands, sort, onTotalChange, searched, priceRange, queryCat }: CardsListProps) {
+export function CardList({ 
+  products,
+  style,
+  sort,
+  onTotalChange,
+  searched,
+  priceRange,
+  queryCat,
+  queryBrand
+  }: CardsListProps) {
   const foo = () => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = products
@@ -23,7 +32,7 @@ export function CardList({ products, style, activeBrands, sort, onTotalChange, s
     )
     .filter(
       (product) =>
-      activeBrands.includes(product.brand) || !activeBrands.length
+      queryBrand.includes(product.brand) || !queryBrand.length
     )
     .filter(
       (product) =>
