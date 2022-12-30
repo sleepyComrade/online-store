@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FilterCheckbox from "./filter-checkbox";
+import { IProductData } from "../../interfaces";
 
 type FiltersBlockCheckboxProps = {
   filterTitle: string;
@@ -7,9 +8,11 @@ type FiltersBlockCheckboxProps = {
   onCategoryChange: (data: string[]) => void;
   categoryState: boolean[];
   onStateChange: (data: boolean[]) => void;
+  productsItems: IProductData[];
+  prop: string;
 }
 
-export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onCategoryChange, categoryState, onStateChange }: FiltersBlockCheckboxProps) {
+export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onCategoryChange, categoryState, onStateChange, productsItems, prop }: FiltersBlockCheckboxProps) {
   return (
     <div className="filters__block filters__block--checkbox">
       <h3 className="filters__block-title">{filterTitle}</h3>
@@ -19,7 +22,11 @@ export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onC
         onStateChange(categoryState);
         const activeCat = ProductsFilters.filter((cat, i) => categoryState[i]);
         onCategoryChange(activeCat);
-      }} state={categoryState[index]} key={index} filter={item} />) }
+      }} total={productsItems.filter(product => prop === 'category' ?
+                                                product.category === item :
+                                                prop === 'brand' ?
+                                                product.brand === item : false
+      ).length} state={categoryState[index]} key={index} filter={item} />) }
       </div>
     </div>
   )

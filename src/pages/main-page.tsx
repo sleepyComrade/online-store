@@ -65,7 +65,7 @@ export default function MainPage() {
             }} onCategoryChange={(data: string[]) => {
               setActiveCategories(data);
               setSearchParams({brand: activeBrands, cat: data});
-            }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
+            }} productsItems={productsItems} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
             <CardsBlock queryBrand={queryBrand} queryCat={queryCat} priceRange={priceRange} products={productsItems} />
           </div>
         </div>
