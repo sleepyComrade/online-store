@@ -3,10 +3,11 @@
 .card-item {
   min-width: 250px;
   max-width: 300px;
+  padding: 5px;
   flex: 1;
   cursor: pointer;
 
-  &:hover .card-item__image {
+  &:hover {
     box-shadow: 0px 0px 5px 2px rgb(188, 188, 188);
   }
 
@@ -25,6 +26,7 @@
 
     .card-item__title {
       margin: 10px 0;
+      padding-left: 5px;
       font-size: 18px;
       font-weight: normal;
       white-space: nowrap;
@@ -47,6 +49,7 @@
     @include a.flex(start, start);
     flex-direction: column;
     gap: 5px;
+    padding-left: 5px;
 
     .card-item__price {
       margin: 0;
@@ -66,7 +69,7 @@
 
   .card-item__btn {
     width: 160px;
-    margin: 10px 0;
+    margin: 10px 5px;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
