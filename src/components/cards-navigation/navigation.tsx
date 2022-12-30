@@ -6,7 +6,7 @@ import { Search } from "../cards-navigation/search";
 
 type CardNavProps = {
   onSortChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearchChange: (value: string) => void;
   onStyleChange: (view:string) => void;
   total: number;
 }

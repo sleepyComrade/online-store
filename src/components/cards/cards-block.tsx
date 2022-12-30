@@ -18,8 +18,8 @@ export function CardsBlock({ products, activeCategories, activeBrands, priceRang
   const [searched, setSearched] = useState('');
   return (
     <div className="cards-block">
-        <CardsNav onSearchChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setSearched(e.target.value);
+        <CardsNav onSearchChange={(value: string) => {
+          setSearched(value);
         }} total={total} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           setSort({sorted: e.target.value});
         }} onStyleChange={(view: string) => {
