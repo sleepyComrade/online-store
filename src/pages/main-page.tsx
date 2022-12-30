@@ -6,7 +6,6 @@ import { CardsBlock } from "../components/cards/cards-block";
 
 export default function MainPage() {
   const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
-  const [activeCategories, setActiveCategories] = useState<Array<string>>([]);
   const [brands, setBrands] = useState<Array<string>>([]);
   const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
   const [brandState, setBrandState] = useState<Array<boolean>>([]);
@@ -59,10 +58,9 @@ export default function MainPage() {
             }} onBrandChange={(data: string[]) => {
               setActiveBrands(data);
             }} onCategoryChange={(data: string[]) => {
-              setActiveCategories(data);
               setSearchParams({cat: data});
             }} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
-            <CardsBlock queryCat={queryCat} priceRange={priceRange} activeBrands={activeBrands} activeCategories={activeCategories} products={productsItems} />
+            <CardsBlock queryCat={queryCat} priceRange={priceRange} activeBrands={activeBrands} products={productsItems} />
           </div>
         </div>
       </main>

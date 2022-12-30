@@ -5,7 +5,6 @@ import { CardList } from "./cards-list";
 type CardsWrapProps = {
   products: Array<IProductData>;
   style: ICardStyle;
-  activeCategories: string[];
   activeBrands: string[];
   sort: { sorted: string };
   onTotalChange: (length: number) => void;
@@ -17,7 +16,6 @@ type CardsWrapProps = {
 export function CardsWrap({
   products,
   style,
-  activeCategories,
   activeBrands,
   sort,
   onTotalChange,
@@ -32,7 +30,6 @@ export function CardsWrap({
         onTotalChange={onTotalChange}
         sort={sort}
         activeBrands={activeBrands}
-        activeCategories={activeCategories}
         style={style}
         products={products}
         searched={searched}

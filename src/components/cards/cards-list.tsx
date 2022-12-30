@@ -5,7 +5,6 @@ import { IProductData, ICardStyle } from "../../interfaces";
 type CardsListProps = {
   products: Array<IProductData>;
   style: ICardStyle;
-  activeCategories: string[];
   activeBrands: string[];
   sort: { sorted: string};
   onTotalChange: (length: number) => void;
@@ -14,7 +13,7 @@ type CardsListProps = {
   queryCat: string[];
 };
 
-export function CardList({ products, style, activeCategories, activeBrands, sort, onTotalChange, searched, priceRange, queryCat }: CardsListProps) {
+export function CardList({ products, style, activeBrands, sort, onTotalChange, searched, priceRange, queryCat }: CardsListProps) {
   const foo = () => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = products
