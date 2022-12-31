@@ -3,7 +3,11 @@ import { CardsNav } from "../../components/cards-navigation/navigation";
 import { CardsWrap } from "./cards-wrap";
 import { IProductData } from "../../interfaces";
 
-export function CardsBlock(props: { products: Array<IProductData>}) {
+type CardsBlockprops = {
+  products: Array<IProductData>;
+}
+
+export function CardsBlock({products}: CardsBlockprops) {
   const gridItem = {
     item: 'card-item',
     image: 'card-item__image',
@@ -38,7 +42,7 @@ export function CardsBlock(props: { products: Array<IProductData>}) {
             setStyle(gridItem);
           } else setStyle(bigItem);
         }}></CardsNav>
-        <CardsWrap style={style} products={props.products} />
+        <CardsWrap style={style} products={products} />
     </div>
   );
 }

@@ -2,10 +2,15 @@ import React from "react";
 import { CardItem } from "./card-item";
 import { IProductData, ICardStyle } from "../../interfaces";
 
-export function CardList(props: { products: Array<IProductData>, style: ICardStyle}) {
+type CardListProps = {
+  products: Array<IProductData>;
+  style: ICardStyle;
+}
+
+export function CardList({ products, style}: CardListProps) {
   return (
     <div className="cards-block__card-list">
-      {props.products.map(product => <CardItem style={props.style} product={product} key={product.id} />)}
+      {products.map(product => <CardItem style={style} product={product} key={product.id} />)}
     </div>
   );
 }
