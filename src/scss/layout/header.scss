@@ -21,11 +21,11 @@
   
     .header__cart-counter {
       position: absolute;
-      top: 4px;
-      right: -3px;
+      top: 6px;
+      right: -2px;
       @include a.flex();
-      width: 23px;
-      height: 23px;
+      width: 27px;
+      height: 27px;
       background-color: rgb(234, 234, 234);
       border-radius: 50%;
       border: 2px solid black;

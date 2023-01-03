@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export default function FilterRange() {
   const [minValue, setMinValue] = useState(2500);

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FiltersButtons from "./filters-buttons";
 import FiltersBlockCheckbox from "./filter-block-checkbox";
 import FiltersBlockRange from "./../filters/filters-block-range";
 import { Filters } from "../../const";
-import { IProductData } from "../../interfaces";
+import { IProductData, IProductItem } from "../../interfaces";
 
 type FilterSectionProps = {
-  products: Array<IProductData>;
+  products: Array<IProductItem>;
 }
 
 export default function FiltersSection({ products }: FilterSectionProps) {
@@ -21,7 +21,7 @@ export default function FiltersSection({ products }: FilterSectionProps) {
 
   const brands: Array<string> = [];
   for (let product of products) {
-    if (!brands.includes(product.brand)) brands.push(product.brand);
+    if (!brands.includes(product.data.brand)) brands.push(product.data.brand);
   }
 
   return (

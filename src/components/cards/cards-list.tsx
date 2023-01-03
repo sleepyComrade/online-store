@@ -1,11 +1,25 @@
 import React from "react";
 import { CardItem } from "./card-item";
-import { IProductData, ICardStyle } from "../../interfaces";
+import { ICardStyle, IProductItem } from "../../interfaces";
 
-export function CardList(props: { products: Array<IProductData>, style: ICardStyle}) {
+type CardListProps = {
+  style: ICardStyle;
+  products: Array<IProductItem>;
+  onAddCartItem: (productItem: IProductItem) => void;
+  onRemoveCartItem: (productItem: IProductItem) => void;
+}
+
+export function CardList({ products, style, onAddCartItem, onRemoveCartItem }: CardListProps) {
   return (
     <div className="cards-block__card-list">
-      {props.products.map(product => <CardItem style={props.style} product={product} key={product.id} />)}
+      {products.map(product =>
+        <CardItem style={style}
+          product={product}
+          key={product.data.id}
+          onAddCartItem={(productItem) => { onAddCartItem(productItem) }}
+          onRemoveCartItem={(productItem) => { onRemoveCartItem(productItem)}}
+        />
+      )}
     </div>
   );
 }
