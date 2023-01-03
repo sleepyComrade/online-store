@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import FiltersButtons from "./filters-buttons";
 import FiltersBlockCheckbox from "./filter-block-checkbox";
 import FiltersBlockRange from "./../filters/filters-block-range";

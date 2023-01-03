@@ -1,5 +1,5 @@
 import React from "react";
-import { IProductData, ICardStyle, IProductItem } from "../../interfaces";
+import { ICardStyle, IProductItem } from "../../interfaces";
 import { CardList } from "./cards-list";
 
 type CardsWrapProps = {

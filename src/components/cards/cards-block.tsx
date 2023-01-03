@@ -13,30 +13,6 @@ type CardsBlockProps = {
   onRemoveCartItem: (productItem: IProductItem) => void;
 }
 
-// export function CardsBlock({
-//   onSearchChange,
-//   onSortChange,
-//   total,
-//   activeItems
-// }: CardsBlockProps) {
-//   const [style, setStyle] = useState(gridItem);
-//   return (
-//     <div className="cards-block">
-//       <CardsNav
-//         onSearchChange={onSearchChange}
-//         total={total}
-//         onSortChange={onSortChange}
-//         onStyleChange={(view: string) => {
-//           if (view === "grid") {
-//             setStyle(gridItem);
-//           } else setStyle(bigItem);
-//         }}
-//       ></CardsNav>
-//       <CardsWrap
-//         style={style}
-//         activeItems={activeItems}
-//       />
-
 export function CardsBlock({ onSearchChange, onSortChange, total, products, onAddCartItem, onRemoveCartItem }: CardsBlockProps) {
   const [style, setStyle] = useState(gridItem);
   return (

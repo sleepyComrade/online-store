@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 type FilterRangeProps = {
   onChange: (data: {min: string, max: string}) => void;

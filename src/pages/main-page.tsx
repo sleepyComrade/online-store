@@ -1,7 +1,7 @@
 import FiltersSection from "./../components/filters/filters-section";
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { IProductData, IProductItem } from "./../interfaces";
+import { IProductItem } from "./../interfaces";
 import { CardsBlock } from "../components/cards/cards-block";
 
 type MainPageProps = {
@@ -11,9 +11,6 @@ type MainPageProps = {
 }
 
 export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem}: MainPageProps) {
-  // const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
-  // const [activeItems, setActiveItems] = useState<Array<IProductData>>([]);
-
   const [activeCategories, setActiveCategories] = useState<Array<string>>([]);
   const [brands, setBrands] = useState<Array<string>>([]);
   const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
@@ -25,7 +22,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const [maxPriceValue, setMaxValue] = useState('2000');
   const [searched, setSearched] = useState('');
   const [sort, setSort] = useState({sorted: ''});
-  const [total, setTotal] = useState(0);
 
   const queryCat = searchParams.getAll('cat') || [];
   const queryBrand = searchParams.getAll('brand') || [];
@@ -36,7 +32,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const qBrand = JSON.stringify(queryBrand);
     
   const filterItems = (items: IProductItem[], cat: string[], brand: string[], minPrice: string, maxPrice: string) => {
-    // const items = items_.map(item => item.data);
     const sortInfo = sort.sorted.split('-');
     const filteredItems = items
     .filter(
@@ -78,7 +73,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
         a.data.rating - b.data.rating : 0;
       }).reverse();
     }
-    // setTotal(sortedItems.length);
     return sortedItems;
   }
 
@@ -87,7 +81,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     .then(res => res.json())
     .then(categories => {
       setCategories(categories);
-      
     });
   }, []);
 
@@ -95,15 +88,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     setCategoryState(categories.map((cat: string) => queryCat.includes(cat)));
     setActiveCategories(categories.filter((cat: string) => queryCat.includes(cat)));
   }, [qCat, categories]);
-  
-  // useEffect(() => {
-  //   fetch('https://dummyjson.com/products?limit=100')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setProductsItems(data.products);
-        
-  //     })
-  // }, []);
   
   useEffect(() => {
     const brands: Array<string> = [];
@@ -114,10 +98,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     setBrandState(brands.map((brand: string) => queryBrand.includes(brand)));
     setActiveBrands(brands.filter((brand: string) => queryBrand.includes(brand)));
     setMinValue(queryMinPrice);
-    setMaxValue(queryMaxPrice);
-    // setActiveItems(filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice));
-    console.log(queryCat, queryBrand, queryMinPrice, queryMaxPrice);
-    
+    setMaxValue(queryMaxPrice);    
   }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice])
 
    const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice);
@@ -126,11 +107,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     <>
       <main>
         <div className="main-container">
-          {/* <h2>Main Page</h2>
-          <br />
-          <Link to="/product/01">
-            Go to product page
-          </Link> */}
           <div className="main-page__content-wrap">
             <FiltersSection onMinChange={(value: string) => {
               // setMinValue(value);
@@ -164,24 +140,9 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
               setSearched(value);
             }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               setSort({sorted: e.target.value});
-            }} products={activeItems} total={total} onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
+            }} products={activeItems} total={activeItems.length} onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
             onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
           </div>
-
-
-{/* export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem }: MainPageProps) {  
-  return (
-    <>
-      <main>
-        <Link to="/product/01">
-          Go to product page
-        </Link>
-        <div className="main-page__content-wrap">
-          <FiltersSection  products={productsItems} />
-          <CardsBlock products={productsItems} 
-            onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
-            onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}}
-          /> */}
         </div>
       </main>
       <footer></footer>
