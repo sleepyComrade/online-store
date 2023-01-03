@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function FiltersButtons() {
   return (
     <div className="filters__buttons">

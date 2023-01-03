@@ -1,12 +1,19 @@
 import FiltersSection from "./../components/filters/filters-section";
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { IProductData } from "./../interfaces";
+import { IProductData, IProductItem } from "./../interfaces";
 import { CardsBlock } from "../components/cards/cards-block";
 
-export default function MainPage() {
-  const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
-  const [activeItems, setActiveItems] = useState<Array<IProductData>>([]);
+type MainPageProps = {
+  productsItems: Array<IProductItem>;
+  onAddCartItem: (productItem: IProductItem) => void;
+  onRemoveCartItem: (productItem: IProductItem) => void;
+}
+
+export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem}: MainPageProps) {
+  // const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
+  // const [activeItems, setActiveItems] = useState<Array<IProductData>>([]);
+
   const [activeCategories, setActiveCategories] = useState<Array<string>>([]);
   const [brands, setBrands] = useState<Array<string>>([]);
   const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
@@ -23,51 +30,55 @@ export default function MainPage() {
   const queryCat = searchParams.getAll('cat') || [];
   const queryBrand = searchParams.getAll('brand') || [];
   const queryMinPrice = searchParams.get('minPrice') || '0';
-  const queryMaxPrice = searchParams.get('maxPrice') || '2000'; 
+  const queryMaxPrice = searchParams.get('maxPrice') || '2000';
+
+  const qCat = JSON.stringify(queryCat);
+  const qBrand = JSON.stringify(queryBrand);
     
-  const filterItems = (items: IProductData[], cat: string[], brand: string[], minPrice: string, maxPrice: string) => {
+  const filterItems = (items: IProductItem[], cat: string[], brand: string[], minPrice: string, maxPrice: string) => {
+    // const items = items_.map(item => item.data);
     const sortInfo = sort.sorted.split('-');
     const filteredItems = items
     .filter(
       (product) =>
-      cat.includes(product.category) || !cat.length
+      cat.includes(product.data.category) || !cat.length
     )
     .filter(
       (product) =>
-      brand.includes(product.brand) || !brand.length
+      brand.includes(product.data.brand) || !brand.length
     )
     .filter(
       (product) =>
-      product.price >= +minPrice && product.price <= +maxPrice ||
-      product.price <= +minPrice && product.price >= +maxPrice
+      product.data.price >= +minPrice && product.data.price <= +maxPrice ||
+      product.data.price <= +minPrice && product.data.price >= +maxPrice
     )
     .filter(
       (product) =>
-      product.brand.toLowerCase().includes(searched.toLowerCase()) ||
-      product.title.toLowerCase().includes(searched.toLowerCase()) ||
-      product.category.toLowerCase().includes(searched.toLowerCase())
+      product.data.brand.toLowerCase().includes(searched.toLowerCase()) ||
+      product.data.title.toLowerCase().includes(searched.toLowerCase()) ||
+      product.data.category.toLowerCase().includes(searched.toLowerCase())
     )
     let sortedItems = filteredItems;
     if (sortInfo.length > 1) {
       sortedItems = sortInfo[0] === 'low' ?
       filteredItems.sort((a, b) => {
         return sortInfo[1] === 'price' ?
-        a.price - b.price :
+        a.data.price - b.data.price :
         sortInfo[1] === 'discountPercentage' ?
-        a.discountPercentage - b.discountPercentage :
+        a.data.discountPercentage - b.data.discountPercentage :
         sortInfo[1] === 'rating' ?
-        a.rating - b.rating : 0;
+        a.data.rating - b.data.rating : 0;
       }) :
       filteredItems.sort((a, b) => {
         return sortInfo[1] === 'price' ?
-        a.price - b.price :
+        a.data.price - b.data.price :
         sortInfo[1] === 'discountPercentage' ?
-        a.discountPercentage - b.discountPercentage :
+        a.data.discountPercentage - b.data.discountPercentage :
         sortInfo[1] === 'rating' ?
-        a.rating - b.rating : 0;
+        a.data.rating - b.data.rating : 0;
       }).reverse();
     }
-    setTotal(sortedItems.length);
+    // setTotal(sortedItems.length);
     return sortedItems;
   }
 
@@ -76,29 +87,41 @@ export default function MainPage() {
     .then(res => res.json())
     .then(categories => {
       setCategories(categories);
-      setCategoryState(categories.map((cat: string) => queryCat.includes(cat)));
-      setActiveCategories(categories.filter((cat: string) => queryCat.includes(cat)));
+      
     });
   }, []);
+
+  useEffect(() => {
+    setCategoryState(categories.map((cat: string) => queryCat.includes(cat)));
+    setActiveCategories(categories.filter((cat: string) => queryCat.includes(cat)));
+  }, [qCat, categories]);
+  
+  // useEffect(() => {
+  //   fetch('https://dummyjson.com/products?limit=100')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProductsItems(data.products);
+        
+  //     })
+  // }, []);
   
   useEffect(() => {
-    fetch('https://dummyjson.com/products?limit=100')
-      .then(res => res.json())
-      .then(data => {
-        setProductsItems(data.products);
-        const brands: Array<string> = [];
-        for (let product of data.products) {
-          if (!brands.includes(product.brand)) brands.push(product.brand);
-        }
-        setBrands(brands);
-        setBrandState(brands.map((brand: string) => queryBrand.includes(brand)));
-        setActiveBrands(brands.filter((brand: string) => queryBrand.includes(brand)));
-        setMinValue(queryMinPrice);
-        setMaxValue(queryMaxPrice);
-        setActiveItems(filterItems(data.products, queryCat, queryBrand, queryMinPrice, queryMaxPrice));
-      })
-  }, []);
-  
+    const brands: Array<string> = [];
+    for (let product of productsItems) {
+      if (!brands.includes(product.data.brand)) brands.push(product.data.brand);
+    }
+    setBrands(brands);
+    setBrandState(brands.map((brand: string) => queryBrand.includes(brand)));
+    setActiveBrands(brands.filter((brand: string) => queryBrand.includes(brand)));
+    setMinValue(queryMinPrice);
+    setMaxValue(queryMaxPrice);
+    // setActiveItems(filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice));
+    console.log(queryCat, queryBrand, queryMinPrice, queryMaxPrice);
+    
+  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice])
+
+   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice);
+
   return (
     <>
       <main>
@@ -110,26 +133,26 @@ export default function MainPage() {
           </Link> */}
           <div className="main-page__content-wrap">
             <FiltersSection onMinChange={(value: string) => {
-              setMinValue(value);
+              // setMinValue(value);
             }} onMaxChange={(value: string) => {
-              setMaxValue(value);
+              // setMaxValue(value);
             }} onPriceChange={(data: {min: string, max: string}) => {
               setSearchParams({brand: activeBrands, cat: activeCategories, minPrice: data.min, maxPrice: data.max});
-              setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
+              // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
             }} onStateChange={(data: boolean[]) => {
-              setCategoryState(data)
+              // setCategoryState(data)
             }} onBrandStateChange={(data: boolean[]) => {
-              setBrandState(data);
+              // setBrandState(data);
             }} onBrandChange={(data: string[]) => {
-              setActiveBrands(data);
+              // setActiveBrands(data);
               setSearchParams({brand: data, cat: activeCategories, minPrice: minPriceValue, maxPrice: maxPriceValue});
-              setActiveItems(filterItems(productsItems, queryCat, data, queryMinPrice, queryMaxPrice));
+              // setActiveItems(filterItems(productsItems, queryCat, data, queryMinPrice, queryMaxPrice));
             }} onCategoryChange={(data: string[]) => {
-              setActiveCategories(data);
+              // setActiveCategories(data);
               setSearchParams({brand: activeBrands, cat: data, minPrice: minPriceValue, maxPrice: maxPriceValue});
-              setActiveItems(filterItems(productsItems, data, queryBrand, queryMinPrice, queryMaxPrice));
-            }} activeItems={activeItems}
-               productsItems={productsItems}
+              // setActiveItems(filterItems(productsItems, data, queryBrand, queryMinPrice, queryMaxPrice));
+            }} activeItems={activeItems.map(item => item.data)}
+               productsItems={productsItems.map(item => item.data)}
                categoryState={categoryState}
                brandState={brandState}
                categories={categories}
@@ -140,8 +163,24 @@ export default function MainPage() {
               setSearched(value);
             }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               setSort({sorted: e.target.value});
-            }} activeItems={activeItems} total={total} />
+            }} products={activeItems} total={total} onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
+            onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
           </div>
+
+
+{/* export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem }: MainPageProps) {  
+  return (
+    <>
+      <main>
+        <Link to="/product/01">
+          Go to product page
+        </Link>
+        <div className="main-page__content-wrap">
+          <FiltersSection  products={productsItems} />
+          <CardsBlock products={productsItems} 
+            onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
+            onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}}
+          /> */}
         </div>
       </main>
       <footer></footer>

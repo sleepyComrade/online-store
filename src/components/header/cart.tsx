@@ -1,3 +1,4 @@
+import React from "react";
 import cart from "../../assets/svg/cart-icon.png";
 import { Link } from "react-router-dom";
 

@@ -12,6 +12,11 @@ export interface IProductData {
     images: string[];
 }
 
+export interface IProductItem { 
+    data: IProductData, 
+    counter: number 
+}
+
 export interface ICardStyle {
     item: string,
     image: string,

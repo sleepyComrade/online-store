@@ -1,34 +1,32 @@
 @use '../abstracts' as a;
 
 .filters {
-    width: 320px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: a.$clr-primary-11;
+  width: 320px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: a.$clr-primary-11;
 }
 
 .filters__buttons {
-    margin: 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  margin: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .filters__button {
-    min-width: 90px;
-    padding: 8px;
-    background-color: #fff;
-    // color: crimson;
-    color: a.$clr-grey-2;
-    font-size: 18px;
-    font-weight: 600;
-    transition: all 0.3s ease-out;
-    border-radius: 5px;
+  min-width: 90px;
+  padding: 8px;
+  background-color: #fff;
+  color: a.$clr-grey-2;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.3s ease-out;
+  border-radius: 5px;
 }
 
 .filters__button:focus,
 .filters__button:hover {
-    // background-color: crimson;
     background-color: a.$clr-primary-4;
     color: #fff;
     transition: all 0.3s ease-out;
@@ -53,54 +51,80 @@
 
 .filters__block--range {
     height: 165px;
+  background-color: crimson;
+  color: #fff;
+  transition: all 0.3s ease-out;
+}
+
+.filters__block {
+  width: 95%;
+  display: block;
+  overflow: hidden;
+  margin-right: 0;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  padding: 8px;
+  border: 1px solid crimson;
+  border-radius: 10px;
+}
+
+.filters__block--checkbox {
+  height: 260px;
+}
+
+.filters__block--range {
+  height: 170px;
 }
 
 .filters__block-title {
-    background-color: #fff;
-    text-align: center;
-    padding: 5px;
-    margin-top: 10px;
+  background-color: #fff;
+  text-align: center;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 .filters__checkbox-wrapper {
-    width: 100%;
-    height: 70%;
-    overflow: hidden;
-    overflow-y: auto;
+  width: 100%;
+  height: 70%;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .filter-checkbox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 
 .filter-checkbox__label {
-    font-size: 18px;
-    position: relative;
-    display: block;
-    padding-left: 30px;
-    font-weight: 500;
-    cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  display: block;
+  padding-left: 30px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.filter-checkbox__input:focus + label,
+.filter-checkbox__input:focus+label,
 .filter-checkbox__label:hover {
-    color:crimson;
-} 
+  color: crimson;
+}
 
-.filter-checkbox__input + label::before {
+.filter-checkbox__input+label {
+  &::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0;
+    top: 4px;
     width: 16px;
     height: 16px;
     border: 2px solid #000;
+  }
 }
 
-.filter-checkbox__input:checked + label::after {
+.filter-checkbox__input:checked+label {
+  &::after {
     content: "";
     position: absolute;
     top: -4px;
@@ -111,25 +135,26 @@
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 25px 25px;
+  }
 }
 
 /* Работает в Chrome, Opera и Safari */
 .filters__checkbox-wrapper::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 .filters__checkbox-wrapper::-webkit-scrollbar-track {
-    background: #fff;
-    border-radius: 10px;
+  background: #fff;
+  border-radius: 10px;
 }
 
 .filters__checkbox-wrapper::-webkit-scrollbar-thumb {
-    width: 8px;
-    height: 25%;
-    background: crimson;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    cursor: pointer;    
+  width: 8px;
+  height: 25%;
+  background: crimson;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Работает в Firefox */
@@ -139,96 +164,96 @@
 }
 
 .filter-checkbox__count {
-    margin: 5px;
-    width: 25%;
-    text-align: right;
+  margin: 5px;
+  width: 25%;
+  text-align: right;
 }
 
 .filter-checkbox__count span {
-    font-size: 18px;
-    font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 /* range filter */
 
 .filter-range__values {
-    width: 100%;
-    display: flex;
-    margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
 }
 
 .filter-range__field {
-    height: 45px;
-    width: 100%;
-    display: flex;
-    align-items: center;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .filter-range__value {
-    display: block;
-    min-width: 70px;
-    min-height: 30px;
-    font-size: 18px;
-    line-height: 28px;
-    text-align: center;
-    margin-left: 12px;   
-    border-radius: 5px;
-    background-color: #fff;
+  display: block;
+  min-width: 70px;
+  min-height: 30px;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+  margin-left: 12px;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 .filter-range__separator {
-    width: 130px;
-    display: flex;
-    font-size: 18px;
-    align-items: center;
-    justify-content: center;
+  width: 130px;
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
 }
 
 .filter-range__slider {
-    height: 5px;
-    position: relative;
-    border-radius: 5px;
-    background: rgb(206, 205, 205);
+  height: 5px;
+  position: relative;
+  border-radius: 5px;
+  background: rgb(206, 205, 205);
 }
 
 .filter-range__progress {
-    height: 5px;
-    position: absolute;
-    border-radius: 5px;
-    background: crimson;
+  height: 5px;
+  position: absolute;
+  border-radius: 5px;
+  background: crimson;
 }
 
 .filter-range__container {
-    position: relative;
+  position: relative;
 }
 
 .filter-range__input {
-    position: absolute;
-    top: -5px;
-    height: 5px;
-    width: 100%;
-    background: none;
-    pointer-events: none;
-    -webkit-appearance: none;
+  position: absolute;
+  top: -5px;
+  height: 5px;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
 }
 
 .filter-range__input::-webkit-slider-thumb {
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    pointer-events: auto;
-    -webkit-appearance: none;
-    background: crimson;
-    cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  background: crimson;
+  cursor: pointer;
 }
 
 .filter-range__input::-moz-range-thumb {
-    height: 16px;
-    width: 16px;
-    border: none;
-    border-radius: 50%;
-    pointer-events: auto;
-    -moz-appearance: none;
-    background: crimson;
-    cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border: none;
+  border-radius: 50%;
+  pointer-events: auto;
+  -moz-appearance: none;
+  background: crimson;
+  cursor: pointer;
 }
