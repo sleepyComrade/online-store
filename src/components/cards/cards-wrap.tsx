@@ -1,5 +1,5 @@
 import React from "react";
-import { IProductData, ICardStyle, IProductItem } from "../../interfaces";
+import { ICardStyle, IProductItem } from "../../interfaces";
 import { CardList } from "./cards-list";
 
 type CardsWrapProps = {
@@ -7,7 +7,7 @@ type CardsWrapProps = {
   style: ICardStyle;
   onAddCartItem: (productItem: IProductItem) => void;
   onRemoveCartItem: (productItem: IProductItem) => void;
-}
+};
 
 export function CardsWrap({ products, style, onAddCartItem, onRemoveCartItem }: CardsWrapProps) {
   return (

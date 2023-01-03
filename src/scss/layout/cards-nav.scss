@@ -1,9 +1,9 @@
-@use '../abstracts/mixins' as a;
+@use '../abstracts' as a;
 
 .cards-nav {
   @include a.flex(space-around);
   height: 40px;
-  background-color: rgb(234, 234, 234);
+  background-color: a.$clr-primary-11;
 
   .cards-nav__sort-wrap {
     .cards-nav__select {

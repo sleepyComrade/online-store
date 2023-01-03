@@ -1,14 +1,20 @@
-export function Sort() {
+import React from "react";
+
+type SortProps = {
+  onSortChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export function Sort({onSortChange}: SortProps) {
   return (
     <div className="cards-nav__sort-wrap">
-      <select className="cards-nav__select" defaultValue={""}>
+      <select onChange={onSortChange} className="cards-nav__select" defaultValue={""}>
         <option value="" disabled>Sort by</option>
         <option value="low-price">Lowest price</option>
         <option value="high-price">Highest price</option>
-        <option value="low-rate">Lowest rating</option>
-        <option value="high-rate">Highest rating</option>
-        <option value="big-disc">Biggest discount</option>
-        <option value="small-disc">Smallest discount</option>
+        <option value="low-rating">Lowest rating</option>
+        <option value="high-rating">Highest rating</option>
+        <option value="low-discountPercentage">Smallest discount</option>
+        <option value="high-discountPercentage">Biggest discount</option>
       </select>
     </div>
   );

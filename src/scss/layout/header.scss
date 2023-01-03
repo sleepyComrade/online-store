@@ -1,34 +1,39 @@
-@use '../abstracts/mixins' as a;
+@use '../abstracts' as a;
 
 .header {
-  @include a.flex(space-between);
-  padding: 0 30px;
+  padding: 10px 0px;
   height: 80px;
-  background-color: rgb(234, 234, 234);
+  background-color: a.$clr-primary-11;
 
-  .header__logo {
-    height: 60px;
-  }
+  .header__container {
+    @include a.flex(space-between);
+    max-width: 1350px;
+    margin: auto;
 
-  .header__payment-wrap {
-    @include a.flex();
-    gap: 20px;
-  }
-
-  .header__cart-wrap {
-    position: relative;
-    color: black;
-  
-    .header__cart-counter {
-      position: absolute;
-      top: 6px;
-      right: -2px;
-      @include a.flex();
-      width: 27px;
-      height: 27px;
-      background-color: rgb(234, 234, 234);
-      border-radius: 50%;
-      border: 2px solid black;
+    .header__logo {
+      height: 60px;
     }
+  
+    .header__payment-wrap {
+      @include a.flex();
+      gap: 20px;
+    }
+  
+    .header__cart-wrap {
+      position: relative;
+      color: black;
+    
+      .header__cart-counter {
+        position: absolute;
+        top: 1px;
+        right: -5px;
+        @include a.flex();
+        width: 30px;
+        height: 30px;
+        background-color: rgb(234, 234, 234);
+        border-radius: 50%;
+        border: 2px solid black;
+      }
   }
+}
 }
