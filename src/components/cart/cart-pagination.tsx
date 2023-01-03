@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 type CartPaginationProps = {
   countItemsPerPageCart: number;
   cartProductsCount: number;
@@ -9,15 +7,18 @@ type CartPaginationProps = {
 
 export default function CartPagination({ countItemsPerPageCart, cartProductsCount, currentPage, setCurrentPage }: CartPaginationProps) {
 
-  const res = Math.ceil(cartProductsCount / countItemsPerPageCart);
-  const nextPage = () => setCurrentPage(currentPage => currentPage < res ? currentPage + 1 : res);
+  const defaultNumberPage = 1;
+  const numberCurrentPage = Math.ceil(cartProductsCount / countItemsPerPageCart);
+  const nextPage = () => setCurrentPage(currentPage => currentPage < numberCurrentPage ? currentPage + 1 : numberCurrentPage);
   const prevPage = () => setCurrentPage(currentPage => currentPage >= 2 ? currentPage - 1 : currentPage);
+
+  const numberTotalPage = numberCurrentPage > 0 ? numberCurrentPage : defaultNumberPage;
 
   return (
     <div className="cart__pagination">
       <span>Page: </span>
       <button className="btn" onClick={prevPage}> &lt; </button>
-      <span className="cart__page-count">{currentPage} of {res}</span>
+      <span className="cart__page-count">{currentPage} of {numberTotalPage}</span>
       <button className="btn" onClick={nextPage}> &gt; </button>
     </div>
   )

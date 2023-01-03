@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FiltersSection from "./../components/filters/filters-section";
-import { IProductData } from "./../interfaces";
+import { IProductData, IProductItem } from "./../interfaces";
 import { Header } from "../components/header/header";
 import { CardsBlock } from "../components/cards/cards-block";
 
-export default function MainPage() {
-  const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
+type MainPageProps = {
+  productsItems: Array<IProductItem>;
+  onAddCartItem: (productItem: IProductItem) => void;
+  onRemoveCartItem: (productItem: IProductItem) => void;
+}
 
-  useEffect(() => {
-    fetch('https://dummyjson.com/products?limit=100')
-      .then(res => res.json())
-      .then(data => setProductsItems(data.products))
-  }, []);
-  
+export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem }: MainPageProps) {  
   return (
     <>
       <main>
@@ -24,7 +22,10 @@ export default function MainPage() {
         </Link>
         <div className="main-page__content-wrap">
           <FiltersSection  products={productsItems} />
-          <CardsBlock products={productsItems} />
+          <CardsBlock products={productsItems} 
+            onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
+            onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}}
+          />
         </div>
       </main>
       <footer></footer>

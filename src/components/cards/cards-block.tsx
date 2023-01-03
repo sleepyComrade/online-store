@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { CardsNav } from "../../components/cards-navigation/navigation";
 import { CardsWrap } from "./cards-wrap";
-import { IProductData } from "../../interfaces";
+import { IProductData, IProductItem } from "../../interfaces";
 
 type CardsBlockprops = {
-  products: Array<IProductData>;
+  products: Array<IProductItem>;
+  onAddCartItem: (productItem: IProductItem) => void;
+  onRemoveCartItem: (productItem: IProductItem) => void;
 }
 
-export function CardsBlock({products}: CardsBlockprops) {
+export function CardsBlock({ products, onAddCartItem, onRemoveCartItem }: CardsBlockprops) {
   const gridItem = {
     item: 'card-item',
     image: 'card-item__image',
@@ -37,12 +39,15 @@ export function CardsBlock({products}: CardsBlockprops) {
   const [style, setStyle] = useState(gridItem);
   return (
     <div className="cards-block">
-        <CardsNav onStyleChange={(view: string) => {
-          if (view === 'grid') {
-            setStyle(gridItem);
-          } else setStyle(bigItem);
-        }}></CardsNav>
-        <CardsWrap style={style} products={products} />
+      <CardsNav onStyleChange={(view: string) => {
+        if (view === 'grid') {
+          setStyle(gridItem);
+        } else setStyle(bigItem);
+      }}></CardsNav>
+      <CardsWrap style={style} products={products}
+        onAddCartItem={(productItem) => { onAddCartItem(productItem) }}
+        onRemoveCartItem={(productItem) => { onRemoveCartItem(productItem) }}
+        />
     </div>
   );
 }

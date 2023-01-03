@@ -6,7 +6,7 @@ import { Filters } from "../../const";
 import { IProductData } from "../../interfaces";
 
 type FilterSectionProps = {
-  products: Array<IProductData>;
+  products: Array<{ data: IProductData, counter: number }>;
 }
 
 export default function FiltersSection({ products }: FilterSectionProps) {
@@ -21,7 +21,7 @@ export default function FiltersSection({ products }: FilterSectionProps) {
 
   const brands: Array<string> = [];
   for (let product of products) {
-    if (!brands.includes(product.brand)) brands.push(product.brand);
+    if (!brands.includes(product.data.brand)) brands.push(product.data.brand);
   }
 
   return (
