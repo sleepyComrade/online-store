@@ -5,7 +5,6 @@ import { ICardStyle, IProductItem, IProductData } from "../../interfaces";
 type CardsListProps = {
   products: Array<IProductItem>;
   style: ICardStyle;
-  activeItems: IProductData[];
   onAddCartItem: (productItem: IProductItem) => void;
   onRemoveCartItem: (productItem: IProductItem) => void;
 };
@@ -21,7 +20,7 @@ type CardsListProps = {
 //        activeItems.map(item => <CardItem style={style} product={item} key={item.id} />)}
 
 
-export function CardList({ products, style, onAddCartItem, onRemoveCartItem, activeItems }: CardsListProps) {
+export function CardList({ products, style, onAddCartItem, onRemoveCartItem }: CardsListProps) {
   return (
     <div className="cards-block__card-list">
       

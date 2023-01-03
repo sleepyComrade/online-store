@@ -158,7 +158,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                categories={categories}
                brands={brands}
                minPriceValue={minPriceValue}
-               maxPriceValue={maxPriceValue} />
+               maxPriceValue={maxPriceValue}
+               products={productsItems} />
             <CardsBlock onSearchChange={(value: string) => {
               setSearched(value);
             }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
