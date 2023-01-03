@@ -6,6 +6,7 @@ import { CardsBlock } from "../components/cards/cards-block";
 
 export default function MainPage() {
   const [productsItems, setProductsItems] = useState<Array<IProductData>>([]);
+  const [activeItems, setActiveItems] = useState<Array<IProductData>>([]);
   const [activeCategories, setActiveCategories] = useState<Array<string>>([]);
   const [brands, setBrands] = useState<Array<string>>([]);
   const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
@@ -13,10 +14,62 @@ export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [categories, setCategories] = useState<Array<string>>([]);
   const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
-  const [priceRange, setPriceRange] = useState({min: '0', max: '2000'});
+  const [minPriceValue, setMinValue] = useState('0');
+  const [maxPriceValue, setMaxValue] = useState('2000');
+  const [searched, setSearched] = useState('');
+  const [sort, setSort] = useState({sorted: ''});
+  const [total, setTotal] = useState(0);
 
   const queryCat = searchParams.getAll('cat') || [];
   const queryBrand = searchParams.getAll('brand') || [];
+  const queryMinPrice = searchParams.get('minPrice') || '0';
+  const queryMaxPrice = searchParams.get('maxPrice') || '2000'; 
+    
+  const filterItems = (items: IProductData[], cat: string[], brand: string[], minPrice: string, maxPrice: string) => {
+    const sortInfo = sort.sorted.split('-');
+    const filteredItems = items
+    .filter(
+      (product) =>
+      cat.includes(product.category) || !cat.length
+    )
+    .filter(
+      (product) =>
+      brand.includes(product.brand) || !brand.length
+    )
+    .filter(
+      (product) =>
+      product.price >= +minPrice && product.price <= +maxPrice ||
+      product.price <= +minPrice && product.price >= +maxPrice
+    )
+    .filter(
+      (product) =>
+      product.brand.toLowerCase().includes(searched.toLowerCase()) ||
+      product.title.toLowerCase().includes(searched.toLowerCase()) ||
+      product.category.toLowerCase().includes(searched.toLowerCase())
+    )
+    let sortedItems = filteredItems;
+    if (sortInfo.length > 1) {
+      sortedItems = sortInfo[0] === 'low' ?
+      filteredItems.sort((a, b) => {
+        return sortInfo[1] === 'price' ?
+        a.price - b.price :
+        sortInfo[1] === 'discountPercentage' ?
+        a.discountPercentage - b.discountPercentage :
+        sortInfo[1] === 'rating' ?
+        a.rating - b.rating : 0;
+      }) :
+      filteredItems.sort((a, b) => {
+        return sortInfo[1] === 'price' ?
+        a.price - b.price :
+        sortInfo[1] === 'discountPercentage' ?
+        a.discountPercentage - b.discountPercentage :
+        sortInfo[1] === 'rating' ?
+        a.rating - b.rating : 0;
+      }).reverse();
+    }
+    setTotal(sortedItems.length);
+    return sortedItems;
+  }
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
@@ -40,6 +93,9 @@ export default function MainPage() {
         setBrands(brands);
         setBrandState(brands.map((brand: string) => queryBrand.includes(brand)));
         setActiveBrands(brands.filter((brand: string) => queryBrand.includes(brand)));
+        setMinValue(queryMinPrice);
+        setMaxValue(queryMaxPrice);
+        setActiveItems(filterItems(data.products, queryCat, queryBrand, queryMinPrice, queryMaxPrice));
       })
   }, []);
   
@@ -53,20 +109,38 @@ export default function MainPage() {
             Go to product page
           </Link> */}
           <div className="main-page__content-wrap">
-            <FiltersSection onPriceChange={(data: {min: string, max: string}) => {
-              setPriceRange(data);
+            <FiltersSection onMinChange={(value: string) => {
+              setMinValue(value);
+            }} onMaxChange={(value: string) => {
+              setMaxValue(value);
+            }} onPriceChange={(data: {min: string, max: string}) => {
+              setSearchParams({brand: activeBrands, cat: activeCategories, minPrice: data.min, maxPrice: data.max});
+              setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
             }} onStateChange={(data: boolean[]) => {
               setCategoryState(data)
             }} onBrandStateChange={(data: boolean[]) => {
               setBrandState(data);
             }} onBrandChange={(data: string[]) => {
               setActiveBrands(data);
-              setSearchParams({brand: data, cat: activeCategories});
+              setSearchParams({brand: data, cat: activeCategories, minPrice: minPriceValue, maxPrice: maxPriceValue});
+              setActiveItems(filterItems(productsItems, queryCat, data, queryMinPrice, queryMaxPrice));
             }} onCategoryChange={(data: string[]) => {
               setActiveCategories(data);
-              setSearchParams({brand: activeBrands, cat: data});
-            }} productsItems={productsItems} categoryState={categoryState} brandState={brandState} categories={categories} brands={brands} />
-            <CardsBlock queryBrand={queryBrand} queryCat={queryCat} priceRange={priceRange} products={productsItems} />
+              setSearchParams({brand: activeBrands, cat: data, minPrice: minPriceValue, maxPrice: maxPriceValue});
+              setActiveItems(filterItems(productsItems, data, queryBrand, queryMinPrice, queryMaxPrice));
+            }} activeItems={activeItems}
+               productsItems={productsItems}
+               categoryState={categoryState}
+               brandState={brandState}
+               categories={categories}
+               brands={brands}
+               minPriceValue={minPriceValue}
+               maxPriceValue={maxPriceValue} />
+            <CardsBlock onSearchChange={(value: string) => {
+              setSearched(value);
+            }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              setSort({sorted: e.target.value});
+            }} activeItems={activeItems} total={total} />
           </div>
         </div>
       </main>

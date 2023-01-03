@@ -10,9 +10,10 @@ type FiltersBlockCheckboxProps = {
   onStateChange: (data: boolean[]) => void;
   productsItems: IProductData[];
   prop: string;
+  activeItems: IProductData[];
 }
 
-export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onCategoryChange, categoryState, onStateChange, productsItems, prop }: FiltersBlockCheckboxProps) {
+export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onCategoryChange, categoryState, onStateChange, productsItems, prop, activeItems }: FiltersBlockCheckboxProps) {
   return (
     <div className="filters__block filters__block--checkbox">
       <h3 className="filters__block-title">{filterTitle}</h3>
@@ -22,10 +23,14 @@ export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onC
         onStateChange(categoryState);
         const activeCat = ProductsFilters.filter((cat, i) => categoryState[i]);
         onCategoryChange(activeCat);
-      }} total={productsItems.filter(product => prop === 'category' ?
-                                                product.category === item :
-                                                prop === 'brand' ?
-                                                product.brand === item : false
+      }} activeQty={activeItems.filter(product => prop === 'category' ?
+                                                  product.category === item :
+                                                  prop === 'brand' ?
+                                                  product.brand === item : false
+      ).length} total={productsItems.filter(product => prop === 'category' ?
+                                            product.category === item :
+                                            prop === 'brand' ?
+                                            product.brand === item : false
       ).length} state={categoryState[index]} key={index} filter={item} />) }
       </div>
     </div>

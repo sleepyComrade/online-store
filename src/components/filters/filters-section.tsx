@@ -16,6 +16,11 @@ type FilterSectionProps = {
   onBrandStateChange: (data: boolean[]) => void;
   onPriceChange: (data: { min: string; max: string }) => void;
   productsItems: IProductData[];
+  activeItems: IProductData[];
+  minPriceValue: string;
+  maxPriceValue: string;
+  onMinChange: (value: string) => void;
+  onMaxChange: (value: string) => void;
 };
 
 export default function FiltersSection({
@@ -29,6 +34,11 @@ export default function FiltersSection({
   onStateChange,
   onPriceChange,
   productsItems,
+  activeItems,
+  minPriceValue,
+  maxPriceValue,
+  onMinChange,
+  onMaxChange
 }: FilterSectionProps) {
   return (
     <section className="filters">
@@ -41,6 +51,7 @@ export default function FiltersSection({
         ProductsFilters={categories}
         productsItems={productsItems}
         prop={'category'}
+        activeItems={activeItems}
       />
       <FiltersBlockCheckbox
         onStateChange={onBrandStateChange}
@@ -50,9 +61,10 @@ export default function FiltersSection({
         ProductsFilters={brands}
         productsItems={productsItems}
         prop={'brand'}
+        activeItems={activeItems}
       />
-      <FiltersBlockRange onChange={onPriceChange} filterTitle={Filters.Price} />
-      <FiltersBlockRange onChange={onPriceChange} filterTitle={Filters.Stock} />
+      <FiltersBlockRange onMinChange={onMinChange} onMaxChange={onMaxChange} minValue={minPriceValue} maxValue={maxPriceValue} onChange={onPriceChange} filterTitle={Filters.Price} />
+      <FiltersBlockRange onMinChange={onMinChange} onMaxChange={onMaxChange} minValue={minPriceValue} maxValue={maxPriceValue} onChange={onPriceChange} filterTitle={Filters.Stock} />
     </section>
   );
 }
