@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { IProductData, ICardStyle, IProductItem } from "../../interfaces";
+import React from "react";
+import { ICardStyle, IProductItem } from "../../interfaces";
 import star from "../../assets/svg/star.svg";
 
 type CardItemProps = {

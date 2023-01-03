@@ -1,3 +1,4 @@
+import React from "react";
 import logo from "../../assets/images/online-store.png";
 import { Link } from "react-router-dom";
 

@@ -1,8 +1,8 @@
-import { IProductData } from "../../interfaces";
+import { IProductData, IProductItem } from "../../interfaces";
 import CartItem from "./cart-item";
 
 type CartListProps = {
-  productsInCart: Array<{data: IProductData, counter: number}>;
+  productsInCart: Array<IProductItem>;
   onCounter: (id: IProductData['id'], value: number) => void; 
   startIndex: number;
 }

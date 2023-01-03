@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CardsNav } from "../../components/cards-navigation/navigation";
 import { CardsWrap } from "./cards-wrap";
-import { IProductData, IProductItem } from "../../interfaces";
+import { IProductItem } from "../../interfaces";
 
 type CardsBlockprops = {
   products: Array<IProductItem>;

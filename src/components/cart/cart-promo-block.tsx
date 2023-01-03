@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { IProductData, IPromoCode } from "../../interfaces";
+import React from "react";
+import { IPromoCode } from "../../interfaces";
 import { PromoCodes } from "../../const";
 import CartPromoBlockList from "./cart-promo-block-list";
 import { Modal } from "../payment-form/modal";
@@ -10,7 +10,7 @@ type CartPromoBlockProps = {
   totalCost: number;
   promoItem: null | IPromoCode;
   setPromoItem: React.Dispatch<React.SetStateAction<IPromoCode | null>>;
-  appliedPromoItems: IPromoCode[];
+  appliedPromoItems: Array<IPromoCode>;
   setAppliedPromoItems: React.Dispatch<React.SetStateAction<IPromoCode[]>>;
   totalCostWithDiscount: number;
   isModal: boolean;

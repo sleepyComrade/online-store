@@ -1,6 +1,6 @@
 import React from "react";
 import { CardItem } from "./card-item";
-import { IProductData, ICardStyle, IProductItem } from "../../interfaces";
+import { ICardStyle, IProductItem } from "../../interfaces";
 
 type CardListProps = {
   style: ICardStyle;

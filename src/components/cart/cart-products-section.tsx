@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CartList from "./cart-list";
 import CartItemsPerPage from "./cart-items-per-page";
 import CartPagination from "./cart-pagination";
-import { IProductData } from "../../interfaces";
+import { IProductData, IProductItem } from "../../interfaces";
 
 type CartProductsSectionProps = {
-  cartItems: Array<{ data: IProductData, counter: number }>;
-  setCartItems: React.Dispatch<React.SetStateAction<{
-    data: IProductData;
-    counter: number;
-  }[]>>
+  cartItems: Array<IProductItem>;
+  setCartItems: React.Dispatch<React.SetStateAction<IProductItem[]>>
 }
 
 export default function CartProductsSection({ cartItems, setCartItems }: CartProductsSectionProps) {

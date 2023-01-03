@@ -1,3 +1,4 @@
+import React from "react";
 import FilterRange from "./filter-range";
 
 type FiltersBlockCheckboxProps = {

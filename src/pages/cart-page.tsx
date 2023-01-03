@@ -1,22 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import CartProductsSection from "../components/cart/cart-products-section";
 import CartPromoBlock from "../components/cart/cart-promo-block";
-import { IProductData, IPromoCode } from "../interfaces";
+import { IProductItem, IPromoCode } from "../interfaces";
 
 type CartPageProps = {
-  cartItems: {
-    data: IProductData;
-    counter: number;
-  }[];
-  setCartItems: React.Dispatch<React.SetStateAction<{
-    data: IProductData;
-    counter: number;
-  }[]>>
+  cartItems: Array<IProductItem>;
+  setCartItems: React.Dispatch<React.SetStateAction<IProductItem[]>>
   cartItemsCount: number;
   totalCost: number;
   promoItem: null | IPromoCode;
   setPromoItem: React.Dispatch<React.SetStateAction<IPromoCode | null>>;
-  appliedPromoItems: IPromoCode[];
+  appliedPromoItems: Array<IPromoCode>;
   setAppliedPromoItems: React.Dispatch<React.SetStateAction<IPromoCode[]>>;
   totalCostWithDiscount: number;
   isModal: boolean;

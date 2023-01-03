@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IProductData, ICardStyle, IProductItem } from "../../interfaces";
 import { CardList } from "./cards-list";
 
 type CardsWrapProps = {
-  products: Array<{ data: IProductData, counter: number }>;
+  products: Array<IProductItem>;
   style: ICardStyle;
   onAddCartItem: (productItem: IProductItem) => void;
   onRemoveCartItem: (productItem: IProductItem) => void;
