@@ -21,7 +21,6 @@ export default function CartPromoBlock({ cartItemsCount, totalCost, promoItem, s
 
   const dropCodeHandler = (itemCode: IPromoCode['code'], appliedPromoItems: Array<IPromoCode>) => {
     const currentIndex = appliedPromoItems.findIndex((item) => item.code == itemCode);
-    console.log(appliedPromoItems);
     return [...appliedPromoItems.slice(0, currentIndex), ...appliedPromoItems.slice(currentIndex + 1)];
   }
 

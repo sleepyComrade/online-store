@@ -14,8 +14,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   return (
     <>
       <main>
-        <h2>Main Page</h2>
-        <br />
         <Link to="/product/01">
           Go to product page
         </Link>
