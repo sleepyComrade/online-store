@@ -45,9 +45,12 @@ export default function CartPromoBlock({ cartItemsCount, totalCost, promoItem, s
           {appliedPromoItems.length !== 0 &&
             <div className="promo-block__applied-codes">
               <h3>Applied codes</h3>
-              <CartPromoBlockList appliedPromoItems={appliedPromoItems} onDrop={(code: string) => {
-                setAppliedPromoItems((last) => dropCodeHandler(code, last));
-              }} />
+              <CartPromoBlockList
+                appliedPromoItems={appliedPromoItems}
+                onDrop={(code: string) => {
+                  setAppliedPromoItems((last) => dropCodeHandler(code, last));
+                }}
+              />
             </div>}
 
           <div className="promo-block__code">
