@@ -31,6 +31,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const queryMaxPrice = searchParams.get('maxPrice') || '2000';
   const queryMinStock = searchParams.get('minStock') || '0';
   const queryMaxStock = searchParams.get('maxStock') || '200';
+  const querySearch = searchParams.get('search') || '';
 
   const qCat = JSON.stringify(queryCat);
   const qBrand = JSON.stringify(queryBrand);
@@ -41,7 +42,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                       minPrice: string,
                       maxPrice: string,
                       minStock: string,
-                      maxStock: string) => {
+                      maxStock: string,
+                      search: string) => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = items
     .filter(
@@ -64,9 +66,14 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     )
     .filter(
       (product) =>
-      product.data.brand.toLowerCase().includes(searched.toLowerCase()) ||
-      product.data.title.toLowerCase().includes(searched.toLowerCase()) ||
-      product.data.category.toLowerCase().includes(searched.toLowerCase())
+      product.data.brand.toLowerCase().includes(search.toLowerCase()) ||
+      product.data.title.toLowerCase().includes(search.toLowerCase()) ||
+      product.data.category.toLowerCase().includes(search.toLowerCase()) ||
+      product.data.stock.toString().toLowerCase().includes(search.toLowerCase()) ||
+      product.data.price.toString().toLowerCase().includes(search.toLowerCase()) ||
+      product.data.description.toLowerCase().includes(search.toLowerCase()) ||
+      product.data.rating.toString().toLowerCase().includes(search.toLowerCase()) ||
+      product.data.discountPercentage.toString().toLowerCase().includes(search.toLowerCase())
     )
     let sortedItems = filteredItems;
     if (sortInfo.length > 1) {
@@ -116,9 +123,10 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     setMaxValue(queryMaxPrice);  
     setMinStockValue(queryMinStock);
     setMaxStockValue(queryMaxStock);
-  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock])
+    setSearched(querySearch)
+  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch])
 
-   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock);
+   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch);
 
   return (
     <>
@@ -135,7 +143,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minPrice: data.min,
                               maxPrice: data.max,
                               minStock: minStockValue,
-                              maxStock: maxStockValue});
+                              maxStock: maxStockValue,
+                              search: searched});
               // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
             }} onStockChange={(data: {min: string, max: string}) => {
               setSearchParams({brand: activeBrands,
@@ -143,7 +152,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minPrice: minPriceValue,
                               maxPrice: maxPriceValue,
                               minStock: data.min,
-                              maxStock: data.max});
+                              maxStock: data.max,
+                              search: searched});
               // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
             }} onStateChange={(data: boolean[]) => {
               // setCategoryState(data)
@@ -156,7 +166,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minPrice: minPriceValue,
                               maxPrice: maxPriceValue,
                               minStock: minStockValue,
-                              maxStock: maxStockValue});
+                              maxStock: maxStockValue,
+                              search: searched});
               // setActiveItems(filterItems(productsItems, queryCat, data, queryMinPrice, queryMaxPrice));
             }} onCategoryChange={(data: string[]) => {
               // setActiveCategories(data);
@@ -165,7 +176,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minPrice: minPriceValue,
                               maxPrice: maxPriceValue,
                               minStock: minStockValue,
-                              maxStock: maxStockValue});
+                              maxStock: maxStockValue,
+                              search: searched});
               // setActiveItems(filterItems(productsItems, data, queryBrand, queryMinPrice, queryMaxPrice));
             }} activeItems={activeItems.map(item => item.data)}
                productsItems={productsItems.map(item => item.data)}
@@ -179,10 +191,18 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                maxStockValue={maxStockValue}
                products={productsItems} />
             <CardsBlock onSearchChange={(value: string) => {
-              setSearched(value);
+              // setSearched(value);
+              setSearchParams({brand: activeBrands,
+                cat: activeCategories,
+                minPrice: minPriceValue,
+                maxPrice: maxPriceValue,
+                minStock: minStockValue,
+                maxStock: maxStockValue,
+                search: value});
             }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               setSort({sorted: e.target.value});
             }} products={activeItems} total={activeItems.length}
+            search={searched}
             onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
             onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
           </div>
