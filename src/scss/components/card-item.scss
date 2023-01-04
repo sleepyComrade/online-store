@@ -1,4 +1,4 @@
-@use '../abstracts/mixins' as a;
+@use '../abstracts' as a;
 
 .card-item {
   min-width: 250px;
@@ -66,7 +66,7 @@
     .card-item__discount {
       margin: 0;
       font-size: 14px;
-      color: green;
+      color: a.$clr-grey-4;
 
       .card-item__origin-price{
         text-decoration: line-through;

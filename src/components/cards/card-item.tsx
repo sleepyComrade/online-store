@@ -11,7 +11,7 @@ type CardItemProps = {
 
 export function CardItem({ product, style, onAddCartItem, onRemoveCartItem }: CardItemProps) {
   const btnContent = product.counter > 0 ? 'Remove from cart' : 'Add to cart';
-  const btnColor = product.counter > 0 ? 'crimson' : 'green';
+  const btnColor = product.counter > 0 ? 'crimson' : '#48647f';
 
   const title = product.data.title.charAt(0).toUpperCase() + product.data.title.slice(1);
   const originalPrice = ((product.data.price / (100 - product.data.discountPercentage)) * 100).toFixed(2);
