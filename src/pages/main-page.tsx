@@ -24,6 +24,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const [maxStockValue, setMaxStockValue] = useState('200');
   const [searched, setSearched] = useState('');
   const [sort, setSort] = useState(searchParams.get('sort') || '');
+  const [style, setStyle] = useState(searchParams.get('style') || 'grid');
 
   const queryCat = searchParams.getAll('cat') || [];
   const queryBrand = searchParams.getAll('brand') || [];
@@ -33,6 +34,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const queryMaxStock = searchParams.get('maxStock') || '200';
   const querySearch = searchParams.get('search') || '';
   const querySort = searchParams.get('sort') || '';
+  const queryStyle = searchParams.get('style') || 'grid';
 
   const qCat = JSON.stringify(queryCat);
   const qBrand = JSON.stringify(queryBrand);
@@ -127,9 +129,10 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     setMaxStockValue(queryMaxStock);
     setSearched(querySearch);
     setSort(querySort);
-  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch, querySort])
+    setStyle(queryStyle);
+  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch, querySort, queryStyle])
 
-   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch, querySort);
+  const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch, querySort);
 
   return (
     <>
@@ -148,8 +151,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minStock: minStockValue,
                               maxStock: maxStockValue,
                               search: searched,
-                              sort: sort});
-              // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
+                              sort: sort,
+                              style: style});
             }} onStockChange={(data: {min: string, max: string}) => {
               setSearchParams({brand: activeBrands,
                               cat: activeCategories,
@@ -158,14 +161,13 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minStock: data.min,
                               maxStock: data.max,
                               search: searched,
-                              sort: sort});
-              // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
+                              sort: sort,
+                              style: style});
             }} onStateChange={(data: boolean[]) => {
               // setCategoryState(data)
             }} onBrandStateChange={(data: boolean[]) => {
               // setBrandState(data);
             }} onBrandChange={(data: string[]) => {
-              // setActiveBrands(data);
               setSearchParams({brand: data,
                               cat: activeCategories,
                               minPrice: minPriceValue,
@@ -173,10 +175,9 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minStock: minStockValue,
                               maxStock: maxStockValue,
                               search: searched,
-                              sort: sort});
-              // setActiveItems(filterItems(productsItems, queryCat, data, queryMinPrice, queryMaxPrice));
+                              sort: sort,
+                              style: style});
             }} onCategoryChange={(data: string[]) => {
-              // setActiveCategories(data);
               setSearchParams({brand: activeBrands,
                               cat: data,
                               minPrice: minPriceValue,
@@ -184,8 +185,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               minStock: minStockValue,
                               maxStock: maxStockValue,
                               search: searched,
-                              sort: sort});
-              // setActiveItems(filterItems(productsItems, data, queryBrand, queryMinPrice, queryMaxPrice));
+                              sort: sort,
+                              style: style});
             }} activeItems={activeItems.map(item => item.data)}
                productsItems={productsItems.map(item => item.data)}
                categoryState={categoryState}
@@ -198,7 +199,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                maxStockValue={maxStockValue}
                products={productsItems} />
             <CardsBlock onSearchChange={(value: string) => {
-              // setSearched(value);
               setSearchParams({brand: activeBrands,
                 cat: activeCategories,
                 minPrice: minPriceValue,
@@ -206,9 +206,9 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                 minStock: minStockValue,
                 maxStock: maxStockValue,
                 search: value,
-                sort: sort});
+                sort: sort,
+                style: style});
             }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              // setSort(e.target.value);
               setSearchParams({brand: activeBrands,
                 cat: activeCategories,
                 minPrice: minPriceValue,
@@ -216,10 +216,22 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                 minStock: minStockValue,
                 maxStock: maxStockValue,
                 search: searched,
-                sort: e.target.value});
+                sort: e.target.value,
+                style: style});
+            }} onStyleChange={(view: string) => {
+              setSearchParams({brand: activeBrands,
+                cat: activeCategories,
+                minPrice: minPriceValue,
+                maxPrice: maxPriceValue,
+                minStock: minStockValue,
+                maxStock: maxStockValue,
+                search: searched,
+                sort: sort,
+                style: view});
             }} products={activeItems} total={activeItems.length}
             search={searched}
             sort={sort}
+            style={style}
             onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
             onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
           </div>

@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import grid from '../../assets/svg/grid.svg';
 import square from '../../assets/svg/square.svg';
 
-export function ViewSwitcher(props: { onStyleChange: (view:string) => void}) {
+type ViewSwitcherProps = {
+  onStyleChange: (view:string) => void;
+  style: string;
+}
+
+export function ViewSwitcher({ onStyleChange, style }: ViewSwitcherProps) {
   const iconsClassNames = {
     grid: {
       active: 'cards-nav__grid-icon cards-nav__switcher-icon-active',
@@ -13,14 +18,14 @@ export function ViewSwitcher(props: { onStyleChange: (view:string) => void}) {
       inactive: 'cards-nav__stack-icon cards-nav__switcher-icon-inactive'
     }
   }
-  const [gridStyle, setGridStyle] = useState(iconsClassNames.grid.active);
-  const [stackStyle, setStackStyle] = useState(iconsClassNames.stack.inactive);
+  const [gridStyle, setGridStyle] = useState(style === 'grid' ? iconsClassNames.grid.active : iconsClassNames.grid.inactive);
+  const [stackStyle, setStackStyle] = useState(style === 'grid' ? iconsClassNames.stack.inactive : iconsClassNames.stack.active);
 
   const handleGridClick = () => {
     if (gridStyle === iconsClassNames.grid.inactive) {
       setGridStyle(iconsClassNames.grid.active);
       setStackStyle(iconsClassNames.stack.inactive);
-      props.onStyleChange('grid');
+      onStyleChange('grid');
     };
   }
 
@@ -28,7 +33,7 @@ export function ViewSwitcher(props: { onStyleChange: (view:string) => void}) {
     if (stackStyle === iconsClassNames.stack.inactive) {
       setStackStyle(iconsClassNames.stack.active);
       setGridStyle(iconsClassNames.grid.inactive);
-      props.onStyleChange('stack');
+      onStyleChange('stack');
     };
   }
   return (

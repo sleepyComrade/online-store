@@ -11,15 +11,16 @@ type CardNavProps = {
   total: number;
   search: string;
   sort: string;
+  style: string;
 }
 
-export function CardsNav({ onStyleChange, onSortChange, total, onSearchChange, search, sort }: CardNavProps) {
+export function CardsNav({ onStyleChange, onSortChange, total, onSearchChange, search, sort, style }: CardNavProps) {
   return (
     <div className="cards-nav">
       <Sort sort={sort} onSortChange={onSortChange}></Sort>
       <Found total={total}></Found>
       <Search search={search} onSearchChange={onSearchChange}></Search>
-      <ViewSwitcher onStyleChange={onStyleChange}></ViewSwitcher>
+      <ViewSwitcher style={style} onStyleChange={onStyleChange}></ViewSwitcher>
     </div>
   );
 }
