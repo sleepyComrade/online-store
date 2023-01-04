@@ -23,7 +23,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const [minStockValue, setMinStockValue] = useState('0');
   const [maxStockValue, setMaxStockValue] = useState('200');
   const [searched, setSearched] = useState('');
-  const [sort, setSort] = useState({sorted: ''});
+  const [sort, setSort] = useState(searchParams.get('sort') || '');
 
   const queryCat = searchParams.getAll('cat') || [];
   const queryBrand = searchParams.getAll('brand') || [];
@@ -32,6 +32,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const queryMinStock = searchParams.get('minStock') || '0';
   const queryMaxStock = searchParams.get('maxStock') || '200';
   const querySearch = searchParams.get('search') || '';
+  const querySort = searchParams.get('sort') || '';
 
   const qCat = JSON.stringify(queryCat);
   const qBrand = JSON.stringify(queryBrand);
@@ -43,8 +44,9 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                       maxPrice: string,
                       minStock: string,
                       maxStock: string,
-                      search: string) => {
-    const sortInfo = sort.sorted.split('-');
+                      search: string,
+                      sort: string) => {
+    const sortInfo = sort.split('-');
     const filteredItems = items
     .filter(
       (product) =>
@@ -123,10 +125,11 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     setMaxValue(queryMaxPrice);  
     setMinStockValue(queryMinStock);
     setMaxStockValue(queryMaxStock);
-    setSearched(querySearch)
-  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch])
+    setSearched(querySearch);
+    setSort(querySort);
+  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch, querySort])
 
-   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch);
+   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch, querySort);
 
   return (
     <>
@@ -144,7 +147,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               maxPrice: data.max,
                               minStock: minStockValue,
                               maxStock: maxStockValue,
-                              search: searched});
+                              search: searched,
+                              sort: sort});
               // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
             }} onStockChange={(data: {min: string, max: string}) => {
               setSearchParams({brand: activeBrands,
@@ -153,7 +157,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               maxPrice: maxPriceValue,
                               minStock: data.min,
                               maxStock: data.max,
-                              search: searched});
+                              search: searched,
+                              sort: sort});
               // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
             }} onStateChange={(data: boolean[]) => {
               // setCategoryState(data)
@@ -167,7 +172,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               maxPrice: maxPriceValue,
                               minStock: minStockValue,
                               maxStock: maxStockValue,
-                              search: searched});
+                              search: searched,
+                              sort: sort});
               // setActiveItems(filterItems(productsItems, queryCat, data, queryMinPrice, queryMaxPrice));
             }} onCategoryChange={(data: string[]) => {
               // setActiveCategories(data);
@@ -177,7 +183,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                               maxPrice: maxPriceValue,
                               minStock: minStockValue,
                               maxStock: maxStockValue,
-                              search: searched});
+                              search: searched,
+                              sort: sort});
               // setActiveItems(filterItems(productsItems, data, queryBrand, queryMinPrice, queryMaxPrice));
             }} activeItems={activeItems.map(item => item.data)}
                productsItems={productsItems.map(item => item.data)}
@@ -198,11 +205,21 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                 maxPrice: maxPriceValue,
                 minStock: minStockValue,
                 maxStock: maxStockValue,
-                search: value});
+                search: value,
+                sort: sort});
             }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              setSort({sorted: e.target.value});
+              // setSort(e.target.value);
+              setSearchParams({brand: activeBrands,
+                cat: activeCategories,
+                minPrice: minPriceValue,
+                maxPrice: maxPriceValue,
+                minStock: minStockValue,
+                maxStock: maxStockValue,
+                search: searched,
+                sort: e.target.value});
             }} products={activeItems} total={activeItems.length}
             search={searched}
+            sort={sort}
             onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
             onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
           </div>
