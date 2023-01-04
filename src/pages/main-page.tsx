@@ -20,6 +20,8 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
   const [minPriceValue, setMinValue] = useState('0');
   const [maxPriceValue, setMaxValue] = useState('2000');
+  const [minStockValue, setMinStockValue] = useState('0');
+  const [maxStockValue, setMaxStockValue] = useState('200');
   const [searched, setSearched] = useState('');
   const [sort, setSort] = useState({sorted: ''});
 
@@ -27,11 +29,19 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const queryBrand = searchParams.getAll('brand') || [];
   const queryMinPrice = searchParams.get('minPrice') || '0';
   const queryMaxPrice = searchParams.get('maxPrice') || '2000';
+  const queryMinStock = searchParams.get('minStock') || '0';
+  const queryMaxStock = searchParams.get('maxStock') || '200';
 
   const qCat = JSON.stringify(queryCat);
   const qBrand = JSON.stringify(queryBrand);
     
-  const filterItems = (items: IProductItem[], cat: string[], brand: string[], minPrice: string, maxPrice: string) => {
+  const filterItems = (items: IProductItem[],
+                      cat: string[],
+                      brand: string[],
+                      minPrice: string,
+                      maxPrice: string,
+                      minStock: string,
+                      maxStock: string) => {
     const sortInfo = sort.sorted.split('-');
     const filteredItems = items
     .filter(
@@ -46,6 +56,11 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
       (product) =>
       product.data.price >= +minPrice && product.data.price <= +maxPrice ||
       product.data.price <= +minPrice && product.data.price >= +maxPrice
+    )
+    .filter(
+      (product) =>
+      product.data.stock >= +minStock && product.data.stock <= +maxStock ||
+      product.data.stock <= +minStock && product.data.stock >= +maxStock
     )
     .filter(
       (product) =>
@@ -98,10 +113,12 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     setBrandState(brands.map((brand: string) => queryBrand.includes(brand)));
     setActiveBrands(brands.filter((brand: string) => queryBrand.includes(brand)));
     setMinValue(queryMinPrice);
-    setMaxValue(queryMaxPrice);    
-  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice])
+    setMaxValue(queryMaxPrice);  
+    setMinStockValue(queryMinStock);
+    setMaxStockValue(queryMaxStock);
+  }, [productsItems, qCat, qBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock])
 
-   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice);
+   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock);
 
   return (
     <>
@@ -113,7 +130,20 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
             }} onMaxChange={(value: string) => {
               // setMaxValue(value);
             }} onPriceChange={(data: {min: string, max: string}) => {
-              setSearchParams({brand: activeBrands, cat: activeCategories, minPrice: data.min, maxPrice: data.max});
+              setSearchParams({brand: activeBrands,
+                              cat: activeCategories,
+                              minPrice: data.min,
+                              maxPrice: data.max,
+                              minStock: minStockValue,
+                              maxStock: maxStockValue});
+              // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
+            }} onStockChange={(data: {min: string, max: string}) => {
+              setSearchParams({brand: activeBrands,
+                              cat: activeCategories,
+                              minPrice: minPriceValue,
+                              maxPrice: maxPriceValue,
+                              minStock: data.min,
+                              maxStock: data.max});
               // setActiveItems(filterItems(productsItems, queryCat, queryBrand, data.min, data.max));
             }} onStateChange={(data: boolean[]) => {
               // setCategoryState(data)
@@ -121,11 +151,21 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
               // setBrandState(data);
             }} onBrandChange={(data: string[]) => {
               // setActiveBrands(data);
-              setSearchParams({brand: data, cat: activeCategories, minPrice: minPriceValue, maxPrice: maxPriceValue});
+              setSearchParams({brand: data,
+                              cat: activeCategories,
+                              minPrice: minPriceValue,
+                              maxPrice: maxPriceValue,
+                              minStock: minStockValue,
+                              maxStock: maxStockValue});
               // setActiveItems(filterItems(productsItems, queryCat, data, queryMinPrice, queryMaxPrice));
             }} onCategoryChange={(data: string[]) => {
               // setActiveCategories(data);
-              setSearchParams({brand: activeBrands, cat: data, minPrice: minPriceValue, maxPrice: maxPriceValue});
+              setSearchParams({brand: activeBrands,
+                              cat: data,
+                              minPrice: minPriceValue,
+                              maxPrice: maxPriceValue,
+                              minStock: minStockValue,
+                              maxStock: maxStockValue});
               // setActiveItems(filterItems(productsItems, data, queryBrand, queryMinPrice, queryMaxPrice));
             }} activeItems={activeItems.map(item => item.data)}
                productsItems={productsItems.map(item => item.data)}
@@ -135,12 +175,15 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                brands={brands}
                minPriceValue={minPriceValue}
                maxPriceValue={maxPriceValue}
+               minStockValue={minStockValue}
+               maxStockValue={maxStockValue}
                products={productsItems} />
             <CardsBlock onSearchChange={(value: string) => {
               setSearched(value);
             }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               setSort({sorted: e.target.value});
-            }} products={activeItems} total={activeItems.length} onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
+            }} products={activeItems} total={activeItems.length}
+            onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
             onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
           </div>
         </div>

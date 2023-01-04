@@ -15,10 +15,13 @@ type FilterSectionProps = {
   onStateChange: (data: boolean[]) => void;
   onBrandStateChange: (data: boolean[]) => void;
   onPriceChange: (data: { min: string; max: string }) => void;
+  onStockChange: (data: { min: string; max: string }) => void;
   productsItems: IProductData[];
   activeItems: IProductData[];
   minPriceValue: string;
   maxPriceValue: string;
+  minStockValue: string;
+  maxStockValue: string;
   onMinChange: (value: string) => void;
   onMaxChange: (value: string) => void;
   products: Array<IProductItem>;
@@ -34,10 +37,13 @@ export default function FiltersSection({
   onBrandStateChange,
   onStateChange,
   onPriceChange,
+  onStockChange,
   productsItems,
   activeItems,
   minPriceValue,
   maxPriceValue,
+  minStockValue,
+  maxStockValue,
   onMinChange,
   onMaxChange
 }: FilterSectionProps) {
@@ -64,8 +70,8 @@ export default function FiltersSection({
         prop={'brand'}
         activeItems={activeItems}
       />
-      <FiltersBlockRange onMinChange={onMinChange} onMaxChange={onMaxChange} minValue={minPriceValue} maxValue={maxPriceValue} onChange={onPriceChange} filterTitle={Filters.Price} />
-      <FiltersBlockRange onMinChange={onMinChange} onMaxChange={onMaxChange} minValue={minPriceValue} maxValue={maxPriceValue} onChange={onPriceChange} filterTitle={Filters.Stock} />
+      <FiltersBlockRange maxLimit={2000} onMinChange={onMinChange} onMaxChange={onMaxChange} minValue={minPriceValue} maxValue={maxPriceValue} onChange={onPriceChange} filterTitle={Filters.Price} />
+      <FiltersBlockRange maxLimit={200} onMinChange={onMinChange} onMaxChange={onMaxChange} minValue={minStockValue} maxValue={maxStockValue} onChange={onStockChange} filterTitle={Filters.Stock} />
     </section>
   );
 }
