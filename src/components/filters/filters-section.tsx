@@ -24,6 +24,7 @@ type FilterSectionProps = {
   maxStockValue: string;
   onMinChange: (value: string) => void;
   onMaxChange: (value: string) => void;
+  onReset: () => void;
   products: Array<IProductItem>;
 };
 
@@ -45,11 +46,12 @@ export default function FiltersSection({
   minStockValue,
   maxStockValue,
   onMinChange,
-  onMaxChange
+  onMaxChange,
+  onReset
 }: FilterSectionProps) {
   return (
     <section className="filters">
-      <FiltersButtons />
+      <FiltersButtons onReset={onReset} />
       <FiltersBlockCheckbox
         onStateChange={onStateChange}
         categoryState={categoryState}
