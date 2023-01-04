@@ -17,6 +17,16 @@
     .header__payment-wrap {
       @include a.flex();
       gap: 20px;
+
+      .header__total {
+        font-size: 20px;
+        font-weight: bold;
+
+        span {
+          color: crimson;
+        }
+      }
+
     }
   
     .header__cart-wrap {

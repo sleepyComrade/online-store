@@ -1,13 +1,18 @@
-@use '../abstracts/mixins' as a;
+@use '../abstracts' as a;
 
 .cart {
-  width: 65%;
+  width: 70%;
   border: 1px dashed crimson;
 }
 .cart__header {
   @include a.flex(space-between);
   padding: 10px 20px;
   border-bottom: 1px solid crimson;
+}
+
+.cart__title {
+  color:  a.$clr-grey-2;
+  font-size: 30px;
 }
 
 .cart__input-number {
@@ -17,7 +22,7 @@
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid rgb(197, 197, 197);
+  border: 1px solid a.$clr-grey-4;
   border-radius: 5px;
   -moz-appearance: textfield;
 }
@@ -28,13 +33,15 @@
 }
 
 .cart__pagination button {
-  width: 25px;
+  width: 40px;
   height: 30px;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid rgb(197, 197, 197);
+  color:#fff;
+  border: 1px solid a.$clr-grey-4;
   border-radius: 5px;
+  background-color: a.$clr-grey-4;
 }
 
 .cart__page-count {
@@ -63,7 +70,7 @@
 }
 
 .cart-item__number {
-  width: 5%;
+  width: 6%;
   @include a.flex();
   font-size: 20px;
   font-weight: bold;
@@ -74,7 +81,8 @@
   width: 40px;
   height: 40px;
   display: inline-block;
-  border: 1px dashed crimson;
+  background-color:  a.$clr-grey-4;
+  color: #fff;
   border-radius: 50%;
   line-height: 38px;
   text-align: center;
@@ -101,7 +109,7 @@
   width: 70%;
   min-height: 240px;
   padding: 0 15px;
-  background-color: rgb(234, 234, 234);
+  background-color: a.$clr-primary-11;
 }
 
 .cart-item__title {
@@ -109,6 +117,7 @@
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  color: a.$clr-grey-2;
   background-color: #fff;
 }
 
@@ -131,19 +140,21 @@
 }
 
 .cart-item__price-block {
-  width: 25%;
-  padding: 10px 15px;
+  width: 24%;
+  padding: 10px;
   text-align: center;
 }
 
 .cart-item__counter-button {
-  width: 25px;
+  width: 30px;
   height: 30px;
   font-size: 26px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid rgb(197, 197, 197);
+  border: 1px solid a.$clr-grey-4;
   border-radius: 5px;
+  background-color: a.$clr-grey-4;
+  color: #fff;
 }
 
 .cart-item__counter-span {

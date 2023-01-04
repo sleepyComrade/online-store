@@ -1,9 +1,9 @@
-@use '../abstracts/mixins' as a;
+@use '../abstracts' as a;
 
 .promo-block {
   position: fixed;
   right: 50px;
-  width: 30%;
+  width: 27%;
   border: 1px dashed crimson;
   text-align: center;
 }
@@ -14,9 +14,14 @@
   background-color: #fff;
 }
 
+.promo-block__title {
+  color:  a.$clr-grey-2;
+  font-size: 30px;
+}
+
 .promo-block__calculation {
   padding: 10px 20px 20px;
-  background-color: rgb(234, 234, 234);
+  background-color: a.$clr-primary-11;
 }
 
 .promo-block__products-count,
@@ -94,9 +99,10 @@
   margin-left: 10px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid rgb(197, 197, 197);
+  color: #fff;
+  border: 1px solid a.$clr-grey-4;
   border-radius: 5px;
-  background-color: rgb(234, 234, 234);
+  background-color: a.$clr-grey-4;
 }
 
 .non-display {
