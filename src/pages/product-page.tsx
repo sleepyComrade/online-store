@@ -4,6 +4,7 @@ import { Modal } from "../components/payment-form/modal";
 import { PaymentForm } from "../components/payment-form/payment-form";
 import { ICardStyle, IProductItem } from "../interfaces";
 import NotFoundPage from "./404-page";
+import ImagesGallery from "../components/images-gallery/images-gallery";
 
 type ProductPageProps = {
   products: Array<IProductItem>;
@@ -14,12 +15,13 @@ type ProductPageProps = {
 export default function ProductPage({ products, isModal, setIsModal }: ProductPageProps) {
   const params = useParams();
   const product = products.find((product) => product.data.id === Number(params.id));
-
+ 
   if (!product) {
     return <NotFoundPage />;
   }
   console.log(product);
-  const { title, category, brand, images, description, discountPercentage, rating, stock, price } = product.data;
+  const { title, category, brand, description, discountPercentage, rating, stock, price, images } = product.data;
+  
   const btnContent = product.counter > 0 ? 'Remove from cart' : 'Add to cart';
   const btnColor = product.counter > 0 ? 'crimson' : '#48647f';
 
@@ -38,7 +40,9 @@ export default function ProductPage({ products, isModal, setIsModal }: ProductPa
           <div className="product__header">
             <h2 className="product__title">{title}</h2></div>
           <div className="product__info">
-            <div className="product__images"></div>
+            <div className="product__images">
+              <ImagesGallery images={images}  />
+            </div>
             <div className="product__full-info">
               <ul className="product__full-info-list">
                 <li className="product__full-info-item"><p>Rating: <span>{rating}</span></p></li>

@@ -31,8 +31,12 @@
 }
 
 .product__header {
-  text-align: center;
+  text-align: center;  
   border-bottom: 1px solid crimson;
+}
+
+.product__title {
+  color: crimson;
 }
 
 .product__info {
@@ -40,7 +44,7 @@
 }
 
 .product__images {
-  width: 35%;
+  width: 40%;
 }
 
 .product__full-info {
@@ -68,7 +72,7 @@
 }
 
 .prodict__buy-block {
-  width: 25%;
+  width: 20%;
   padding: 10px 15px;
   display: flex;
   flex-direction: column;
