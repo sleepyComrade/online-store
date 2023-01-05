@@ -6,10 +6,11 @@ type FilterRangeProps = {
   maxValue: string;
   onMinChange: (value: string) => void;
   onMaxChange: (value: string) => void;
+  maxLmt: number;
 }
 
-export default function FilterRange({ onChange, minValue, maxValue, onMinChange, onMaxChange }: FilterRangeProps) {
-  const maxLimit = 2000;
+export default function FilterRange({ onChange, minValue, maxValue, onMinChange, onMaxChange, maxLmt }: FilterRangeProps) {
+  const maxLimit = maxLmt;
   const minLimit = 0;
 
   const left = (+minValue - minLimit) / (maxLimit - minLimit) * 100 + '%';
