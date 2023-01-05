@@ -85,7 +85,9 @@ export function App() {
         <Route
           path={AppRoute.Product}
           element={
-            <ProductPage />
+            <ProductPage products={productsItems}
+              isModal={isModal}
+              setIsModal={setIsModal} />
           }
         />
         <Route
