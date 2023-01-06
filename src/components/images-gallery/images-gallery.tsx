@@ -5,7 +5,7 @@ type ImageItemProps = {
   onPreviewClick: (src: string) => void;
 }
 
-function ImageItem({ src, onPreviewClick }: ImageItemProps): JSX.Element {
+function ImageItem({ src, onPreviewClick }: ImageItemProps) {
   return (
     <div className="image-item__wrapper">
       <img className="image-item__image" src={src} onClick={() => onPreviewClick(src)} />

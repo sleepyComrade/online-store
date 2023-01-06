@@ -2,6 +2,7 @@
 
 .main-container--product-page {
   flex-direction: column;
+  padding: 0;
 }
 
 .product__breadcrumbs {
@@ -40,16 +41,17 @@
 }
 
 .product__info {
-  @include a.flex(space-between);
+  @include a.flex(space-between, stretch);
+  border-top: 1px dashed crimson;
 }
 
 .product__images {
-  width: 40%;
+  width: 100%;
 }
 
 .product__full-info {
-  width: 40%;
-  padding: 10px 15px;
+  width: 80%;
+  padding: 10px 20px;
   background-color: a.$clr-primary-11;
 }
 
@@ -60,10 +62,11 @@
 
 .product__full-info-item {
   list-style: none;
-  text-align: center;
+  text-align: left;
 }
 
 .product__full-info-item p {
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -78,10 +81,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-left: 1px dashed crimson;
 }
 
 .product__price {
-  font-size: 22px;
+  font-size: 36px;
   font-weight: bold;
   color: crimson;
   margin: 20px 0;

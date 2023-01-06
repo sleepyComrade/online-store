@@ -5,8 +5,10 @@
 }
 
 .image-gallery__previews {
-  width: 20%;
+  width: 12%;
   padding: 10px;
+  max-height: 450px;
+  overflow-y: auto;
 }
 
 .image-item__image {
@@ -21,6 +23,31 @@
   }
 }
 
+/* Работает в Chrome, Opera и Safari */
+.image-gallery__previews::-webkit-scrollbar {
+  width: 10px;
+}
+
+.image-gallery__previews::-webkit-scrollbar-track {
+  background: a.$clr-primary-11;
+  border-radius: 10px;
+}
+
+.image-gallery__previews::-webkit-scrollbar-thumb {
+  width: 8px;
+  height: 10%;
+  background: a.$clr-grey-4;
+  border: 1px solid a.$clr-primary-11;;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Работает в Firefox */
+.image-gallery__previews {
+  scrollbar-width: thin;
+  scrollbar-color: a.$clr-grey-4 a.$clr-primary-11;;
+}
+
 .image-gallery__big-image-wrapper {
   width: 80%;
   padding: 20px;
@@ -30,7 +57,7 @@
 .image-gallery__big-image {
   width: 100%;
   height: auto;
-  max-height: 350px;
+  max-height: 450px;
   object-fit: contain;
   margin: 0 auto;
 }
