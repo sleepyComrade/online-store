@@ -9,22 +9,38 @@ import { IProductData, IProductItem, IPromoCode } from "./interfaces";
 import { Header } from "./components/header/header";
 import { Footer } from "./components/footer/footer";
 
+interface IStorageItem {
+  id: number;
+  counter: number;
+}
+
 export function App() {
   const [productsItems, setProductsItems] = useState<Array<IProductItem>>([]);
 
-  useEffect(() => {
+  useEffect(() => {    
     fetch('https://dummyjson.com/products?limit=100')
       .then(res => res.json())
-      .then((data: { products: Array<IProductData> }) => setProductsItems(data.products.map(item => {
+      .then((data: { products: Array<IProductData> }) => {
+        const loadedItems = localStorage.getItem('a');
+        const parsedItems: Array<IStorageItem> = loadedItems ? JSON.parse(loadedItems) : []; 
+        setProductsItems(data.products.map(item => {
         return {
-          counter: 0,
+          counter: parsedItems.find(it => it.id === item.id) ?. counter || 0,
           data: item
         }
-      })))
+      }))
+    })
   }, []);
+
 
   const cartItems = productsItems.filter(item => item.counter > 0);
   const [isModal, setIsModal] = useState(false);  // добавить также в ProductPage
+
+  useEffect(() => {
+    window.onbeforeunload = () => {
+      localStorage.setItem('a', JSON.stringify(cartItems.map(it => ({id: it.data.id, counter: it.counter}))));
+    }
+  }, [cartItems]);
 
   {/*состояние, когда введен конкретный код или нет*/ }
   const [promoItem, setPromoItem] = useState<null | IPromoCode>(null);
