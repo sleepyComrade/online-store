@@ -14,31 +14,53 @@ interface IStorageItem {
   counter: number;
 }
 
+class StorageItem {
+  id: number;
+  counter: number;
+  constructor(data: IStorageItem) {
+    if(!(data !== null && typeof data === 'object')) throw new Error();
+    if(typeof data.id !== 'number') throw new Error();
+    this.id = data.id;
+
+    if(typeof data.counter !== 'number') throw new Error();
+    this.counter = data.counter;
+  }
+}
+
 export function App() {
   const [productsItems, setProductsItems] = useState<Array<IProductItem>>([]);
+  const localStorageKey = 'a';
 
   useEffect(() => {    
     fetch('https://dummyjson.com/products?limit=100')
       .then(res => res.json())
       .then((data: { products: Array<IProductData> }) => {
-        const loadedItems = localStorage.getItem('a');
-        const parsedItems: Array<IStorageItem> = loadedItems ? JSON.parse(loadedItems) : []; 
+        const loadedItems = localStorage.getItem(localStorageKey);
+        const parsedItems: Array<IStorageItem> = loadedItems && Array.isArray(loadedItems) ? JSON.parse(loadedItems) : []; 
+        const validated: Array<StorageItem> = parsedItems.map(it => {
+          try {
+            const item = new StorageItem(it);
+            return item;
+          }
+          catch(e) {
+            return null;
+          }
+        }).filter(it => it !== null) as Array<StorageItem>;
         setProductsItems(data.products.map(item => {
         return {
-          counter: parsedItems.find(it => it.id === item.id) ?. counter || 0,
+          counter: validated.find(it => it.id === item.id) ?. counter || 0,
           data: item
         }
       }))
     })
   }, []);
 
-
   const cartItems = productsItems.filter(item => item.counter > 0);
   const [isModal, setIsModal] = useState(false);  // добавить также в ProductPage
 
   useEffect(() => {
     window.onbeforeunload = () => {
-      localStorage.setItem('a', JSON.stringify(cartItems.map(it => ({id: it.data.id, counter: it.counter}))));
+      localStorage.setItem(localStorageKey, JSON.stringify(cartItems.map(it => ({id: it.data.id, counter: it.counter}))));
     }
   }, [cartItems]);
 
