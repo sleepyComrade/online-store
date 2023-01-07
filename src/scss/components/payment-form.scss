@@ -31,6 +31,14 @@
       min-width: 165px;
       align-self: flex-start;
     }
+
+    .payment-form__help-msg-incorrect {
+      color:rgb(209, 4, 4);
+    }
+
+    .payment-form__help-msg-correct {
+      color:rgb(36, 181, 48);
+    }
   }
 }
 

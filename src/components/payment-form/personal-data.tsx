@@ -11,9 +11,19 @@ type PersonalDataProps = {
   personalStates: IPersonalData;
   helpMessages: IPersonalData;
   onBlur: (value: string, regex: RegExp, valueName: string, index: number) => void;
+  messageStates: IPersonalData;
 }
 
-export function PersonalData({onChange, initial, correctInit, regexes, onStateChange, onMessageChange, personalStates, helpMessages, onBlur}: PersonalDataProps) {
+export function PersonalData({onChange,
+                            initial,
+                            correctInit,
+                            regexes,
+                            onStateChange,
+                            onMessageChange,
+                            personalStates,
+                            helpMessages,
+                            onBlur,
+                            messageStates}: PersonalDataProps) {
   const personalIsCorrect = {...correctInit};
 
   const nameBlurHandler = () => onBlur(initial.name, regexes.name, 'name', 0);
@@ -65,7 +75,7 @@ export function PersonalData({onChange, initial, correctInit, regexes, onStateCh
             type="text"
             placeholder="Name"
           />
-          <p className="payment-form__help-msg">{helpMessages.name}</p>
+          <p className={messageStates.name}>{helpMessages.name}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
@@ -76,7 +86,7 @@ export function PersonalData({onChange, initial, correctInit, regexes, onStateCh
             type="text"
             placeholder="Phone number"
           />
-          <p className="payment-form__help-msg">{helpMessages.phone}</p>
+          <p className={messageStates.phone}>{helpMessages.phone}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
@@ -87,7 +97,7 @@ export function PersonalData({onChange, initial, correctInit, regexes, onStateCh
             type="text"
             placeholder="Delivery address"
           />
-          <p className="payment-form__help-msg">{helpMessages.address}</p>
+          <p className={messageStates.address}>{helpMessages.address}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
@@ -98,7 +108,7 @@ export function PersonalData({onChange, initial, correctInit, regexes, onStateCh
             type="text"
             placeholder="E-mail"
           />
-          <p className="payment-form__help-msg">{helpMessages.email}</p>
+          <p className={messageStates.email}>{helpMessages.email}</p>
         </div>
       </div>
   );

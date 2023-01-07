@@ -16,6 +16,12 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
     correct: "payment-form__input payment-form__input_correct",
   };
 
+  const inputMessageState = {
+    initial: "payment-form__help-msg",
+    incorrect: "payment-form__help-msg payment-form__help-msg-incorrect",
+    correct: "payment-form__help-msg payment-form__help-msg-correct",
+  }
+
   const [personalData, setPersonalData] = useState({name: '', phone: '', address: '', email: ''});
   const [personalIsCorrect, setPersonalCorrect] = useState({nameIsCorrect: false, phoneIsCorrect: false, addressIsCorrect: false, emailIsCorrect: false});
   const [cardData, setCardData] = useState({holder: '', number: '', date: '', cvv: ''});
@@ -26,6 +32,7 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
 
   const [helpMessages, setHelpMessage] = useState({name: 'Enter your name', phone: 'Enter your phone number', address: 'Enter your address', email: 'Enter your email'});
   const [personalStates, setPersonalStates] = useState({name: inputState.initial, phone: inputState.initial, address: inputState.initial, email: inputState.initial});
+  const [messageStates, setMessageStates] = useState({name: inputMessageState.initial, phone: inputMessageState.initial, address: inputMessageState.initial, email: inputMessageState.initial});
 
   // Personal Data consts
 
@@ -65,12 +72,15 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
     if (regex.test(name.trim())) {
       setPersonalByValueName(valueName, helpMessages, setHelpMessage, 'Correct');
       setPersonalByValueName(valueName, personalStates, setPersonalStates, inputState.correct);
+      setPersonalByValueName(valueName, messageStates, setMessageStates, inputMessageState.correct);
     } else if (name.trim() === "") {
       setPersonalByValueName(valueName, helpMessages, setHelpMessage, `${inputPersonalNames[index]} field must be filled`);
       setPersonalByValueName(valueName, personalStates, setPersonalStates, inputState.incorrect);
+      setPersonalByValueName(valueName, messageStates, setMessageStates, inputMessageState.incorrect);
     } else {
       setPersonalByValueName(valueName, helpMessages, setHelpMessage, `${inputPersonalNames[index]} field is incorrect`);
       setPersonalByValueName(valueName, personalStates, setPersonalStates, inputState.incorrect);
+      setPersonalByValueName(valueName, messageStates, setMessageStates, inputMessageState.incorrect);
     }
   };
 
@@ -80,23 +90,30 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
     valueName: string,
     index: number,
     personalMessageData: string[],
-    personaStateData: string[]
+    personaStateData: string[],
+    messageStateData: string[]
   ) => {
     if (regex.test(name.trim())) {
       setPersonalByValueName(valueName, helpMessages, setHelpMessage, 'Correct');
       setPersonalByValueName(valueName, personalStates, setPersonalStates, inputState.correct);
+      setPersonalByValueName(valueName, messageStates, setMessageStates, inputMessageState.correct);
       personalMessageData.push('Correct');
       personaStateData.push(inputState.correct);
+      messageStateData.push(inputMessageState.correct);
     } else if (name.trim() === "") {
       setPersonalByValueName(valueName, helpMessages, setHelpMessage, `${inputPersonalNames[index]} field must be filled`);
       setPersonalByValueName(valueName, personalStates, setPersonalStates, inputState.incorrect);
+      setPersonalByValueName(valueName, messageStates, setMessageStates, inputMessageState.incorrect);
       personalMessageData.push(`${inputPersonalNames[index]} field must be filled`);
       personaStateData.push(inputState.incorrect);
+      messageStateData.push(inputMessageState.incorrect);
     } else {
       setPersonalByValueName(valueName, helpMessages, setHelpMessage, `${inputPersonalNames[index]} field is incorrect`);
       setPersonalByValueName(valueName, personalStates, setPersonalStates, inputState.incorrect);
+      setPersonalByValueName(valueName, messageStates, setMessageStates, inputMessageState.incorrect);
       personalMessageData.push(`${inputPersonalNames[index]} field is incorrect`);
       personaStateData.push(inputState.incorrect);
+      messageStateData.push(inputMessageState.incorrect);
     }
   };
 
@@ -182,14 +199,16 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
 
     const personalMessageData: string[] = [];
     const personaStateData: string[] = [];
+    const messageStateData: string[] = [];
 
-    setPersonalStatesOnSubmit(personalData.name, personalRegexes.name, 'name', 0, personalMessageData, personaStateData);
-    setPersonalStatesOnSubmit(personalData.phone, personalRegexes.phone, 'phone', 1, personalMessageData, personaStateData);
-    setPersonalStatesOnSubmit(personalData.address, personalRegexes.address, 'address', 2, personalMessageData, personaStateData);
-    setPersonalStatesOnSubmit(personalData.email, personalRegexes.email, 'email', 3, personalMessageData, personaStateData);
+    setPersonalStatesOnSubmit(personalData.name, personalRegexes.name, 'name', 0, personalMessageData, personaStateData, messageStateData);
+    setPersonalStatesOnSubmit(personalData.phone, personalRegexes.phone, 'phone', 1, personalMessageData, personaStateData, messageStateData);
+    setPersonalStatesOnSubmit(personalData.address, personalRegexes.address, 'address', 2, personalMessageData, personaStateData, messageStateData);
+    setPersonalStatesOnSubmit(personalData.email, personalRegexes.email, 'email', 3, personalMessageData, personaStateData, messageStateData);
 
     setHelpMessage({name: personalMessageData[0], phone: personalMessageData[1], address: personalMessageData[2], email: personalMessageData[3]});
     setPersonalStates({name: personaStateData[0], phone: personaStateData[1], address: personaStateData[2], email: personaStateData[3]});
+    setMessageStates({name: messageStateData[0], phone: messageStateData[1], address: messageStateData[2], email: messageStateData[3]});
 
     const cardErrData: string[] = [];
     const cardStateData: string[] = [];
@@ -219,9 +238,11 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
           setPersonalDataStates(value, regex, valueName, index);
         }} onStateChange={(valueName: string) => {
           setPersonalByValueName(valueName, personalStates, setPersonalStates, inputState.initial);
+          setPersonalByValueName(valueName, messageStates, setMessageStates, inputMessageState.initial);
         }} onMessageChange={(valueName: string, index: number) => {
           setPersonalByValueName(valueName, helpMessages, setHelpMessage, `Enter your ${inputPersonalNames[index].toLowerCase()}`);
         }} personalStates={personalStates}
+        messageStates={messageStates}
         helpMessages={helpMessages}
         initial={personalData}
         correctInit={personalIsCorrect}
