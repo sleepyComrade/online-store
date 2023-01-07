@@ -5,14 +5,17 @@ import { PaymentForm } from "../components/payment-form/payment-form";
 import { ICardStyle, IProductItem } from "../interfaces";
 import NotFoundPage from "./404-page";
 import ImagesGallery from "../components/images-gallery/images-gallery";
+import ButtonAddToCart from "../components/buttons/button-add-to-cart";
 
 type ProductPageProps = {
   products: Array<IProductItem>;
   isModal: boolean;
   setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  onAddCartItem: (productItem: IProductItem) => void;
+  onRemoveCartItem: (productItem: IProductItem) => void;
 }
 
-export default function ProductPage({ products, isModal, setIsModal }: ProductPageProps) {
+export default function ProductPage({ products, isModal, setIsModal, onAddCartItem, onRemoveCartItem }: ProductPageProps) {
   const params = useParams();
   const product = products.find((product) => product.data.id === Number(params.id));
 
@@ -60,8 +63,11 @@ export default function ProductPage({ products, isModal, setIsModal }: ProductPa
             </div>
             <div className="prodict__buy-block">
               <p className="product__price">${new Intl.NumberFormat("en").format(price)}</p>
-              <button className="btn product__button product__button--add" style={{ background: `${btnColor}` }}>
-              </button>
+              <ButtonAddToCart style={'card-item__btn'}
+                product={product}
+                onAddCartItem={(productItem) => { onAddCartItem(productItem) }}
+                onRemoveCartItem={(productItem) => { onRemoveCartItem(productItem) }}
+              />              
               <button className="btn promo-block__button promo-block__button--buy" onClick={() => setIsModal(true)}>Buy now</button>
             </div>
           </div>

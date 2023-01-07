@@ -2,6 +2,7 @@ import React from "react";
 import { ICardStyle, IProductItem } from "../../interfaces";
 import star from "../../assets/svg/star.svg";
 import { Link } from "react-router-dom";
+import ButtonAddToCart from '../buttons/button-add-to-cart';
 
 type CardItemProps = {
   product: IProductItem;
@@ -11,14 +12,12 @@ type CardItemProps = {
 }
 
 export function CardItem({ product, style, onAddCartItem, onRemoveCartItem }: CardItemProps) {
-  const btnContent = product.counter > 0 ? 'Remove from cart' : 'Add to cart';
-  const btnColor = product.counter > 0 ? 'crimson' : '#48647f';
 
   const title = product.data.title.charAt(0).toUpperCase() + product.data.title.slice(1);
   const originalPrice = ((product.data.price / (100 - product.data.discountPercentage)) * 100).toFixed(2);
   return (
     <div className={style.item}>
-      <Link to={`/product/${product.data.id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+      <Link to={`/product/${product.data.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <div
           className={style.image}
           style={{ backgroundImage: `url(${product.data.images[0]})` }}
@@ -44,18 +43,11 @@ export function CardItem({ product, style, onAddCartItem, onRemoveCartItem }: Ca
           </div>
         </div>
       </Link>
-      <button style={{ background: `${btnColor}` }}
-        onClick={
-          () => {
-            if (product.counter > 0) {
-              onRemoveCartItem(product);
-            } else {
-              onAddCartItem(product);
-            }
-          }
-        }
-        className={style.button}>{btnContent}
-      </button>
+      <ButtonAddToCart style={style.button} 
+        product={product}         
+        onAddCartItem={(productItem) => { onAddCartItem(productItem) }}
+        onRemoveCartItem={(productItem) => { onRemoveCartItem(productItem) }}
+      />
     </div >
 
   );

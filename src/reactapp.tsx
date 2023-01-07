@@ -125,7 +125,20 @@ export function App() {
           element={
             <ProductPage products={productsItems}
               isModal={isModal}
-              setIsModal={setIsModal} />
+              setIsModal={setIsModal}
+              onAddCartItem={(productItem: IProductItem) => {
+                setProductsItems((last) => {
+                  const currentIndex = last.findIndex((item) => item.data.id == productItem.data.id);
+                  return [...last.slice(0, currentIndex), { ...last[currentIndex], counter: productItem.counter + 1 }, ...last.slice(currentIndex + 1)]
+                })
+              }}
+              onRemoveCartItem={(productItem: IProductItem) => {
+                setProductsItems((last) => {
+                  const currentIndex = last.findIndex((item) => item.data.id == productItem.data.id);
+                  return [...last.slice(0, currentIndex), { ...last[currentIndex], counter: 0 }, ...last.slice(currentIndex + 1)]
+                })
+              }}
+               />
           }
         />
         <Route
