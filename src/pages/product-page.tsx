@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/payment-form/modal";
 import { PaymentForm } from "../components/payment-form/payment-form";
 import { IProductItem } from "../interfaces";
@@ -18,6 +18,8 @@ type ProductPageProps = {
 export default function ProductPage({ products, isModal, setIsModal, onAddCartItem, onRemoveCartItem }: ProductPageProps) {
   const params = useParams();
   const product = products.find((product) => product.data.id === Number(params.id));
+
+  const navigate = useNavigate();
 
   if (!product) {
     return <NotFoundPage />;
@@ -71,7 +73,7 @@ export default function ProductPage({ products, isModal, setIsModal, onAddCartIt
                 if (product.counter === 0)  {
                   onAddCartItem(product);
                 }
-                  window.location.assign('http://localhost:8082/#/cart');
+                  navigate('/cart');
                   setIsModal(true);                 
               }}>Buy now</button>
             </div>
