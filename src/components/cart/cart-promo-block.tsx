@@ -80,9 +80,9 @@ export default function CartPromoBlock({ cartItemsCount, totalCost, promoItem, s
           <button className="btn promo-block__button promo-block__button--buy" onClick={() => setIsModal(true)}>Buy now</button>
         </div>
       </section>
-      <Modal open={isModal} setState={setIsModal}>
+      {isModal && <Modal open={isModal} setState={setIsModal}>
         <PaymentForm setState={setIsModal} />
-      </Modal>
+      </Modal>}
     </>
   )
 }
