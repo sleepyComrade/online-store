@@ -85,7 +85,7 @@ export function PersonalData(props: {onChange: (data: IPersonalData, personalIsC
   };
   
   return (
-    <div>
+    <div className="payment-form__personal-data">
         <h3 className="payment-form__block-name">Personal details</h3>
         <div className="payment-form__input-wrap">
           <input
@@ -107,7 +107,7 @@ export function PersonalData(props: {onChange: (data: IPersonalData, personalIsC
             type="text"
             placeholder="Phone number"
           />
-          <p>{phoneHelpMessage}</p>
+          <p className="payment-form__help-msg">{phoneHelpMessage}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
@@ -118,7 +118,7 @@ export function PersonalData(props: {onChange: (data: IPersonalData, personalIsC
             type="text"
             placeholder="Delivery address"
           />
-          <p>{addressHelpMessage}</p>
+          <p className="payment-form__help-msg">{addressHelpMessage}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
@@ -129,7 +129,7 @@ export function PersonalData(props: {onChange: (data: IPersonalData, personalIsC
             type="text"
             placeholder="E-mail"
           />
-          <p>{emailHelpMessage}</p>
+          <p className="payment-form__help-msg">{emailHelpMessage}</p>
         </div>
       </div>
   );

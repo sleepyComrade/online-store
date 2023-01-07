@@ -4,11 +4,16 @@
   @include a.flex();
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
+  flex-grow: 1;
+  padding: 20px 50px;
   font-size: 18px;
   border: 1px solid black;
   border-radius: 15px;
   background-color: rgb(255, 255, 255);
+
+  @media screen and (max-width: 450px) {
+    padding: 20px;
+  }
 
   .payment-form__block-name{
     text-align: center;
@@ -16,19 +21,23 @@
   }
 
   .payment-form__input-wrap{
-    max-width: 400px;
     @include a.flex(start);
-    gap: 10px;
-    margin: 0 5px;
-  }
+    gap: 3px;
+    flex-direction: column-reverse;
+    margin: 12px 5px 0;
 
-  .payment-form__help-msg {
-    min-width: 165px;
+    .payment-form__help-msg {
+      margin: 0;
+      min-width: 165px;
+      align-self: flex-start;
+    }
   }
 }
 
 .payment-form__input {
-  padding: 5px 0;
+  max-width: 400px;
+  min-width: 300px;
+  padding: 5px 10px;
   text-align: center;
   border: 2px solid black;
   border-radius: 6px;
