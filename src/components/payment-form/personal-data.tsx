@@ -1,87 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
 import { IPersonalData, IPersonalDataValidity } from "../../interfaces";
 
-export function PersonalData(props: {onChange: (data: IPersonalData, personalIsCorrect: IPersonalDataValidity) => void, initial: IPersonalData, correctInit: IPersonalDataValidity}) {
-  const inputState = {
-    initial: "payment-form__input",
-    incorrect: "payment-form__input payment-form__input_incorrect",
-    correct: "payment-form__input payment-form__input_correct",
-  };
+type PersonalDataProps = {
+  onChange: (data: IPersonalData, personalIsCorrect: IPersonalDataValidity) => void;
+  initial: IPersonalData;
+  correctInit: IPersonalDataValidity;
+  regexes: {name: RegExp, phone: RegExp, address: RegExp, email: RegExp};
+  onStateChange: (valueName: string) => void;
+  onMessageChange: (valueName: string, index: number) => void;
+  personalStates: IPersonalData;
+  helpMessages: IPersonalData;
+  onBlur: (value: string, regex: RegExp, valueName: string, index: number) => void;
+}
 
-  const regexes = {
-    name: /^((\b[A-Z]{1}[a-zA-Z]{2,40}\b)\s*){2,}$/,
-    phone: /^\+\d{9,}$/,
-    address: /^((\b[a-zA-Z0-9]{5,40}\b)\s*){3,}$/,
-    email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  }
+export function PersonalData({onChange, initial, correctInit, regexes, onStateChange, onMessageChange, personalStates, helpMessages, onBlur}: PersonalDataProps) {
+  const personalIsCorrect = {...correctInit};
 
-  const data = {...props.initial};
-  const personalIsCorrect = {...props.correctInit};
-
-  const [nameState, setNameState] = useState(inputState.initial);
-  const [phoneState, setPhoneState] = useState(inputState.initial);
-  const [addressState, setAddressState] = useState(inputState.initial);
-  const [emailState, setEmailState] = useState(inputState.initial);
-
-  const [nameHelpMessage, setNameHelpMessage] = useState("Enter your name");
-  const [phoneHelpMessage, setPhoneHelpMessage] = useState("Enter your phone number");
-  const [addressHelpMessage, setAddressHelpMessage] = useState("Enter your address");
-  const [emailHelpMessage, setEmailHelpMessage] = useState("Enter your email");
-
-  const setStates = (
-    name: string,
-    regex: RegExp,
-    setMsg: React.Dispatch<React.SetStateAction<string>>,
-    setState: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    if (regex.test(name.trim())) {
-      setMsg("Correct");
-      setState(inputState.correct);
-    } else {
-      setMsg("Incorrect");
-      setState(inputState.incorrect);
-    }
-    if (name.trim() === "") {
-      setMsg("Empty");
-      setState(inputState.incorrect);
-    }
-  };
-
-  const nameBlurHandler = () => setStates(data.name, regexes.name, setNameHelpMessage, setNameState);
-  const phoneBlurHandler = () => setStates(data.phone, regexes.phone, setPhoneHelpMessage, setPhoneState);
-  const addressBlurHandler = () => setStates(data.address, regexes.address, setAddressHelpMessage, setAddressState);
-  const emailBlurHandler = () => setStates(data.email, regexes.email, setEmailHelpMessage, setEmailState);
+  const nameBlurHandler = () => onBlur(initial.name, regexes.name, 'name', 0);
+  const phoneBlurHandler = () => onBlur(initial.phone, regexes.phone, 'phone', 1);
+  const addressBlurHandler = () => onBlur(initial.address, regexes.address, 'address', 2);
+  const emailBlurHandler = () => onBlur(initial.email, regexes.email, 'email', 3);
 
   const nameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     personalIsCorrect.nameIsCorrect = regexes.name.test(e.target.value.trim());
-    data.name = e.target.value;
-    props.onChange(data, personalIsCorrect);
-    setNameHelpMessage("Enter your name");
-    setNameState(inputState.initial);
+    initial.name = e.target.value;
+    onChange(initial, personalIsCorrect);
+    onMessageChange('name', 0);
+    onStateChange('name');
   };
 
   const phoneChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     personalIsCorrect.phoneIsCorrect = regexes.phone.test(e.target.value.trim());
-    data.phone = e.target.value;
-    props.onChange(data, personalIsCorrect);
-    setPhoneHelpMessage("Enter your phone number");
-    setPhoneState(inputState.initial);
+    initial.phone = e.target.value;
+    onChange(initial, personalIsCorrect);
+    onMessageChange('phone', 1);
+    onStateChange('phone');
   };
 
   const addressChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     personalIsCorrect.addressIsCorrect = regexes.address.test(e.target.value.trim());
-    data.address = e.target.value;
-    props.onChange(data, personalIsCorrect);
-    setAddressHelpMessage("Enter your address");
-    setAddressState(inputState.initial);
+    initial.address = e.target.value;
+    onChange(initial, personalIsCorrect);
+    onMessageChange('address', 2);
+    onStateChange('address');
   };
 
   const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     personalIsCorrect.emailIsCorrect = regexes.email.test(e.target.value.trim());
-    data.email = e.target.value;
-    props.onChange(data, personalIsCorrect);
-    setEmailHelpMessage("Enter your email");
-    setEmailState(inputState.initial);
+    initial.email = e.target.value;
+    onChange(initial, personalIsCorrect);
+    onMessageChange('email', 3);
+    onStateChange('email');
   };
   
   return (
@@ -90,46 +59,46 @@ export function PersonalData(props: {onChange: (data: IPersonalData, personalIsC
         <div className="payment-form__input-wrap">
           <input
             onChange={nameChangeHandler}
-            value={data.name}
+            value={initial.name}
             onBlur={nameBlurHandler}
-            className={nameState}
+            className={personalStates.name}
             type="text"
             placeholder="Name"
           />
-          <p className="payment-form__help-msg">{nameHelpMessage}</p>
+          <p className="payment-form__help-msg">{helpMessages.name}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
             onChange={phoneChangeHandler}
-            value={data.phone}
+            value={initial.phone}
             onBlur={phoneBlurHandler}
-            className={phoneState}
+            className={personalStates.phone}
             type="text"
             placeholder="Phone number"
           />
-          <p className="payment-form__help-msg">{phoneHelpMessage}</p>
+          <p className="payment-form__help-msg">{helpMessages.phone}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
             onChange={addressChangeHandler}
-            value={data.address}
+            value={initial.address}
             onBlur={addressBlurHandler}
-            className={addressState}
+            className={personalStates.address}
             type="text"
             placeholder="Delivery address"
           />
-          <p className="payment-form__help-msg">{addressHelpMessage}</p>
+          <p className="payment-form__help-msg">{helpMessages.address}</p>
         </div>
         <div className="payment-form__input-wrap">
           <input
             onChange={emailChangeHandler}
-            value={data.email}
+            value={initial.email}
             onBlur={emailBlurHandler}
-            className={emailState}
+            className={personalStates.email}
             type="text"
             placeholder="E-mail"
           />
-          <p className="payment-form__help-msg">{emailHelpMessage}</p>
+          <p className="payment-form__help-msg">{helpMessages.email}</p>
         </div>
       </div>
   );

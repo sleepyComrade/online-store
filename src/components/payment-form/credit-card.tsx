@@ -11,64 +11,16 @@ type CreditCardProps = {
   correctInit: ICardDataValidity;
   cardErrorData: ICardData;
   regexes: {holder: RegExp, number: RegExp, date: RegExp, cvv: RegExp};
-  fieldsetState: {initial: string, incorrect: string, correct: string};
   cardStates: ICardData;
   onErrorChange: (valueName: string) => void;
   onStateChange: (valueName: string) => void;
   onBlur: (value: string, regex: RegExp, valueName: string, index: number) => void;
 }
 
-export function CreditCard({onChange, initial, correctInit, cardErrorData, regexes, fieldsetState, cardStates, onErrorChange, onStateChange, onBlur}: CreditCardProps) {
-  // const fieldsetState = {
-  //   initial: "credit-card__fieldset",
-  //   incorrect: "credit-card__fieldset credit-card__fieldset_incorrect",
-  //   correct: "credit-card__fieldset credit-card__fieldset_correct",
-  // };
-
-  // const regexes = {
-  //   holder: /^((\b[A-Z]{3,40}\b)\s*){2,}$/,
-  //   number: /^(\d{4}) (\d{4}) (\d{4}) (\d{4})$/,
-  //   date: /^((0[1-9])|(1[0-2]))\/\d{2}$/,
-  //   cvv:/^\d{3}$/
-  // }
-
-  // const data = {...initial};
+export function CreditCard({onChange, initial, correctInit, cardErrorData, regexes, cardStates, onErrorChange, onStateChange, onBlur}: CreditCardProps) {
   const cardIsCorrect = {...correctInit};
-
-  // const inputNames = ['Holder', 'Number', 'Date', 'CVV'];
   const systems = [defaultCard, visa, masterCard, americanExpress];
-
   const [system, setSystem] = useState(systems[0]);
-
-  // const [holderState, setHolderState] = useState(fieldsetState.initial);
-  // const [numberState, setNumberState] = useState(fieldsetState.initial);
-  // const [dateState, setDateState] = useState(fieldsetState.initial);
-  // const [cvvState, setCvvState] = useState(fieldsetState.initial);
-
-  // const [holderError, setHolderError] = useState("");
-  // const [numberError, setNumberError] = useState("");
-  // const [dateError, setDateError] = useState("");
-  // const [cvvError, setCvvError] = useState("");
-
-  // const setStates = (
-  //   name: string,
-  //   regex: RegExp,
-  //   setErr: React.Dispatch<React.SetStateAction<string>>,
-  //   setState: React.Dispatch<React.SetStateAction<string>>,
-  //   inputNameIndex: number
-  // ) => {
-  //   if (regex.test(name.trim())) {
-  //     setErr("");
-  //     setState(fieldsetState.correct);
-  //   } else {
-  //     setErr("Incorrect");
-  //     setState(fieldsetState.incorrect);
-  //   }
-  //   if (name.trim() === "") {
-  //     setErr(`${inputNames[inputNameIndex]} field must be filled`);
-  //     setState(fieldsetState.incorrect);
-  //   }
-  // };
   
   const holderBlurHandler = () => onBlur(initial.holder, regexes.holder, 'holder', 0);
   const numberBlurHandler = () => onBlur(initial.number, regexes.number, 'number', 1);
