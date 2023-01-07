@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Modal } from "../components/payment-form/modal";
 import { PaymentForm } from "../components/payment-form/payment-form";
-import { ICardStyle, IProductItem } from "../interfaces";
+import { IProductItem } from "../interfaces";
 import NotFoundPage from "./404-page";
 import ImagesGallery from "../components/images-gallery/images-gallery";
 import ButtonAddToCart from "../components/buttons/button-add-to-cart";
@@ -22,7 +22,6 @@ export default function ProductPage({ products, isModal, setIsModal, onAddCartIt
   if (!product) {
     return <NotFoundPage />;
   }
-  console.log(product);
   const { title, category, brand, description, discountPercentage, rating, stock, price, images } = product.data;
 
   const btnContent = product.counter > 0 ? 'Remove from cart' : 'Add to cart';
@@ -68,7 +67,13 @@ export default function ProductPage({ products, isModal, setIsModal, onAddCartIt
                 onAddCartItem={(productItem) => { onAddCartItem(productItem) }}
                 onRemoveCartItem={(productItem) => { onRemoveCartItem(productItem) }}
               />              
-              <button className="btn promo-block__button promo-block__button--buy" onClick={() => setIsModal(true)}>Buy now</button>
+              <button className="btn card-item__btn" onClick={() => {
+                if (product.counter === 0)  {
+                  onAddCartItem(product);
+                }
+                  window.location.assign('http://localhost:8082/#/cart');
+                  setIsModal(true);                 
+              }}>Buy now</button>
             </div>
           </div>
         </section>
