@@ -36,7 +36,7 @@ export function App() {
       .then(res => res.json())
       .then((data: { products: Array<IProductData> }) => {
         const loadedItems = localStorage.getItem(localStorageKey);
-        const parsedItems: Array<IStorageItem> = loadedItems && Array.isArray(loadedItems) ? JSON.parse(loadedItems) : []; 
+        const parsedItems: Array<IStorageItem> = loadedItems /*&& Array.isArray(loadedItems)*/ ? JSON.parse(loadedItems) : []; 
         const validated: Array<StorageItem> = parsedItems.map(it => {
           try {
             const item = new StorageItem(it);

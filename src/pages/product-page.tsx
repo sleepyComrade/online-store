@@ -42,10 +42,11 @@ export default function ProductPage({ products, isModal, setIsModal }: ProductPa
         </div>
         <section className="product">
           <div className="product__header">
-            <h2 className="product__title">{title}</h2></div>
-            <div className="product__images">
-              <ImagesGallery images={images} />
-            </div>
+            <h2 className="product__title">{title}</h2>
+          </div>
+          <div className="product__images">
+            <ImagesGallery images={images} />
+          </div>
           <div className="product__info">
             <div className="product__full-info">
               <ul className="product__full-info-list">
