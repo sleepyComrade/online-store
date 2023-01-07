@@ -13,7 +13,8 @@ export default function CartPagination({ countItemsPerPageCart, cartProductsCoun
   const prevPage = () => setCurrentPage(currentPage => currentPage >= 2 ? currentPage - 1 : currentPage);
 
   const numberTotalPage = numberCurrentPage > 0 ? numberCurrentPage : defaultNumberPage;
-
+  if(currentPage > numberTotalPage) setCurrentPage(numberTotalPage);
+  
   return (
     <div className="cart__pagination">
       <span>Page: </span>
