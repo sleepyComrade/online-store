@@ -10,7 +10,9 @@ type CartItemProps = {
 export default function CartItem({ productInCart, itemNumber, counter,  onCounter}: CartItemProps) {
   const minCounter = 1;
   const maxCounter = productInCart.stock;
-  const productsCounter = counter <= minCounter ? minCounter : counter;
+  const productsCounter = counter <= minCounter ? minCounter : 
+                          counter >= maxCounter ? maxCounter :
+                          counter;
 
   const priceForAll = productInCart.price * productsCounter;
 

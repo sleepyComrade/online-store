@@ -1,13 +1,18 @@
-@use '../abstracts/mixins' as a;
+@use '../abstracts' as a;
 
 .cart {
-  width: 65%;
+  width: 75%;
   border: 1px dashed crimson;
 }
 .cart__header {
   @include a.flex(space-between);
   padding: 10px 20px;
   border-bottom: 1px solid crimson;
+}
+
+.cart__title {
+  color:  a.$clr-grey-2;
+  font-size: 30px;
 }
 
 .cart__input-number {
@@ -17,7 +22,7 @@
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid rgb(197, 197, 197);
+  border: 1px solid a.$clr-grey-4;
   border-radius: 5px;
   -moz-appearance: textfield;
 }
@@ -28,13 +33,15 @@
 }
 
 .cart__pagination button {
-  width: 25px;
+  width: 40px;
   height: 30px;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid rgb(197, 197, 197);
+  color:#fff;
+  border: 1px solid a.$clr-grey-4;
   border-radius: 5px;
+  background-color: a.$clr-grey-4;
 }
 
 .cart__page-count {
@@ -51,6 +58,7 @@
 
 .cart-item {
   width: 100%;
+  position: relative;
   @include a.flex(flex-start);
   align-items: stretch;
   font-size: 18px;
@@ -63,45 +71,49 @@
 }
 
 .cart-item__number {
-  width: 5%;
-  @include a.flex();
+  position: absolute;
+  margin: 0;
   font-size: 20px;
   font-weight: bold;
-  text-align: left;
+  top: 50%;
+  transform: translateY(-20px);
+  left: -56px;
 }
 
 .cart-item__number span {
   width: 40px;
   height: 40px;
   display: inline-block;
-  border: 1px dashed crimson;
+  background-color: a.$clr-grey-4;
+  color: #fff;
   border-radius: 50%;
   line-height: 38px;
   text-align: center;
 }
 
 .cart-item__info {
-  width: 70%;
+  width: 75%;
   @include a.flex(flex-start);
 }
 
 .cart-item__image {
   @include a.flex(flex-start);
-  width: 30%;
+  width: 40%;
   margin: 0 10px;
 }
 
 .cart-item__image img {
-  width: 180px;
-  height: 150px;
+  width: 260px;
+  height: 220px;
   object-fit: contain;
+  margin: 0 auto;
 }
 
 .cart-item__full-info {
-  width: 70%;
+  width: 60%;
   min-height: 240px;
   padding: 0 15px;
-  background-color: rgb(234, 234, 234);
+  background-color: a.$clr-primary-11;
 }
 
 .cart-item__title {
@@ -109,6 +121,7 @@
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  color: a.$clr-grey-2;
   background-color: #fff;
 }
 
@@ -132,18 +145,20 @@
 
 .cart-item__price-block {
   width: 25%;
-  padding: 10px 15px;
+  padding: 10px;
   text-align: center;
 }
 
 .cart-item__counter-button {
-  width: 25px;
+  width: 30px;
   height: 30px;
   font-size: 26px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid rgb(197, 197, 197);
+  border: 1px solid a.$clr-grey-4;
   border-radius: 5px;
+  background-color: a.$clr-grey-4;
+  color: #fff;
 }
 
 .cart-item__counter-span {

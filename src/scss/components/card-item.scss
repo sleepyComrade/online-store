@@ -1,4 +1,4 @@
-@use '../abstracts/mixins' as a;
+@use '../abstracts' as a;
 
 .card-item {
   min-width: 250px;
@@ -66,28 +66,28 @@
     .card-item__discount {
       margin: 0;
       font-size: 14px;
-      color: green;
+      color: a.$clr-grey-4;
 
       .card-item__origin-price{
         text-decoration: line-through;
       }
     }
   }
+}
 
-  .card-item__btn {
-    width: 160px;
-    margin: 10px 5px;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    background-color: crimson;
-    transition: all .2s ease;
-    cursor: pointer;
+.card-item__btn {
+  width: 160px;
+  margin: 10px 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: crimson;
+  transition: all .2s ease;
+  cursor: pointer;
 
-    &:hover {
-      background-color: rgb(201, 18, 55);
-      box-shadow: 0px 0px 5px 2px rgb(188, 188, 188);
-    }
+  &:hover {
+    background-color: rgb(201, 18, 55);
+    box-shadow: 0px 0px 5px 2px rgb(188, 188, 188);
   }
 }
