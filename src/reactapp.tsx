@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/404-page";
 import { AppRoute } from "./const";
 import { IProductData, IProductItem, IPromoCode } from "./interfaces";
 import { Header } from "./components/header/header";
+import { Footer } from "./components/footer/footer";
 
 export function App() {
   const [productsItems, setProductsItems] = useState<Array<IProductItem>>([]);
@@ -92,6 +93,7 @@ export function App() {
           element={<NotFoundPage />}
         />
       </Routes>
+      <Footer />
     </HashRouter>
   );
 }

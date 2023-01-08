@@ -13,6 +13,13 @@ body {
   line-height: 140%;
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
 img {
   max-width: 100%;
   height: auto;
