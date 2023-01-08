@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type FilterRangeProps = {
   onChange: (data: {min: string, max: string}) => void;
@@ -9,7 +9,36 @@ type FilterRangeProps = {
   maxLmt: number;
 }
 
-export default function FilterRange({ onChange, minValue, maxValue, onMinChange, onMaxChange, maxLmt }: FilterRangeProps) {
+export default function FilterRange({ onChange, minValue: _minValue, maxValue: _maxValue, onMinChange, onMaxChange, maxLmt }: FilterRangeProps) {
+  const [maxValue, setMaxValue] = useState(_maxValue);
+  const [minValue, setMinValue] = useState(_minValue);
+
+  useEffect(() => {
+    const value = minValue;
+    const a = window.setTimeout(() => {
+      onMinChange(value);
+      onChange({min: value, max: maxValue});
+    }, 500);
+    return () => {
+      if (a !== null) {
+        window.clearTimeout(a);
+      }
+    }
+}, [minValue])
+
+  useEffect(() => {
+      const value = maxValue;
+      const a = window.setTimeout(() => {
+        onMaxChange(value);
+        onChange({min: minValue, max: value});
+      }, 500);
+      return () => {
+        if (a !== null) {
+          window.clearTimeout(a);
+        }
+      }
+  }, [maxValue])
+
   const maxLimit = maxLmt;
   const minLimit = 0;
 
@@ -44,13 +73,11 @@ export default function FilterRange({ onChange, minValue, maxValue, onMinChange,
       <div className="filter-range__container">
         <input type="range" className="filter-range__input filter-range__input--min" min={minLimit} max={maxLimit} value={minValue}
           onChange={(e) => {
-            onMinChange(e.target.value);
-            onChange({min: e.target.value, max: maxValue});
+            setMinValue(e.target.value);
           }} />
         <input type="range" className="filter-range__input filter-range__input--max" min={minLimit} max={maxLimit} value={maxValue}
           onChange={(e) => {
-            onMaxChange(e.target.value);
-            onChange({min: minValue, max: e.target.value});
+            setMaxValue(e.target.value);
           }} />
       </div>
     </div>
