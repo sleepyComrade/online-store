@@ -7,14 +7,10 @@ type CartItemProps = {
   onCounter: (a: number) => void;
 }
 
-export default function CartItem({ productInCart, itemNumber, counter,  onCounter}: CartItemProps) {
-  const minCounter = 1;
+export default function CartItem({ productInCart, itemNumber, counter,  onCounter}: CartItemProps) { 
   const maxCounter = productInCart.stock;
-  const productsCounter = counter <= minCounter ? minCounter : 
-                          counter >= maxCounter ? maxCounter :
-                          counter;
 
-  const priceForAll = productInCart.price * productsCounter;
+  const priceForAll = productInCart.price * counter;
 
   return (
     <li className="cart__item cart-item">
@@ -34,10 +30,10 @@ export default function CartItem({ productInCart, itemNumber, counter,  onCounte
         <p className="cart-item__stock"><span>Stock: </span> {productInCart.stock}</p>
         <p className="cart-item__price-for-one"><span>Price for one: </span>${productInCart.price}</p>
         <div className="cart-item__counter">
-          <button className="btn cart-item__counter-button" onClick={() => onCounter(1)}>
+          <button className="btn cart-item__counter-button" onClick={() => onCounter(1)} disabled={counter >= maxCounter}>
             +
           </button>
-          <span className="cart-item__counter-span">{productsCounter}</span>
+          <span className="cart-item__counter-span">{counter}</span>
           <button className="btn cart-item__counter-button" onClick={() => onCounter(-1)}>
            -
           </button>
