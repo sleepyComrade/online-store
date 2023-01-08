@@ -12,12 +12,19 @@
   }
 
   .card-item__image {
+    position: relative;
     width: 100%;
     padding-bottom: 100%;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
     transition: all .2s ease;
+
+    .card-item__image-tag {
+      position: absolute;
+      max-width: 100%;
+      max-height:100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .card-item__title-rate-wrap {
