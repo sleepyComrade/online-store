@@ -13,6 +13,7 @@ export default function CartPagination({ countItemsPerPageCart, cartProductsCoun
   const prevPage = () => setCurrentPage(currentPage => currentPage >= 2 ? currentPage - 1 : currentPage);
 
   const numberTotalPage = numberCurrentPage > 0 ? numberCurrentPage : defaultNumberPage;
+  //если удаляем с последней страницы единственный товар, перенаправляем на предыдущую страницу
   if(currentPage > numberTotalPage) setCurrentPage(numberTotalPage);
   
   return (

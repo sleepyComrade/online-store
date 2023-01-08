@@ -26,9 +26,6 @@ export default function ProductPage({ products, isModal, setIsModal, onAddCartIt
   }
   const { title, category, brand, description, discountPercentage, rating, stock, price, images } = product.data;
 
-  const btnContent = product.counter > 0 ? 'Remove from cart' : 'Add to cart';
-  const btnColor = product.counter > 0 ? 'crimson' : '#48647f';
-
   return (
     <main>
       <div className="main-container main-container--product-page">

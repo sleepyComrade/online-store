@@ -77,7 +77,7 @@ export function App() {
   // скидка от общей стоимости товаров
   const discountFromCost = totalCost / 100 * discountAmount;
   // итоговая стоимость с учетом скидки
-  const totalCostWithDiscount = totalCost - discountFromCost;
+  const totalCostWithDiscount = totalCost - discountFromCost; 
 
   return (
     <HashRouter>
