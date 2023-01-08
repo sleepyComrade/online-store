@@ -18,10 +18,9 @@ export function CardItem({ product, style, onAddCartItem, onRemoveCartItem }: Ca
   return (
     <div className={style.item}>
       <Link to={`/product/${product.data.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-        <div
-          className={style.image}
-          style={{ backgroundImage: `url(${product.data.images[0]})` }}
-        ></div>
+        <div className={style.image} >
+          <img loading="lazy" className="card-item__image-tag" src={product.data.images[0]} alt={title} />
+        </div>
         <div>
           <div className={style.titleWrap}>
             <h4 title={title} className={style.title}>{title}</h4>
