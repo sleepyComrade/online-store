@@ -4,6 +4,7 @@ import { PromoCodes } from "../../const";
 import CartPromoBlockList from "./cart-promo-block-list";
 import { Modal } from "../payment-form/modal";
 import { PaymentForm } from "../payment-form/payment-form";
+import { IProductItem } from "../../interfaces";
 
 type CartPromoBlockProps = {
   cartItemsCount: number;
@@ -15,9 +16,10 @@ type CartPromoBlockProps = {
   totalCostWithDiscount: number;
   isModal: boolean;
   setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  cartItems: Array<IProductItem>;
 }
 
-export default function CartPromoBlock({ cartItemsCount, totalCost, promoItem, setPromoItem, appliedPromoItems, setAppliedPromoItems, totalCostWithDiscount, isModal, setIsModal }: CartPromoBlockProps) {
+export default function CartPromoBlock({ cartItemsCount, totalCost, promoItem, setPromoItem, appliedPromoItems, setAppliedPromoItems, totalCostWithDiscount, isModal, setIsModal, cartItems }: CartPromoBlockProps) {
 
   const dropCodeHandler = (itemCode: IPromoCode['code'], appliedPromoItems: Array<IPromoCode>) => {
     const currentIndex = appliedPromoItems.findIndex((item) => item.code == itemCode);
@@ -81,7 +83,7 @@ export default function CartPromoBlock({ cartItemsCount, totalCost, promoItem, s
         </div>
       </section>
       {isModal && <Modal open={isModal} setState={setIsModal}>
-        <PaymentForm setState={setIsModal} />
+        <PaymentForm cartItems={cartItems} setState={setIsModal} />
       </Modal>}
     </>
   )

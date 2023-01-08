@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CreditCard } from "./credit-card";
 import { PersonalData } from "./personal-data";
-import { IPersonalData, IPersonalDataValidity, ICardData, ICardDataValidity } from "../../interfaces";
+import { IPersonalData, IPersonalDataValidity, ICardData, ICardDataValidity, IProductItem } from "../../interfaces";
 
-export function PaymentForm(props: {setState: React.Dispatch<React.SetStateAction<boolean>>}) {
+type PaymentFormProps = {
+  cartItems: IProductItem[];
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function PaymentForm({setState, cartItems}: PaymentFormProps) {
   const fieldsetState = {
     initial: "credit-card__fieldset",
     incorrect: "credit-card__fieldset credit-card__fieldset_incorrect",
@@ -233,6 +238,7 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
       }
     })
     if (isValid) {
+      cartItems.forEach(item => item.counter = 0);
       setConfirm(true);
       setTimeout(() => {
         setCounter(2);
@@ -241,7 +247,7 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
         setCounter(1);
       }, 2000);
       setTimeout(() => {
-        props.setState(false);
+        setState(false);
         setConfirm(false);
         navigate('/');
       }, 3000);

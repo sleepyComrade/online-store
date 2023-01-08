@@ -35,7 +35,8 @@ export default function CartPage({ cartItems, setCartItems, cartItemsCount, tota
                 setAppliedPromoItems={setAppliedPromoItems}
                 totalCostWithDiscount={totalCostWithDiscount}
                 isModal={isModal}
-                setIsModal={setIsModal} />
+                setIsModal={setIsModal}
+                cartItems={cartItems} />
             </>
           }
         </div>

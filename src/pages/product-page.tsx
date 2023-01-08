@@ -13,6 +13,7 @@ type ProductPageProps = {
   setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
   onAddCartItem: (productItem: IProductItem) => void;
   onRemoveCartItem: (productItem: IProductItem) => void;
+  // cartItems: IProductItem[];
 }
 
 export default function ProductPage({ products, isModal, setIsModal, onAddCartItem, onRemoveCartItem }: ProductPageProps) {
@@ -76,9 +77,6 @@ export default function ProductPage({ products, isModal, setIsModal, onAddCartIt
             </div>
           </div>
         </section>
-        <Modal open={isModal} setState={setIsModal}>
-          <PaymentForm setState={setIsModal} />
-        </Modal>
       </div>
     </main>
   );
