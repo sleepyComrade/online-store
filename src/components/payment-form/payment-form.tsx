@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CreditCard } from "./credit-card";
 import { PersonalData } from "./personal-data";
 import { IPersonalData, IPersonalDataValidity, ICardData, ICardDataValidity } from "../../interfaces";
@@ -21,6 +22,11 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
     incorrect: "payment-form__help-msg payment-form__help-msg-incorrect",
     correct: "payment-form__help-msg payment-form__help-msg-correct",
   }
+
+  const navigate = useNavigate();
+
+  const [confirm, setConfirm] = useState(false);
+  const [counter, setCounter] = useState(3);
 
   const [personalData, setPersonalData] = useState({name: '', phone: '', address: '', email: ''});
   const [personalIsCorrect, setPersonalCorrect] = useState({nameIsCorrect: false, phoneIsCorrect: false, addressIsCorrect: false, emailIsCorrect: false});
@@ -227,12 +233,24 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
       }
     })
     if (isValid) {
-      props.setState(false);
+      setConfirm(true);
+      setTimeout(() => {
+        setCounter(2);
+      }, 1000);
+      setTimeout(() => {
+        setCounter(1);
+      }, 2000);
+      setTimeout(() => {
+        props.setState(false);
+        setConfirm(false);
+        navigate('/');
+      }, 3000);
     }
   };
 
   return (
-    <div>
+    <div className="payment-form-wrap">
+      { !confirm ?
       <form className="payment-form">
         <PersonalData onBlur={(value: string, regex: RegExp, valueName: string, index: number) => {
           setPersonalDataStates(value, regex, valueName, index);
@@ -267,6 +285,8 @@ export function PaymentForm(props: {setState: React.Dispatch<React.SetStateActio
         }} />
         <button onClick={submitForm} onMouseDown={submitForm}>Confirm</button>
       </form>
+      : <h3 className="payment-message">Thanks for your order. Redirect to the store after {counter} sec</h3>
+      }
     </div>
   );
 }
