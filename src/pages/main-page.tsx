@@ -11,20 +11,7 @@ type MainPageProps = {
 }
 
 export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem}: MainPageProps) {
-  const [activeCategories, setActiveCategories] = useState<Array<string>>([]);
-  const [brands, setBrands] = useState<Array<string>>([]);
-  const [activeBrands, setActiveBrands] = useState<Array<string>>([]);
-  const [brandState, setBrandState] = useState<Array<boolean>>([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [categories, setCategories] = useState<Array<string>>([]);
-  const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
-  const [minPriceValue, setMinValue] = useState('0');
-  const [maxPriceValue, setMaxValue] = useState('2000');
-  const [minStockValue, setMinStockValue] = useState('0');
-  const [maxStockValue, setMaxStockValue] = useState('200');
-  const [searched, setSearched] = useState('');
-  const [sort, setSort] = useState(searchParams.get('sort') || '');
-  const [style, setStyle] = useState(searchParams.get('style') || 'grid');
 
   const queryCat = searchParams.getAll('cat') || [];
   const queryBrand = searchParams.getAll('brand') || [];
@@ -38,6 +25,20 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
 
   const qCat = JSON.stringify(queryCat);
   const qBrand = JSON.stringify(queryBrand);
+
+  const [activeCategories, setActiveCategories] = useState<Array<string>>(queryCat);
+  const [brands, setBrands] = useState<Array<string>>([]);
+  const [activeBrands, setActiveBrands] = useState<Array<string>>(queryBrand);
+  const [brandState, setBrandState] = useState<Array<boolean>>([]);
+  const [categories, setCategories] = useState<Array<string>>([]);
+  const [categoryState, setCategoryState] = useState<Array<boolean>>([]);
+  const [minPriceValue, setMinValue] = useState(queryMinPrice);
+  const [maxPriceValue, setMaxValue] = useState(queryMaxPrice);
+  const [minStockValue, setMinStockValue] = useState(queryMinStock);
+  const [maxStockValue, setMaxStockValue] = useState(queryMaxStock);
+  const [searched, setSearched] = useState(querySearch);
+  const [sort, setSort] = useState(searchParams.get('sort') || '');
+  const [style, setStyle] = useState(searchParams.get('style') || 'grid');
     
   const filterItems = (items: IProductItem[],
                       cat: string[],
@@ -147,7 +148,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                             maxStock: maxStockValue,
                             search: searched,
                             sort: sort,
-                            style: style});
+                            style: style});            
             }} onStockChange={(data: {min: string, max: string}) => {
             setSearchParams({brand: activeBrands,
                             cat: activeCategories,
