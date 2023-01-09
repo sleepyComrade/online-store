@@ -135,112 +135,109 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   const activeItems = filterItems(productsItems, queryCat, queryBrand, queryMinPrice, queryMaxPrice, queryMinStock, queryMaxStock, querySearch, querySort);
 
   return (
-    <>
-      <main>
-        <div className="main-container">
-          <div className="main-page__content-wrap">
-            <FiltersSection onMinChange={(value: string) => {
-              // setMinValue(value);
-              }} onMaxChange={(value: string) => {
-              // setMaxValue(value);
-              }} onPriceChange={(data: {min: string, max: string}) => {
-              setSearchParams({brand: activeBrands,
-                              cat: activeCategories,
-                              minPrice: data.min,
-                              maxPrice: data.max,
-                              minStock: minStockValue,
-                              maxStock: maxStockValue,
-                              search: searched,
-                              sort: sort,
-                              style: style});
-              }} onStockChange={(data: {min: string, max: string}) => {
-              setSearchParams({brand: activeBrands,
-                              cat: activeCategories,
-                              minPrice: minPriceValue,
-                              maxPrice: maxPriceValue,
-                              minStock: data.min,
-                              maxStock: data.max,
-                              search: searched,
-                              sort: sort,
-                              style: style});
-              }} onStateChange={(data: boolean[]) => {
-              // setCategoryState(data)
-              }} onBrandStateChange={(data: boolean[]) => {
-              // setBrandState(data);
-              }} onBrandChange={(data: string[]) => {
-              setSearchParams({brand: data,
-                              cat: activeCategories,
-                              minPrice: minPriceValue,
-                              maxPrice: maxPriceValue,
-                              minStock: minStockValue,
-                              maxStock: maxStockValue,
-                              search: searched,
-                              sort: sort,
-                              style: style});
-              }} onCategoryChange={(data: string[]) => {
-              setSearchParams({brand: activeBrands,
-                              cat: data,
-                              minPrice: minPriceValue,
-                              maxPrice: maxPriceValue,
-                              minStock: minStockValue,
-                              maxStock: maxStockValue,
-                              search: searched,
-                              sort: sort,
-                              style: style});
-              }} activeItems={activeItems.map(item => item.data)}
-              productsItems={productsItems.map(item => item.data)}
-              onReset={() => {
-                setSearchParams({sort: sort});
-              }}
-              categoryState={categoryState}
-              brandState={brandState}
-              categories={categories}
-              brands={brands}
-              minPriceValue={minPriceValue}
-              maxPriceValue={maxPriceValue}
-              minStockValue={minStockValue}
-              maxStockValue={maxStockValue}
-              products={productsItems} />
-            <CardsBlock onSearchChange={(value: string) => {
-              setSearchParams({brand: activeBrands,
-                cat: activeCategories,
-                minPrice: minPriceValue,
-                maxPrice: maxPriceValue,
-                minStock: minStockValue,
-                maxStock: maxStockValue,
-                search: value,
-                sort: sort,
-                style: style});
-            }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              setSearchParams({brand: activeBrands,
-                cat: activeCategories,
-                minPrice: minPriceValue,
-                maxPrice: maxPriceValue,
-                minStock: minStockValue,
-                maxStock: maxStockValue,
-                search: searched,
-                sort: e.target.value,
-                style: style});
-            }} onStyleChange={(view: string) => {
-              setSearchParams({brand: activeBrands,
-                cat: activeCategories,
-                minPrice: minPriceValue,
-                maxPrice: maxPriceValue,
-                minStock: minStockValue,
-                maxStock: maxStockValue,
-                search: searched,
-                sort: sort,
-                style: view});
-            }} products={activeItems} total={activeItems.length}
-            search={searched}
-            sort={sort}
-            style={style}
-            onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
-            onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
-          </div>
+    <main className="main">
+      <div className="main-container">
+        <div className="main-page__content-wrap">
+          <FiltersSection onMinChange={(value: string) => {
+            // setMinValue(value);
+            }} onMaxChange={(value: string) => {
+            // setMaxValue(value);
+            }} onPriceChange={(data: {min: string, max: string}) => {
+            setSearchParams({brand: activeBrands,
+                            cat: activeCategories,
+                            minPrice: data.min,
+                            maxPrice: data.max,
+                            minStock: minStockValue,
+                            maxStock: maxStockValue,
+                            search: searched,
+                            sort: sort,
+                            style: style});
+            }} onStockChange={(data: {min: string, max: string}) => {
+            setSearchParams({brand: activeBrands,
+                            cat: activeCategories,
+                            minPrice: minPriceValue,
+                            maxPrice: maxPriceValue,
+                            minStock: data.min,
+                            maxStock: data.max,
+                            search: searched,
+                            sort: sort,
+                            style: style});
+            }} onStateChange={(data: boolean[]) => {
+            // setCategoryState(data)
+            }} onBrandStateChange={(data: boolean[]) => {
+            // setBrandState(data);
+            }} onBrandChange={(data: string[]) => {
+            setSearchParams({brand: data,
+                            cat: activeCategories,
+                            minPrice: minPriceValue,
+                            maxPrice: maxPriceValue,
+                            minStock: minStockValue,
+                            maxStock: maxStockValue,
+                            search: searched,
+                            sort: sort,
+                            style: style});
+            }} onCategoryChange={(data: string[]) => {
+            setSearchParams({brand: activeBrands,
+                            cat: data,
+                            minPrice: minPriceValue,
+                            maxPrice: maxPriceValue,
+                            minStock: minStockValue,
+                            maxStock: maxStockValue,
+                            search: searched,
+                            sort: sort,
+                            style: style});
+            }} activeItems={activeItems.map(item => item.data)}
+            productsItems={productsItems.map(item => item.data)}
+            onReset={() => {
+              setSearchParams({sort: sort});
+            }}
+            categoryState={categoryState}
+            brandState={brandState}
+            categories={categories}
+            brands={brands}
+            minPriceValue={minPriceValue}
+            maxPriceValue={maxPriceValue}
+            minStockValue={minStockValue}
+            maxStockValue={maxStockValue}
+            products={productsItems} />
+          <CardsBlock onSearchChange={(value: string) => {
+            setSearchParams({brand: activeBrands,
+              cat: activeCategories,
+              minPrice: minPriceValue,
+              maxPrice: maxPriceValue,
+              minStock: minStockValue,
+              maxStock: maxStockValue,
+              search: value,
+              sort: sort,
+              style: style});
+          }} onSortChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            setSearchParams({brand: activeBrands,
+              cat: activeCategories,
+              minPrice: minPriceValue,
+              maxPrice: maxPriceValue,
+              minStock: minStockValue,
+              maxStock: maxStockValue,
+              search: searched,
+              sort: e.target.value,
+              style: style});
+          }} onStyleChange={(view: string) => {
+            setSearchParams({brand: activeBrands,
+              cat: activeCategories,
+              minPrice: minPriceValue,
+              maxPrice: maxPriceValue,
+              minStock: minStockValue,
+              maxStock: maxStockValue,
+              search: searched,
+              sort: sort,
+              style: view});
+          }} products={activeItems} total={activeItems.length}
+          search={searched}
+          sort={sort}
+          style={style}
+          onAddCartItem={(productItem) => {onAddCartItem(productItem)}}
+          onRemoveCartItem={(productItem) => {onRemoveCartItem(productItem)}} />
         </div>
-      </main>
-      <footer></footer>
-    </>
+      </div>
+    </main>
   );
 }

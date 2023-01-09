@@ -16,8 +16,12 @@ body {
 #root {
   min-height: 100vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: column;
+}
+
+.main {
+  flex: 1;
 }
 
 img {

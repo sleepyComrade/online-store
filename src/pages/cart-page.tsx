@@ -20,28 +20,25 @@ type CartPageProps = {
 export default function CartPage({ cartItems, setCartItems, cartItemsCount, totalCost, promoItem, setPromoItem, appliedPromoItems, setAppliedPromoItems, totalCostWithDiscount, isModal, setIsModal }: CartPageProps) {
 
   return (
-    <>
-      <main>
-        <div className="main-container main-container--cart-page">
-          {!cartItems.length ? <h2 style={{margin: `0 auto`}}>There are no items in the cart</h2> :
-            <>
-              <CartProductsSection cartItems={cartItems} setCartItems={setCartItems} />
-              <CartPromoBlock
-                cartItemsCount={cartItemsCount}
-                totalCost={totalCost}
-                promoItem={promoItem}
-                setPromoItem={setPromoItem}
-                appliedPromoItems={appliedPromoItems}
-                setAppliedPromoItems={setAppliedPromoItems}
-                totalCostWithDiscount={totalCostWithDiscount}
-                isModal={isModal}
-                setIsModal={setIsModal}
-                cartItems={cartItems} />
-            </>
-          }
-        </div>
-      </main>
-      <footer></footer>
-    </>
+    <main className="main">
+      <div className="main-container main-container--cart-page">
+        {!cartItems.length ? <h2 style={{margin: `0 auto`}}>There are no items in the cart</h2> :
+          <>
+            <CartProductsSection cartItems={cartItems} setCartItems={setCartItems} />
+            <CartPromoBlock
+              cartItemsCount={cartItemsCount}
+              totalCost={totalCost}
+              promoItem={promoItem}
+              setPromoItem={setPromoItem}
+              appliedPromoItems={appliedPromoItems}
+              setAppliedPromoItems={setAppliedPromoItems}
+              totalCostWithDiscount={totalCostWithDiscount}
+              isModal={isModal}
+              setIsModal={setIsModal}
+              cartItems={cartItems} />
+          </>
+        }
+      </div>
+    </main>
   );
 }
