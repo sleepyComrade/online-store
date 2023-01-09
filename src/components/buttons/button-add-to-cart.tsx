@@ -1,4 +1,4 @@
-import { ICardStyle, IProductItem } from "../../interfaces";
+import { IProductItem } from "../../interfaces";
 
 type ButtonAddToCartProps = {
     product: IProductItem;

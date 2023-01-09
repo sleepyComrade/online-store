@@ -26,7 +26,7 @@ export function ViewSwitcher({ onStyleChange, style }: ViewSwitcherProps) {
       setGridStyle(iconsClassNames.grid.active);
       setStackStyle(iconsClassNames.stack.inactive);
       onStyleChange('grid');
-    };
+    }
   }
 
   const handleStackClick = () => {
@@ -34,7 +34,7 @@ export function ViewSwitcher({ onStyleChange, style }: ViewSwitcherProps) {
       setStackStyle(iconsClassNames.stack.active);
       setGridStyle(iconsClassNames.grid.inactive);
       onStyleChange('stack');
-    };
+    }
   }
   return (
     <div className="cards-nav__switcher-wrap">
