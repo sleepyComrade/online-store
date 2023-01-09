@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
@@ -20,6 +21,9 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
+        new EslintPlugin({
+            extensions: 'ts',
+        })
     ],
     module: {
         rules: [
