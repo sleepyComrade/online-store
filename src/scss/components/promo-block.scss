@@ -108,3 +108,30 @@
 .non-display {
   display: none;
 }
+
+@media (max-width: 1750px) {
+  .promo-block {
+    width: 23%;
+    right: 30px;
+  }
+}
+
+@media (max-width: 1430px) {
+  .promo-block {
+    right: 15px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .promo-block {
+    position: static;
+  }
+
+  .promo-block__code-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 980px) {
+  
+}

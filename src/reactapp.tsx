@@ -56,7 +56,7 @@ export function App() {
   }, []);
 
   const cartItems = productsItems.filter(item => item.counter > 0);
-  const [isModal, setIsModal] = useState(false);  // добавить также в ProductPage
+  const [isModal, setIsModal] = useState(false); 
 
   useEffect(() => {
     window.onbeforeunload = () => {
