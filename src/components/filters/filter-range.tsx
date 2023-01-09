@@ -10,6 +10,11 @@ type FilterRangeProps = {
 export default function FilterRange({ onChange, minValue: _minValue, maxValue: _maxValue, maxLmt }: FilterRangeProps) {
   const [maxValue, setMaxValue] = useState(_maxValue);
   const [minValue, setMinValue] = useState(_minValue);
+  
+  useEffect(() => {
+    setMaxValue(_maxValue);
+    setMinValue(_minValue);
+  }, [_maxValue, _minValue])
 
   useEffect(() => {
     const value = minValue;
