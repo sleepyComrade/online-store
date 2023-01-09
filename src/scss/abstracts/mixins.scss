@@ -3,3 +3,12 @@
   justify-content: $justify;
   align-items: $align;
 }
+
+@mixin font($weight, $value) {
+  @font-face {
+    font-family: 'Roboto';
+    src: url("../assets/fonts/Roboto-#{$weight}.woff") format('woff');
+    font-weight: $value;
+    font-style: normal;
+  }
+}
