@@ -124,7 +124,6 @@ export function App() {
           path={AppRoute.Product}
           element={
             <ProductPage products={productsItems}
-              isModal={isModal}
               setIsModal={setIsModal}
               onAddCartItem={(productItem: IProductItem) => {
                 setProductsItems((last) => {

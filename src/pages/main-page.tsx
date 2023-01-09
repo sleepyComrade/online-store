@@ -1,6 +1,6 @@
 import FiltersSection from "./../components/filters/filters-section";
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { IProductItem } from "./../interfaces";
 import { CardsBlock } from "../components/cards/cards-block";
 
@@ -117,7 +117,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
   
   useEffect(() => {
     const brands: Array<string> = [];
-    for (let product of productsItems) {
+    for (const product of productsItems) {
       if (!brands.includes(product.data.brand)) brands.push(product.data.brand);
     }
     setBrands(brands);
@@ -138,11 +138,7 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
     <main className="main">
       <div className="main-container">
         <div className="main-page__content-wrap">
-          <FiltersSection onMinChange={(value: string) => {
-            // setMinValue(value);
-            }} onMaxChange={(value: string) => {
-            // setMaxValue(value);
-            }} onPriceChange={(data: {min: string, max: string}) => {
+          <FiltersSection onPriceChange={(data: {min: string, max: string}) => {
             setSearchParams({brand: activeBrands,
                             cat: activeCategories,
                             minPrice: data.min,
@@ -162,10 +158,6 @@ export default function MainPage({productsItems, onAddCartItem, onRemoveCartItem
                             search: searched,
                             sort: sort,
                             style: style});
-            }} onStateChange={(data: boolean[]) => {
-            // setCategoryState(data)
-            }} onBrandStateChange={(data: boolean[]) => {
-            // setBrandState(data);
             }} onBrandChange={(data: string[]) => {
             setSearchParams({brand: data,
                             cat: activeCategories,

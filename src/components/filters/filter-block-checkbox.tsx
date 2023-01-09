@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FilterCheckbox from "./filter-checkbox";
 import { IProductData } from "../../interfaces";
 
@@ -7,20 +7,18 @@ type FiltersBlockCheckboxProps = {
   ProductsFilters: Array<string>;
   onCategoryChange: (data: string[]) => void;
   categoryState: boolean[];
-  onStateChange: (data: boolean[]) => void;
   productsItems: IProductData[];
   prop: string;
   activeItems: IProductData[];
 }
 
-export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onCategoryChange, categoryState, onStateChange, productsItems, prop, activeItems }: FiltersBlockCheckboxProps) {
+export default function FiltersBlockCheckbox({ filterTitle, ProductsFilters, onCategoryChange, categoryState, productsItems, prop, activeItems }: FiltersBlockCheckboxProps) {
   return (
     <div className="filters__block filters__block--checkbox">
       <h3 className="filters__block-title">{filterTitle}</h3>
       <div className="filters__checkbox-wrapper">
       { ProductsFilters.map((item, index) => <FilterCheckbox onStateChange={() => {
         categoryState[index] = !categoryState[index];
-        onStateChange(categoryState);
         const activeCat = ProductsFilters.filter((cat, i) => categoryState[i]);
         onCategoryChange(activeCat);
       }} activeQty={activeItems.filter(product => prop === 'category' ?
