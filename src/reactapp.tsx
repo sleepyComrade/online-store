@@ -62,6 +62,11 @@ export function App() {
     window.onbeforeunload = () => {
       localStorage.setItem(localStorageKey, JSON.stringify(cartItems.map(it => ({id: it.data.id, counter: it.counter}))));
     }
+    document.onvisibilitychange = () => {
+      if (document.hidden) {
+        localStorage.setItem(localStorageKey, JSON.stringify(cartItems.map(it => ({id: it.data.id, counter: it.counter}))));
+      }
+    }
   }, [cartItems]);
 
   {/*состояние, когда введен конкретный код или нет*/ }
