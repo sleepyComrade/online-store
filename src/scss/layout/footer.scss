@@ -5,11 +5,13 @@
   height: 60px;
   color: white;
   background-color: a.$clr-grey-4;
+  box-shadow: 0px 0px 4px 2px a.$clr-grey-4;
 
   .footer__container {
     @include a.flex(space-between);
     max-width: 1350px;
     margin: auto;
+    padding: 0 20px;
 
     .footer__app-year {
       margin: 0;

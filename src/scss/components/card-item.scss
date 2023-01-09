@@ -6,6 +6,7 @@
   padding: 5px;
   flex: 1;
   cursor: pointer;
+  transition: all .2s ease;
 
   &:hover {
     box-shadow: 0px 0px 5px 2px rgb(188, 188, 188);
@@ -55,8 +56,9 @@
   .card-item__price-wrap {
     @include a.flex(start, start);
     flex-direction: column;
-    gap: 5px;
+    // gap: 5px;
     padding-left: 5px;
+    line-height: 1.5;
 
     .card-item__price {
       margin: 0;
