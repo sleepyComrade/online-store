@@ -1,17 +1,13 @@
 @use '../abstracts' as a;
 
-.main-container--product-page {
-  flex-direction: column;
-  padding: 0;
-}
-
 .product__breadcrumbs {
   width: 100%;
-  margin: 10px 0;
+  margin-bottom: 20px;
 }
 
 .product__breadcrumbs-list {
   @include a.flex(flex-start);
+  margin: 0;
   padding-left: 0;
 }
 
