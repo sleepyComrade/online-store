@@ -2,7 +2,8 @@ import { useState } from "react";
 import CartList from "./cart-list";
 import CartItemsPerPage from "./cart-items-per-page";
 import CartPagination from "./cart-pagination";
-import { IProductData, IProductItem } from "../../interfaces";
+import { IProductItem } from "../../interfaces";
+import { useSearchParams } from "react-router-dom";
 
 type CartProductsSectionProps = {
   cartItems: Array<IProductItem>;
@@ -10,12 +11,16 @@ type CartProductsSectionProps = {
 }
 
 export default function CartProductsSection({ cartItems, setCartItems }: CartProductsSectionProps) {
-  const [countItemsPerPageCart, setCountItemsPerPageCart] = useState(5);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryItem = searchParams.get('item') || '5';
+  const queryPage = searchParams.get('page') || '1';
+
+  const [countItemsPerPageCart, setCountItemsPerPageCart] = useState(+queryItem);
   const minItemsPerPage = 1;
   const countItemsPerPage: number = (Number.isNaN(countItemsPerPageCart) || countItemsPerPageCart === 0) ? minItemsPerPage : countItemsPerPageCart;
 
   //pagination
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(+queryPage);
   const lastCartItemsIndex = currentPage * countItemsPerPageCart;
   const firstCartItemsIndex = (currentPage - 1) * countItemsPerPageCart;
 
@@ -27,15 +32,24 @@ export default function CartProductsSection({ cartItems, setCartItems }: CartPro
         <h2 className="cart__title">Products in Cart</h2>
         <CartItemsPerPage
           countItemsPerPageCart={countItemsPerPageCart}
-          onCountItemsPerPageCart={setCountItemsPerPageCart}
-          onBlur={() => setCountItemsPerPageCart(countItemsPerPage)}
+          onCountItemsPerPageCart={(value) => {
+            setCountItemsPerPageCart(value);
+            setSearchParams({item: value + '', page: currentPage + ''});
+          }}
+          onBlur={() => {
+            setCountItemsPerPageCart(countItemsPerPage);
+            setSearchParams({item: countItemsPerPage + '', page: currentPage + ''});
+          }}
         />
 
         <CartPagination
           countItemsPerPageCart={countItemsPerPage}
           cartProductsCount={cartItems.length}
           currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+          setCurrentPage={(value) => {
+            setCurrentPage(value);
+            setSearchParams({item: countItemsPerPageCart + '', page: value + ''});
+          }}
         />
       </div>
 

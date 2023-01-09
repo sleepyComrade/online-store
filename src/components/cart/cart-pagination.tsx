@@ -9,8 +9,8 @@ export default function CartPagination({ countItemsPerPageCart, cartProductsCoun
 
   const defaultNumberPage = 1;
   const numberCurrentPage = Math.ceil(cartProductsCount / countItemsPerPageCart);
-  const nextPage = () => setCurrentPage(currentPage => currentPage < numberCurrentPage ? currentPage + 1 : numberCurrentPage);
-  const prevPage = () => setCurrentPage(currentPage => currentPage >= 2 ? currentPage - 1 : currentPage);
+  const nextPage = () => setCurrentPage(currentPage < numberCurrentPage ? currentPage + 1 : numberCurrentPage);
+  const prevPage = () => setCurrentPage(currentPage >= 2 ? currentPage - 1 : currentPage);
 
   const numberTotalPage = numberCurrentPage > 0 ? numberCurrentPage : defaultNumberPage;
   //если удаляем с последней страницы единственный товар, перенаправляем на предыдущую страницу
