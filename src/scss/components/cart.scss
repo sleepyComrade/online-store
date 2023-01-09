@@ -134,6 +134,8 @@
 
 .cart-item__rating span,
 .cart-item__discount span,
+.cart-item__category span,
+.cart-brand span,
 .cart-item__stock span,
 .cart-item__price-for-one span,
 .cart-item__price-for-all span {
@@ -207,7 +209,7 @@
 
   .cart-item__image img {
     width: 100%;
-    height: auto;
+    max-height: 300px;
     margin: 0;
   }
 

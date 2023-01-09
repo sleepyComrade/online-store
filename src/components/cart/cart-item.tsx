@@ -21,7 +21,10 @@ export default function CartItem({ productInCart, itemNumber, counter,  onCounte
         </div>
         <div className="cart-item__full-info">
           <p className="cart-item__title">{productInCart.title}</p>
+          
           <p className="cart-item__desc">{productInCart.description}</p>
+          <p className="cart-item__category"><span>Category: </span>{productInCart.category}</p>
+          <p className="cart-brand"><span>Brand: </span>{productInCart.brand}</p>
           <p className="cart-item__rating"><span>Rating: </span>{productInCart.rating}</p>
           <p className="cart-item__discount"><span>Discount: </span>{productInCart.discountPercentage + "%"}</p>
         </div>

@@ -245,3 +245,9 @@
   background: crimson;
   cursor: pointer;
 }
+
+@media (max-width: 980px) {
+  .filters {
+    width: 280px;
+  }
+}
