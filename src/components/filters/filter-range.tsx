@@ -4,19 +4,21 @@ type FilterRangeProps = {
   onChange: (data: {min: string, max: string}) => void;
   minValue: string;
   maxValue: string;
-  onMinChange: (value: string) => void;
-  onMaxChange: (value: string) => void;
   maxLmt: number;
 }
 
-export default function FilterRange({ onChange, minValue: _minValue, maxValue: _maxValue, onMinChange, onMaxChange, maxLmt }: FilterRangeProps) {
+export default function FilterRange({ onChange, minValue: _minValue, maxValue: _maxValue, maxLmt }: FilterRangeProps) {
   const [maxValue, setMaxValue] = useState(_maxValue);
   const [minValue, setMinValue] = useState(_minValue);
+  
+  useEffect(() => {
+    setMaxValue(_maxValue);
+    setMinValue(_minValue);
+  }, [_maxValue, _minValue])
 
   useEffect(() => {
     const value = minValue;
     const a = window.setTimeout(() => {
-      onMinChange(value);
       onChange({min: value, max: maxValue});
     }, 500);
     return () => {
@@ -29,7 +31,6 @@ export default function FilterRange({ onChange, minValue: _minValue, maxValue: _
   useEffect(() => {
       const value = maxValue;
       const a = window.setTimeout(() => {
-        onMaxChange(value);
         onChange({min: minValue, max: value});
       }, 500);
       return () => {
