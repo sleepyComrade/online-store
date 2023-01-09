@@ -1,0 +1,94 @@
+@use '../abstracts' as a;
+
+.cards-nav {
+  @include a.flex(space-around);
+  height: 50px;
+  background-color: a.$clr-primary-11;
+  box-shadow: 0px 0px 4px 0px a.$clr-grey-4;
+  border-radius: 5px;
+
+  .cards-nav__sort-wrap {
+    border: 1px solid a.$clr-grey-4;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px 0px a.$clr-grey-4;
+
+    .cards-nav__select {
+      padding: 4px;
+      outline: none;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .cards-nav__found {
+    margin: 0;
+  }
+
+  .cards-nav__switcher-wrap {
+    @include a.flex();
+    gap: 7px;
+
+    .cards-nav__grid-icon,
+    .cards-nav__stack-icon {
+      cursor: pointer;
+      transition: all .2s ease;
+      border: 1px solid transparent;
+      border-radius: 5px;
+    }
+
+    .cards-nav__grid-icon{
+      height: 30px;
+      padding: 3px;
+    }
+
+    .cards-nav__stack-icon {
+      height: 29px;
+      padding: 4px;
+    }
+
+    .cards-nav__switcher-icon-active {
+      background-color: rgb(255, 255, 255);
+      border: 1px solid a.$clr-grey-4;
+      box-shadow: 1px 1px 4px 0px a.$clr-grey-4;
+    }
+
+    .cards-nav__switcher-icon-inactive {
+
+      &:hover {
+        background-color: a.$clr-grey-4;
+        filter: invert(100%);
+      }
+    }
+  }
+
+  .cards-nav__search-wrap {
+    width: 157px;
+    position: relative;
+    border: 1px solid a.$clr-grey-4;
+    box-shadow: 1px 1px 4px 0px a.$clr-grey-4;
+    background-color: #fff;
+    border-radius: 4px;
+
+    .cards-nav__input {
+      width: 125px;
+      padding: 5px;
+      padding-right: 0;
+      outline: none;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .cards-nav__img {
+      position: absolute;
+      top: 4px;
+      right: 3px;
+      width: 20px;
+      cursor: pointer;
+    }
+
+    .cards-nav__img-inactive {
+      display: none;
+    }
+  }
+}

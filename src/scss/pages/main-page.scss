@@ -1,0 +1,9 @@
+@use '../abstracts/mixins' as a;
+
+.main-page__content-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10px;
+  @include a.flex(center, start);
+  gap: 10px;
+}

@@ -1,0 +1,63 @@
+@use "../abstracts" as a;
+
+.image-gallery__wrapper {
+  @include a.flex(flex-start);
+}
+
+.image-gallery__previews {
+  width: 12%;
+  padding: 10px;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.image-item__image {
+  object-fit: contain;
+  margin: 0 auto;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    box-shadow: 0px 0px 3px 2px rgb(188 188 188);
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+  }
+}
+
+/* Работает в Chrome, Opera и Safari */
+.image-gallery__previews::-webkit-scrollbar {
+  width: 10px;
+}
+
+.image-gallery__previews::-webkit-scrollbar-track {
+  background: a.$clr-primary-11;
+  border-radius: 10px;
+}
+
+.image-gallery__previews::-webkit-scrollbar-thumb {
+  width: 8px;
+  height: 10%;
+  background: a.$clr-grey-4;
+  border: 1px solid a.$clr-primary-11;;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Работает в Firefox */
+.image-gallery__previews {
+  scrollbar-width: thin;
+  scrollbar-color: a.$clr-grey-4 a.$clr-primary-11;;
+}
+
+.image-gallery__big-image-wrapper {
+  width: 80%;
+  padding: 20px;
+  @include a.flex(center);
+}
+
+.image-gallery__big-image {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: contain;
+  margin: 0 auto;
+}
