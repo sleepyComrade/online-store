@@ -3,3 +3,9 @@
 @use './components';
 @use './layout';
 @use './pages';
+
+// @include a.font('Thin', 100);
+@include a.font('Light', 300);
+@include a.font('Regular', 400);
+@include a.font('Medium', 500);
+@include a.font('Bold', 700);

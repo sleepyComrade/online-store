@@ -28,7 +28,7 @@ export default function ProductPage({ products, isModal, setIsModal, onAddCartIt
   const { title, category, brand, description, discountPercentage, rating, stock, price, images } = product.data;
 
   return (
-    <main>
+    <main className="main">
       <div className="main-container main-container--product-page">
         <div className="product__breadcrumbs">
           <ul className="product__breadcrumbs-list">
