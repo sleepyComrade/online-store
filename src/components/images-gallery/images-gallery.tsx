@@ -20,7 +20,7 @@ type ImagesGalleryProps = {
 export default function ImagesGallery({ images}: ImagesGalleryProps) {
   const [imgs, setImgs] = useState<Array<Blob>>([]);
 
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [selectedImage, setSelectedImage] = useState(images[0]); 
   const onPreviewClick = (image: string) => {setSelectedImage(image)}
   useEffect(() => {
     Promise.allSettled(images.map(src => fetch(src).then(res => res.blob()))).then(res => {
