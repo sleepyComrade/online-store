@@ -1,8 +1,9 @@
 import React from "react";
 import {Footer} from '../components/footer/footer';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import {Counter} from './test-component';
 import {Test1} from './test-component2';
+import { act } from "react-dom/test-utils";
 
 test('fkg', () => {
     const a = render(React.createElement(Footer));
@@ -65,5 +66,24 @@ function fetch() {
 (window.fetch as any) = fetch;
 
 test('fkg',  () => {
+  return act(() => {
     const a = render(React.createElement(Test1));  
+    // return a.findAllByTestId('bbb').then(res => {
+    //   console.log(res);
+    //   expect(res).not.toBe(undefined);
+    // })
+   return a;
+  }).then((a) => {
+  
+    return waitFor(() => {
+      console.log(a);
+      const res = a.getAllByTestId('aaa');
+      console.log(res);
+      return expect(res[0]).toBeInstanceOf(HTMLElement);
+    }, {
+      container: a.getByTestId('bbb')
+    })
+  })
+    
 })
+
